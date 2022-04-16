@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-3">
             <div id="logo_home">
-                <h1><a href="index.html" title="City tours travel template">City Tours travel template</a></h1>
+                <h1><a href="/" title="City tours travel template">City Tours travel template</a></h1>
             </div>
         </div>
         <nav class="col-9">
@@ -61,47 +61,52 @@
                         </ul>
                     </li> -->
                     <li class="submenu">
-                        <a href="javascript:void(0);" class="show-submenu">Destinasi <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-24"></i> Destinasi <i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a href="all_tours_list.html">Alam</a></li>
-                            <li><a href="all_tours_list.html">Belanja</a></li>
-                            <li><a href="all_tours_list.html">Budaya</a></li>
-                            <li><a href="all_tours_list.html">Olahraga</a></li>
-                            <li><a href="all_tours_list.html">Rekreasi</a></li>
-                            <li><a href="all_tours_list.html">Religi</a></li>
-                            <li><a href="all_tours_list.html">Sejarah</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-24"></i> Semua Destinasi</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-24"></i> Alam</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-50"></i> Belanja</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-44"></i> Budaya</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-40"></i> Olahraga</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-3"></i> Rekreasi</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-2"></i> Religi</a></li>
+                            <li><a href="/destinasi"><i class="icon_set_1_icon-4"></i> Sejarah</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);" class="show-submenu">Akomodasi <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-23"></i> Akomodasi <i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a href="all_tours_list.html">Hotel</a></li>
-                            <li><a href="all_tours_list.html">Wisma</a></li>
-                            <li><a href="all_tours_list.html">Transportasi</a></li>
+                            <li><a href="/akomodasi"><i class="icon_set_1_icon-23"></i> Semua Akomodasi</a></li>
+                            <li><a href="/akomodasi"><i class="icon_set_2_icon-104"></i> Hotel</a></li>
+                            <li><a href="/akomodasi"><i class="icon_set_2_icon-114"></i> Wisma</a></li>
+                            <li><a href="/akomodasi"><i class="icon_set_1_icon-26"></i> Transportasi</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);" class="show-submenu">Kuliner <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-58"></i> Kuliner <i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a href="all_tours_list.html">Tradisional</a></li>
-                            <li><a href="all_tours_list.html">Restoran</a></li>
+                            <li><a href="/kuliner"><i class="icon_set_1_icon-58"></i> Semua Kuliner</a></li>
+                            <li><a href="/kuliner"><i class="icon_set_3_restaurant-5"></i> Tradisional</a></li>
+                            <li><a href="/kuliner"><i class="icon_set_3_restaurant-11"></i> Restoran</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);" class="show-submenu">Acara <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-87"></i> Acara <i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a href="all_tours_list.html">Kalender</a></li>
+                            <li><a href="/fullcalender"><i class="icon_set_1_icon-53"></i> Kalender</a></li>
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);" class="show-submenu">Fasilitas Umum <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-24"></i> Fasilitas Umum <i class="icon-down-open-mini"></i></a>
                         <ul>
-                            <li><a href="all_tours_list.html">Toilet</a></li>
-                            <li><a href="all_tours_list.html">Wifi</a></li>
-                            <li><a href="all_tours_list.html">Halte</a></li>
-                            <li><a href="all_tours_list.html">SPBU</a></li>
-                            <li><a href="all_tours_list.html">Rumah Sakit</a></li>
-                            <li><a href="all_tours_list.html">Kantor Polisi</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Semua Fasilitas Umum</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-12"></i> Toilet</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-7"></i> Wifi</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-26"></i> Halte</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> SPBU</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-35"></i> ATM</a></li>
+                            <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Rumah Sakit</a></li>
+                            <li><a href="/fasum"><i class="icon_set_2_icon-105"></i> Kantor Polisi</a></li>
                         </ul>
                     </li>
                     <!-- <li class="submenu">

@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('destinasi', function (Blueprint $table) {
+        Schema::create('acara', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('desc');
-            $table->string('foto');
-            $table->string('video');
-            $table->string('address');
-            $table->string('maps');
-            $table->string('ticket');
-            $table->string('price');
+            $table->string('desa');
+            $table->string('kecamatan');
+            $table->date('start');
+            $table->date('end');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('destinasi');
+        Schema::dropIfExists('acara');
     }
 };

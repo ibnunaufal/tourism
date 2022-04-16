@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="owl-slide cover" style="background-image: url(img/slides/tugu.jpg);">
+        <div class="owl-slide cover" style="background-image: url(img/makana.jpg);">
             <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <div class="row justify-content-center justify-content-md-start">
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <div class="owl-slide cover" style="background-image: url(img/slides/tugu.jpg);">
+        <div class="owl-slide cover" style="background-image: url(img/tari9.jpg);">
             <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <div class="row justify-content-center justify-content-md-start">
@@ -64,7 +64,7 @@
 <div class="container margin_60">
     <div class="row small-gutters categories_grid">
         <div class="col-sm-12 col-md-6">
-            <a href="all_tours_list.html">
+            <a href="/destinasi">
                 <img src="img/img_cat_home_1.jpg" alt="" class="img-fluid">
                 <div class="wrapper">
                     <h2>Destinasi</h2>
@@ -75,7 +75,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="row small-gutters mt-md-0 mt-sm-2">
                 <div class="col-sm-6">
-                    <a href="all_tours_list.html">
+                    <a href="/akomodasi">
                         <img src="img/img_cat_home_2.jpg" alt="" class="img-fluid">
                         <div class="wrapper">
                             <h2>Akomodasi</h2>
@@ -84,7 +84,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="all_hotels_list.html">
+                    <a href="/kuliner">
                         <img src="img/img_cat_home_3.jpg" alt="" class="img-fluid">
                         <div class="wrapper">
                             <h2>Kuliner</h2>
@@ -93,7 +93,7 @@
                     </a>
                 </div>
                 <div class="col-sm-12 mt-sm-2">
-                    <a href="all_restaurants_list.html">
+                    <a href="/acara">
                         <img src="img/img_cat_home_4.jpg" alt="" class="img-fluid">
                         <div class="wrapper">
                             <h2>Acara</h2>
@@ -114,6 +114,7 @@
 
     <div class="main_title">
         <h2>Nikmati beragam destinasi <span>menarik</span></h2>
+        <p>Subtitle</p>
         <!-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> -->
     </div>
 
@@ -263,14 +264,15 @@
     <!-- /carousel -->
     
     <p class="text-center add_bottom_30">
-        <a href="all_tours_list.html" class="btn_1">View all Tours</a>
+        <a href="destinasi" class="btn_1">View all Tours</a>
     </p>
 
     <hr class="mt-5 mb-5">
 
     <div class="main_title">
-        <h2>Penginapan <span>Terbaik</span> Salatiga</h2>
-        <p>Alam nya yang sejuk, membuat anda nyaman untuk menginap diberbagai sudut kota ini.</p>
+        <h2>Akomodasi <span>Terbaik</span> Salatiga</h2>
+        <p>Subtitle</p>
+        <!-- <p>Alam nya yang sejuk, membuat anda nyaman untuk menginap diberbagai sudut kota ini.</p> -->
     </div>
 
     <div class="owl-carousel owl-theme list_carousel add_bottom_30">

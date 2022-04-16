@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     @include('includes.head')
+	@yield('additionalHead')
 </head>
 <body>
     <header>
@@ -76,9 +77,13 @@
     <script src="js/jquery-2.2.4.min.js"></script>
     <script src="js/common_scripts_min.js"></script>
     <script src="js/functions.js"></script>
+	@if(Request::is('fullcalender/'))
+		// code
+		
+	@endif
 	
 	<!-- NOTIFY BUBBLES  -->
-	<script src="js/notify_func.js"></script>
-
+	<!-- <script src="js/notify_func.js"></script> -->
+	@yield('footer-scripts')
 </body>
 </html>

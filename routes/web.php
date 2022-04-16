@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use app\Http\Controller\DestinasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.home');
 });
+
+Route::resource('destinasi','DestinasiController');
+Route::resource('akomodasi','AkomodasiController');
+Route::resource('kuliner','KulinerController');
+// Route::resource('acara','AcaraController');
+Route::get('fullcalender', 'AcaraController@index');
+Route::post('fullcalenderAjax','AcaraController@ajax');
+Route::resource('fasum','FasumController');
 
 Route::get('/category', function () {
     return view('pages.category');
