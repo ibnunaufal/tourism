@@ -1,0 +1,44 @@
+
+
+@extends('layouts.app')
+@section('title')
+<title>Login</title>
+@endsection
+@section('content')
+@if(session('error'))
+<div class="alert alert-danger">
+    <b>Opps!</b> {{session('error')}}
+</div>
+@endif
+<section id="hero" class="login">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+                <div id="login">
+                        <div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
+                        <hr>
+                        <form action="{{ route('actionlogin') }}" method="post">
+                            @csrf
+                        <!-- <a href="#0" class="social_bt facebook">Login with Facebook</a>
+                        <a href="#0" class="social_bt google">Login with Google</a>
+                        <div class="divider"><span>Or</span></div> -->
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email" required="">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class="form-control" placeholder="Password" required="">
+                            </div>
+                            <!-- <p class="small">
+                                <a href="#">Forgot Password?</a>
+                            </p> -->
+                            <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+                            <a href="/register" class="btn_full_outline">Register</a>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection

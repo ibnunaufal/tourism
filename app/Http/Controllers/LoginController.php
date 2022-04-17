@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Login;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
+use Hash;
 
 class LoginController extends Controller
 {
@@ -22,11 +26,45 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
+      return User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        // 'password' => $data['password'],
+        'password' => Hash::make($data['password'])
+      ]);
+    
         //
     }
 
+    public function register(){
+        return view('pages.auth.register');
+    }
+    public function login(){
+        return view('pages.auth.login');
+    }
+
+    public function actionlogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+   
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect("admin");
+        }
+  
+        return redirect("login")->withSuccess('Login details are not valid');
+    }
+
+    public function actionlogout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -38,6 +76,23 @@ class LoginController extends Controller
         //
     }
 
+    public function postRegistration(Request $request)
+    {  
+        // if($request->$password1 != $request->$password2){
+        //     return redirect("register")->withError('Password harus sama');
+        // }
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:4',
+        ]);
+           
+        $data = $request->all();
+        $check = $this->create($data);
+         
+        return redirect("login")->withSuccess('Great! You have Successfully loggedin');
+    }
+    
     /**
      * Display the specified resource.
      *

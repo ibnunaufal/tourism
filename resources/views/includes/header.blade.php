@@ -1,17 +1,17 @@
-<div id="top_line">
+<!-- <div id="top_line">
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <!-- <i class="icon-phone"></i><strong>0812</strong> -->
+                <i class="icon-phone"></i><strong>0812</strong>
             </div>
             <div class="col-6">
                 <ul id="top_links">
                     <li><a href="#sign-in-dialog" id="access_link">Sign in</a></li>
                 </ul>
             </div>
-        </div><!-- End row -->
-    </div><!-- End container-->
-</div><!-- End top line-->
+        </div>End row
+    </div>End container
+</div>End top line -->
 
 <div class="container">
     <div class="row">
@@ -108,6 +108,27 @@
                             <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Rumah Sakit</a></li>
                             <li><a href="/fasum"><i class="icon_set_2_icon-105"></i> Kantor Polisi</a></li>
                         </ul>
+                    </li>
+                    <li class="submenu">
+                        @if (Auth::guest())
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon-login-2"></i> Login <i class="icon-down-open-mini"></i></a>
+                        <ul>
+                            <li><a href="/login"><i class="icon-login-2"></i> Login</a></li>
+                            <li><a href="/register"><i class="icon-login"></i> Register</a></li>
+                        </ul>
+                        @endif
+                        @if (Auth::check())
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon-user-2"></i> Admin Page <i class="icon-down-open-mini"></i></a>
+                        <ul>
+                            <li><a href="/admin"><i class="icon-user-2"></i> Admin Page</a></li>
+                            <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
+                            <li><a href="/akomodasi/admin"><i class="icon_set_1_icon-23"></i> Detail Akomodasi</a></li>
+                            <li><a href="/kuliner/admin"><i class="icon_set_1_icon-58"></i> Detail Kuliner</a></li>
+                            <li><a href="/acara/admin"><i class="icon_set_1_icon-87"></i> Detail Acara</a></li>
+                            <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li>
+                            <li><a href="/actionlogout"><i class="icon-logout"></i> Logout</a></li>
+                        </ul>
+                        @endif
                     </li>
                     <!-- <li class="submenu">
                         <a href="javascript:void(0);" class="show-submenu">Transfers <i class="icon-down-open-mini"></i></a>

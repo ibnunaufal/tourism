@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Destinasi;
+use App\Models\Akomodasi;
+use App\Models\Kuliner;
+use App\Models\Acara;
+use App\Models\Fasum;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -15,7 +20,8 @@ class AdminController extends Controller
     public function index()
     {
         //
-        return view('pages.admin.index');
+        $destinasi = Destinasi::all();
+        return view('pages.admin.index', compact('destinasi', 'destinasi'));
     }
 
     /**

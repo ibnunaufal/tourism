@@ -32,7 +32,8 @@
 		<div class="small-dialog-header">
 			<h3>Sign In</h3>
 		</div>
-		<form>
+		<form action="{{ route('actionlogin') }}" method="POST" >
+		@csrf
 			<div class="sign-in-wrapper">
 				<a href="#0" class="social_bt google">Login with Google</a>
 				<div class="divider"><span>Or</span></div>
@@ -54,8 +55,8 @@
 					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
 				</div>
 				<a href="/admin">
-				<!-- <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div> -->
-				Log In
+				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<!-- Log In -->
 				</a>
 				<div class="text-center">
 					Don’t have an account? <a href="javascript:void(0);">Sign up</a>

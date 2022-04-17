@@ -17,6 +17,12 @@ use app\Http\Controller\DestinasiController;
 // Route::get('/', function () {
 //     return view('pages.home');
 // });
+Route::post('actionlogin', [App\Http\Controllers\LoginController::class, 'actionlogin'])->name('actionlogin');
+Route::get('actionlogout', [App\Http\Controllers\LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+Route::post('postRegistration', [App\Http\Controllers\LoginController::class, 'postRegistration'])->name('postRegistration');
+Route::get('register','LoginController@register');   
+Route::get('login','LoginController@login');   
+
 Route::resource('/','HomeController');
 
 Route::get('destinasi/admin','DestinasiController@admin');
