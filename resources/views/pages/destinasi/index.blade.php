@@ -139,7 +139,7 @@
 				<!--End aside -->
 				<div class="col-lg-9">
 
-					<div id="tools">
+					<!-- <div id="tools">
 						<div class="row">
 							<div class="col-md-3 col-sm-4 col-6">
 								<div class="styled-select-filters">
@@ -164,19 +164,21 @@
 							</div>
 
 						</div>
-					</div>
+					</div> -->
 					<!--/tools -->
 
+					@foreach ($destinasi as $destinasi)
 					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
 						<div class="row">
 							<div class="col-lg-4 col-md-4">
 								<div class="ribbon_3 popular"><span>Popular</span>
 								</div>
-								<div class="wishlist">
+								<!-- <div class="wishlist">
 									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
+								</div> -->
 								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_1.jpg" alt="Image">
+									<a href="single_tour.html">
+										<img src="{{ URL::to('/') }}/img/destinasi/{{ $destinasi->foto }}" alt="Image">
 										<div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
 									</a>
 								</div>
@@ -185,8 +187,8 @@
 								<div class="tour_list_desc">
 									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
 									</div>
-									<h3><strong>Arch Triomphe</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
+									<h3><strong> {{ $destinasi->name }} </strong></h3>
+									<p>{{ $destinasi->desc }}</p>
 									<ul class="add_info">
 										<li>
 											<div class="tooltip_styled tooltip-effect-4">
@@ -205,16 +207,8 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
+													<h4>Address</h4> {{ $destinasi->address }}
 													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
 												</div>
 											</div>
 										</li>
@@ -222,7 +216,8 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
 												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
+													<h4>Parking</h4> 
+													1-3 Rue Elisée Reclus
 													<br> 76 Rue du Général Leclerc
 													<br> 8 Rue Caillaux 94923
 													<br>
@@ -246,8 +241,8 @@
 							</div>
 							<div class="col-lg-2 col-md-2">
 								<div class="price_list">
-									<div><sup>$</sup>39*<span class="normal_price_list">$99</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
+									<div>
+										<p><a href="{{ route('destinasi.show',$destinasi->id) }}" class="btn_1">Details</a>
 										</p>
 									</div>
 
@@ -255,460 +250,12 @@
 							</div>
 						</div>
 					</div>
+					@endforeach
 					<!--End strip -->
 
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.2s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3 popular"><span>Popular</span>
-								</div>
-								<div class="wishlist">
-									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
-								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_2.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-44"></i>Churches</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Notredame</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>42*<span class="normal_price_list">$99</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.3s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="wishlist">
-									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
-								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_3.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-44"></i>Historic Buildings</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Versailles</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>39*<span class="normal_price_list">$99</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.4s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="wishlist">
-									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
-								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_4.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-37"></i>Walking tour</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Pompidue</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>69*<span class="normal_price_list">$59</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.5s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="wishlist">
-									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
-								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_14.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-28"></i>Skyline tour</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Tour Eiffel</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>49*<span class="normal_price_list">$59</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
-
-					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.7s">
-						<div class="row">
-							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3"><span>Top rated</span>
-								</div>
-								<div class="wishlist">
-									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-								</div>
-								<div class="img_list">
-									<a href="single_tour.html"><img src="img/tour_box_5.jpg" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-44"></i>Historic Building</div>
-									</a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6">
-								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
-									<h3><strong>Pantheon</strong> tour</h3>
-									<p>Lorem ipsum dolor sit amet, quem convenire interesset ut vix, ad dicat sanctus detracto vis. Eos modus dolorum ex, qui adipisci maiestatis inciderint no, eos in elit dicat.....</p>
-									<ul class="add_info">
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
-												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
-												<div class="tooltip-content">
-													<h4>Address</h4> Musée du Louvre, 75058 Paris - France
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-97"></i></span>
-												<div class="tooltip-content">
-													<h4>Languages</h4> English - French - Chinese - Russian - Italian
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
-												<div class="tooltip-content">
-													<h4>Parking</h4> 1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
-												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
-													<br>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-2 col-md-2">
-								<div class="price_list">
-									<div><sup>$</sup>49*<span class="normal_price_list">$59</span><small>*Per person</small>
-										<p><a href="single_tour.html" class="btn_1">Details</a>
-										</p>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--End strip -->
 
 					<hr>
-
+<!-- 
 					<nav aria-label="Page navigation">
 						<ul class="pagination justify-content-center">
 							<li class="page-item">
@@ -728,7 +275,7 @@
 								</a>
 							</li>
 						</ul>
-					</nav>
+					</nav> -->
 					<!-- end pagination-->
 
 				</div>

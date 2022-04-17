@@ -14,13 +14,16 @@ use app\Http\Controller\DestinasiController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+// Route::get('/', function () {
+//     return view('pages.home');
+// });
+Route::resource('/','HomeController');
 
+Route::get('destinasi/admin','DestinasiController@admin');
 Route::resource('destinasi','DestinasiController');
 Route::resource('akomodasi','AkomodasiController');
 Route::resource('kuliner','KulinerController');
+Route::resource('admin','AdminController');
 // Route::resource('acara','AcaraController');
 Route::get('fullcalender', 'AcaraController@index');
 Route::post('fullcalenderAjax','AcaraController@ajax');

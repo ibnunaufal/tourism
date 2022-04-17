@@ -65,10 +65,12 @@
     <div class="row small-gutters categories_grid">
         <div class="col-sm-12 col-md-6">
             <a href="/destinasi">
-                <img src="img/img_cat_home_1.jpg" alt="" class="img-fluid">
+                @foreach ($destinasiIcon as $destinasiIcon)
+                <img src="{{URL::to('/')}}/img/destinasi/{{$destinasiIcon->foto}}" style="width: 550px;height: 475px;object-fit: cover;" alt="Icon" class="img-fluid">
+                @endforeach
                 <div class="wrapper">
                     <h2>Destinasi</h2>
-                    <p>7 Kategori</p>
+                    <p>{{ $destinasiSize }} Destinasi</p>
                 </div>
             </a>
         </div>
@@ -79,7 +81,7 @@
                         <img src="img/img_cat_home_2.jpg" alt="" class="img-fluid">
                         <div class="wrapper">
                             <h2>Akomodasi</h2>
-                            <p>50 Tempat</p>
+                            <p>{{ $akomodasiSize }} Tempat</p>
                         </div>
                     </a>
                 </div>
@@ -113,18 +115,19 @@
 <div class="container margin_60">
 
     <div class="main_title">
-        <h2>Nikmati beragam destinasi <span>menarik</span></h2>
+        <h2>Nikmati beragam destinasi <span>menarik</span> </h2>
         <p>Subtitle</p>
         <!-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> -->
     </div>
 
     <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+        @foreach ($destinasi as $destinasi)
         <div class="item">
             <div class="tour_container">
                 <div class="ribbon_3 popular"><span>Terbaik</span></div>
                 <div class="img_container">
-                    <a href="single_tour.html">
-                        <img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="image">
+                    <a href="{{ route('destinasi.show',$destinasi->id) }}">
+                        <img src="{{URL::to('/')}}/img/destinasi/{{$destinasi->foto}}" width="800" height="533" class="img-fluid" alt="image">
                         <div class="short_info">
                             <i class="icon_set_1_icon-44"></i>Bangunan Sejarah
                             <!-- <span class="price">
@@ -134,9 +137,9 @@
                     </a>
                 </div>
                 <div class="tour_title">
-                    <h3>Tur <strong>Kota Tua</strong></h3>
+                    <h3><strong>{{ $destinasi->name }}</strong></h3>
                     
-                    <h6>Sidorejo, Salatiga</h6>
+                    <h6>{{ $destinasi->address }}</h6>
                     <!-- end rating -->
                     <div class="wishlist">
                         <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
@@ -146,118 +149,7 @@
             </div>
             <!-- End box tour -->
         </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Terbaik</span></div>
-                <div class="img_container">
-                    <a href="single_tour.html">
-                        <img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>Bangunan Sejarah
-                            <!-- <span class="price">
-                                <sup>$</sup>39
-                            </span> -->
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3>Tur <strong>Kota Tua</strong></h3>
-                    
-                    <h6>Sidorejo, Salatiga</h6>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box tour -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Terbaik</span></div>
-                <div class="img_container">
-                    <a href="single_tour.html">
-                        <img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>Bangunan Sejarah
-                            <!-- <span class="price">
-                                <sup>$</sup>39
-                            </span> -->
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3>Tur <strong>Kota Tua</strong></h3>
-                    
-                    <h6>Sidorejo, Salatiga</h6>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box tour -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Terbaik</span></div>
-                <div class="img_container">
-                    <a href="single_tour.html">
-                        <img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>Bangunan Sejarah
-                            <!-- <span class="price">
-                                <sup>$</sup>39
-                            </span> -->
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3>Tur <strong>Kota Tua</strong></h3>
-                    
-                    <h6>Sidorejo, Salatiga</h6>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box tour -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="tour_container">
-                <div class="ribbon_3 popular"><span>Terbaik</span></div>
-                <div class="img_container">
-                    <a href="single_tour.html">
-                        <img src="img/tour_box_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <div class="short_info">
-                            <i class="icon_set_1_icon-44"></i>Bangunan Sejarah
-                            <!-- <span class="price">
-                                <sup>$</sup>39
-                            </span> -->
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3>Tur <strong>Kota Tua</strong></h3>
-                    
-                    <h6>Sidorejo, Salatiga</h6>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box tour -->
-        </div>
+        @endforeach
         <!-- /item -->
         
     </div>
@@ -276,6 +168,7 @@
     </div>
 
     <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+        @foreach ($akomodasi as $akomodasi)
         <div class="item">
             <div class="hotel_container">
                 <div class="ribbon_3 popular"><span>Popular</span></div>
@@ -304,122 +197,7 @@
             </div>
             <!-- End box -->
         </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="hotel_container">
-                <div class="ribbon_3 popular"><span>Popular</span></div>
-                <div class="img_container">
-                    <a href="single_hotel.html">
-                        <img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <!-- <div class="score"><span>7.5</span>Good</div> -->
-                        <div class="short_info hotel">
-                            Klasik, Menyatu dengan alam
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong>Kayu Arum</strong> Hotel</h3>
-                    <h3>Sidomukti, Salatiga</h3>
-                    <div class="rating">
-                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                        <small>5 Star Hotel</small>
-                    </div>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="hotel_container">
-                <div class="ribbon_3 popular"><span>Popular</span></div>
-                <div class="img_container">
-                    <a href="single_hotel.html">
-                        <img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <!-- <div class="score"><span>7.5</span>Good</div> -->
-                        <div class="short_info hotel">
-                            Modern, tengah kota
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong>Park Hyatt</strong> Hotel</h3>
-                    <h3>Argomulyo, Salatiga</h3>
-                    <div class="rating">
-                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                        <small>4 Star Hotel</small>
-                    </div>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="hotel_container">
-                <div class="ribbon_3 popular"><span>Popular</span></div>
-                <div class="img_container">
-                    <a href="single_hotel.html">
-                        <img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <!-- <div class="score"><span>7.5</span>Good</div> -->
-                        <div class="short_info hotel">
-                            Klasik, Menyatu dengan alam
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong>Kayu Arum</strong> Hotel</h3>
-                    <h3>Sidomukti, Salatiga</h3>
-                    <div class="rating">
-                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                        <small>5 Star Hotel</small>
-                    </div>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box -->
-        </div>
-        <!-- /item -->
-        <div class="item">
-            <div class="hotel_container">
-                <div class="ribbon_3 popular"><span>Popular</span></div>
-                <div class="img_container">
-                    <a href="single_hotel.html">
-                        <img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="image">
-                        <!-- <div class="score"><span>7.5</span>Good</div> -->
-                        <div class="short_info hotel">
-                            Modern, tengah kota
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong>Park Hyatt</strong> Hotel</h3>
-                    <h3>Argomulyo, Salatiga</h3>
-                    <div class="rating">
-                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                        <small>4 Star Hotel</small>
-                    </div>
-                    <!-- end rating -->
-                    <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
-                    </div>
-                    <!-- End wish list-->
-                </div>
-            </div>
-            <!-- End box -->
-        </div>
+        @endforeach
         <!-- /item -->
     </div>
     <!-- /carousel -->

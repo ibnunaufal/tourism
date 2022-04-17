@@ -53,7 +53,10 @@
 					</div>
 					<div class="float-right"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
 				</div>
-				<div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
+				<a href="/admin">
+				<!-- <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div> -->
+				Log In
+				</a>
 				<div class="text-center">
 					Don’t have an account? <a href="javascript:void(0);">Sign up</a>
 				</div>
@@ -74,9 +77,9 @@
 
     <!-- Common scripts -->
     
-    <script src="js/jquery-2.2.4.min.js"></script>
-    <script src="js/common_scripts_min.js"></script>
-    <script src="js/functions.js"></script>
+    <script src="{{URL::to('/')}}/js/jquery-2.2.4.min.js"></script>
+    <script src="{{URL::to('/')}}/js/common_scripts_min.js"></script>
+    <script src="{{URL::to('/')}}/js/functions.js"></script>
 	@if(Request::is('fullcalender/'))
 		// code
 		
