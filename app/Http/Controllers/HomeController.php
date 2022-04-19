@@ -27,9 +27,9 @@ class HomeController extends Controller
         ->with('akomodasi', Akomodasi::latest()->take(6)->get())
         ->with('akomodasiSize', Akomodasi::count())
         ->with('destinasiSize', Destinasi::count())
-        ->with('destinasiIcon', $data)
-        // ->with('destinasiIcon', Destinasi::where('isIcon', 1)->take(1)->get())
-        ->with('destinasi', Destinasi::latest()->take(6)->get());
+        // ->with('destinasiIcon', $data)
+        ->with('destinasiIcon', Destinasi::where('isIcon', 1)->take(1)->get())
+        ->with('destinasi', Destinasi::whereIn('isHeadline',[1])->take(6)->get());
     }
 
     /**

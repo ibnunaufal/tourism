@@ -29,8 +29,10 @@ class DestinasiController extends Controller
     public function admin()
     {
         //
-        $destinasi = Destinasi::all();
-        return view('pages.destinasi.admin', compact('destinasi', 'destinasi'));
+        // $destinasi = Destinasi::all();
+        // return view('pages.destinasi.admin', compact('destinasi', 'destinasi'));
+        $destinasi = Destinasi::paginate(10);
+        return view('pages.destinasi.admin',['destinasi' => $destinasi]);
     }
 
     /**
@@ -93,10 +95,9 @@ class DestinasiController extends Controller
         $post->name = $request->get('tName');
         $post->desc = $request->get('tDesc');
         $post->foto = $path;
-        $post->video = $request->get('tVideo');
         $post->long = $request->get('tLong');
         $post->lat = $request->get('tLat');
-        $post->address = $request->get('tLat');
+        $post->address = $request->get('tAddress');
         $post->video = $request->get('tVideo');
         // $post->merge([ 
         //     'ticket' => implode(',', (array) $request->get('dynamicAddRemove'))
@@ -105,7 +106,7 @@ class DestinasiController extends Controller
         $post->ticket = $request->get('tTiket');
         $post->days = json_encode($request->input('days'));
         // $post->days = "Setiap Hari";
-        $post->hours = "Setiap Hari";
+        $post->hours = json_encode($request->input('days'));
         if($request->get('cHeadline') == 1){
             $post->isHeadline = $request->get('cHeadline');
         }else{
@@ -117,7 +118,7 @@ class DestinasiController extends Controller
             $post->isIcon = 0; 
         }
         $post->save();
-        return redirect('/destinasi/admin')->with('success', 'gallery has been added');
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**
@@ -141,6 +142,7 @@ class DestinasiController extends Controller
     public function edit(Destinasi $destinasi)
     {
         //
+        return view('pages.destinasi.edit',compact('destinasi'));
     }
 
     /**
@@ -150,9 +152,42 @@ class DestinasiController extends Controller
      * @param  \App\Models\Destinasi  $destinasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destinasi $destinasi)
+    public function update(Request $request, $id)
     {
         //
+        $destinasi = Destinasi::find($id);
+        $destinasi->name = $request->get('tName');
+        $destinasi->desc = $request->get('tDesc');
+        $destinasi->video = $request->get('tVideo');
+        $destinasi->long = $request->get('tLong');
+        $destinasi->lat = $request->get('tLat');
+        $destinasi->address = $request->get('tAddress');
+        $destinasi->price = $request->get('tTicket');
+        $destinasi->ticket = $request->get('tTicket');
+        $destinasi->days = json_encode($request->input('days'));
+        $destinasi->hours = json_encode($request->input('days'));
+        if($request->get('cHeadline') == 1){
+            $destinasi->isHeadline = $request->get('cHeadline');
+        }else{
+            $destinasi->isHeadline = 0;
+        }
+        if($request->get('cIcon') == 1){
+            $destinasi->isIcon = 1;
+        }else{
+            $destinasi->isIcon = 0; 
+        }
+        // if($request->hasFile('image')){
+        if($request->image != "" && $request->image != null){
+            error_log('has image.');
+            $image = $request->file('image');
+            $request->image = $image->getClientOriginalName();
+            $image->move(public_path('img/destinasi'), $image->getClientOriginalName());
+            // $path = public_path('img/logo').'/'.$image->getClientOriginalName();
+            $path = $image->getClientOriginalName();
+            $destinasi->image = $path;
+        }
+        $destinasi->update();
+        return redirect('/admin')->with('success', 'gallery updated successfully');
     }
 
     /**
@@ -164,7 +199,7 @@ class DestinasiController extends Controller
     public function destroy(Destinasi $destinasi)
     {
         //
-        $category->delete();
-        return redirect('/destinasi/admin')->with('success', 'category deleted successfully');
+        $destinasi->delete();
+        return redirect('/destinasi/admin')->with('success', 'destinasi deleted successfully');
     }
 }

@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 @section('title')
-<title>Admin Page | Tambah Destinasi</title>
+<title>Admin Page | Tambah Kuliner</title>
 @endsection
 @section('content')
 
@@ -10,7 +10,7 @@
 	<div class="parallax-content-1">
 		<div class="animated fadeInDown">
 			<h1>Admin Page</h1>
-            <p>Tambahkan Destinasi</p>
+            <p>Tambahkan Kuliner</p>
 		</div>
 	</div>
 </section>
@@ -33,10 +33,10 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-11">
-                        <h2>Tambahkan Destinasi</h2>
+                        <h2>Tambahkan Kuliner</h2>
                     </div>
                     <div class="col-lg-1">
-                        <a class="btn btn-primary" href="{{ url('/destinasi/admin') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ url('/kuliner/admin') }}"> Back</a>
                     </div>
                 </div>
             
@@ -50,7 +50,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('destinasi.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('kuliner.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="tName">Nama:</label>

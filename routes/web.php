@@ -26,6 +26,10 @@ Route::get('login','LoginController@login');
 Route::resource('/','HomeController');
 
 Route::get('destinasi/admin','DestinasiController@admin');
+Route::get('akomodasi/admin','AkomodasiController@admin');
+Route::get('kuliner/admin','KulinerController@admin');
+Route::get('acara/admin','AcaraController@admin');
+Route::get('fasum/admin','FasumController@admin');
 Route::resource('destinasi','DestinasiController');
 Route::resource('akomodasi','AkomodasiController');
 Route::resource('kuliner','KulinerController');

@@ -31,9 +31,9 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr class="text-center table-bordered">
-                            <th colspan="8">Daftar Destinasi</th>
+                            <th colspan="8">Daftar Kuliner</th>
                             <th>
-                            <a class="btn btn-primary" href="{{ url('destinasi/create') }}"> <i class="icon_set_1_icon-11"></i></a>
+                            <a class="btn btn-primary" href="{{ url('kuliner/create') }}"> <i class="icon_set_1_icon-11"></i></a>
                             </th>
                         </tr>
                         <tr class="table-bordered">
@@ -50,34 +50,34 @@
                         @php
                             $i = 0;
                         @endphp
-                        @foreach($destinasi as $des)
+                        @foreach($kuliner as $ako)
                         <tr class="table-bordered">
                             <td class="td-bordered col-md-1">{{ ++$i }}</td>
-                            <td class="td-bordered col-md-1">{{ $des->name }}</td>
-                            <td class="td-bordered col-md-3">{{ $des->desc }}</td>
+                            <td class="td-bordered col-md-1">{{ $ako->name }}</td>
+                            <td class="td-bordered col-md-3">{{ $ako->desc }}</td>
                             <td class="td-bordered col-md-3">
                             <!-- <img style="width: 30px;height: 30px;" src="{{ asset('images/icon/logo-whatsapp.svg') }}" alt=""> -->
-                                <img src="{{URL::to('/')}}/img/destinasi/{{$des->foto}}"
+                                <img src="{{URL::to('/')}}/img/kuliner/{{$ako->foto}}"
                                 style="max-width:70px;" alt="">
                             </td>
-                            <td class="td-bordered col-md-1">{{ $des->video }}</td>
-                            <td class="td-bordered col-md-3">{{ $des->address }}</td>
-                            <td class="td-bordered col-md-1">{{ $des->ticket }}</td>
+                            <td class="td-bordered col-md-1">{{ $ako->video }}</td>
+                            <td class="td-bordered col-md-3">{{ $ako->address }}</td>
+                            <td class="td-bordered col-md-1">{{ $ako->ticket }}</td>
                             <td class="td-bordered col-md-3">
-                                {{ str_contains($des->days, 'sen') ? "Senin " : "" }}
-                                {{ str_contains($des->days, 'sel') ? "Selasa " : "" }}
-                                {{ str_contains($des->days, 'rab') ? "Rabu " : "" }}
-                                {{ str_contains($des->days, 'kam') ? "Kamis " : "" }}
-                                {{ str_contains($des->days, 'jum') ? "Jumat " : "" }}
-                                {{ str_contains($des->days, 'sab') ? "Sabtu " : "" }}
-                                {{ str_contains($des->days, 'min') ? "Minggu " : "" }}
+                                {{ str_contains($ako->days, 'sen') ? "Senin " : "" }}
+                                {{ str_contains($ako->days, 'sel') ? "Selasa " : "" }}
+                                {{ str_contains($ako->days, 'rab') ? "Rabu " : "" }}
+                                {{ str_contains($ako->days, 'kam') ? "Kamis " : "" }}
+                                {{ str_contains($ako->days, 'jum') ? "Jumat " : "" }}
+                                {{ str_contains($ako->days, 'sab') ? "Sabtu " : "" }}
+                                {{ str_contains($ako->days, 'min') ? "Minggu " : "" }}
                                 
                             </td>
                             <td class="td-bordered col-md-3" style="text-align: center;">
-                                <form action="{{ route('destinasi.destroy',$des->id) }}" method="POST">
-                                    <a class="btn btn-info" href="{{ route('destinasi.show',$des->id) }}"><i class="icon_set_1_icon-79"></i></a>
-                                    <a class="btn btn-primary" href="{{ route('destinasi.edit',$des->id) }}"><i class="icon_set_1_icon-17"></i></a>
-                                    <a class="btn btn-danger" onclick="return myFunction();" href="{{route('destinasi.destroy', $des->id)}}"><i class="icon_set_1_icon-67"></i></a>
+                                <form action="{{ route('kuliner.destroy',$ako->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{ route('kuliner.show',$ako->id) }}"><i class="icon_set_1_icon-79"></i></a>
+                                    <a class="btn btn-primary" href="{{ route('kuliner.edit',$ako->id) }}"><i class="icon_set_1_icon-17"></i></a>
+                                    <a class="btn btn-danger" onclick="return myFunction();" href="{{route('kuliner.destroy', $ako->id)}}"><i class="icon_set_1_icon-67"></i></a>
                                     <script>
                                     function myFunction() {
                                         if(!confirm("Are You Sure to delete this"))
@@ -90,8 +90,8 @@
                         @endforeach
                         <tr>
                             <td colspan="10" class="punyaku">
-                                Jumlah Data : {{ $destinasi->total() }} <br>
-                                {{ $destinasi->links("pagination::bootstrap-4") }}
+                                Jumlah Data : {{ $kuliner->total() }} <br>
+                                {{ $kuliner->links("pagination::bootstrap-4") }}
                             </td>
                         </tr>
                     </table>

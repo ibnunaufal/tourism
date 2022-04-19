@@ -15,7 +15,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
                 <div id="login">
-                        <div class="text-center"><img src="img/logo_sticky.png" alt="Image" data-retina="true" ></div>
+                        <h3 style="text-align:center;">Login</h3>
                         <hr>
                         <form action="{{ route('actionlogin') }}" method="post">
                             @csrf

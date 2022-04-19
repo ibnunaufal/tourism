@@ -15,9 +15,7 @@
         <div class="row justify-content-center">
             <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
                 <div id="login">
-                        <div class="text-center">
-                            <label>Register</label>
-                        </div>
+                        <h3 style="text-align:center;">Register</h3>
                         <hr>
                         <form action="{{ route('postRegistration') }}" method="post">
                             @csrf

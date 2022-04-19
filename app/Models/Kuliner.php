@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kuliner extends Model
 {
+    public $table = "kuliner";
     use HasFactory;
 }

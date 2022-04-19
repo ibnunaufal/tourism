@@ -10,7 +10,7 @@
 	<div class="parallax-content-1">
 		<div class="animated fadeInDown">
 			<h1>Admin Page</h1>
-            <p>Tambahkan Destinasi</p>
+            <p>Edit Destinasi</p>
 		</div>
 	</div>
 </section>
@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-11">
-                        <h2>Tambahkan Destinasi</h2>
+                        <h2>Edit Destinasi</h2>
                     </div>
                     <div class="col-lg-1">
                         <a class="btn btn-primary" href="{{ url('/destinasi/admin') }}"> Back</a>
@@ -50,44 +50,44 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('destinasi.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('destinasi.update', $destinasi->id) }}" method="POST" enctype="multipart/form-data">
+                    @method('PATCH')
                     @csrf
                     <div class="form-group">
                         <label for="tName">Nama:</label>
-                        <input type="text" class="form-control" id="tName" placeholder="Masukkan Nama" name="tName">
+                        <input type="text" class="form-control" id="tName" placeholder="Masukkan Nama" name="tName" value="{{$destinasi->name}}">
                     </div>
                     <div class="form-group">
                         <label for="tDesc">Deskripsi:</label>
-                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi"></textarea>
+                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi" value="{{$destinasi->desc}}">{{$destinasi->desc}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">Foto:</label>
-                        <input class="form-control" type="file" id="image" name="image" />
-                        <!-- <input type="file" class="form-control" id="image" placeholder="Masukkan Foto" name="tFoto"> -->
+                        <input class="form-control" type="file" id="image" name="image" value="{{$destinasi->foto}}"/>
                     </div>
                     <div class="form-group">
                         <label for="tVideo">Youtube Video:</label>
-                        <input type="text" class="form-control" id="tVideo" placeholder="Masukkan Url Video" name="tVideo">
+                        <input type="text" class="form-control" id="tVideo" placeholder="Masukkan Url Video" name="tVideo" value="{{$destinasi->video}}">
                     </div>
                     <div class="form-group">
                         <label for="tAddress">Alamat:</label>
-                        <textarea class="form-control" id="tAddress" name="tAddress" rows="3" placeholder="Masukkan Deskripsi"></textarea>
+                        <textarea class="form-control" id="tAddress" name="tAddress" rows="3" placeholder="Masukkan Alamat" value="{{$destinasi->address}}">{{$destinasi->address}}</textarea>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="tLong">Longitude:</label>
-                                <input type="text" class="form-control" id="tLong" placeholder="Masukkan Longitude" name="tLong">
+                                <input type="text" class="form-control" id="tLong" placeholder="Masukkan Longitude" name="tLong" value="{{$destinasi->long}}">
                             </div>
                             <div class="col-lg-6">
                                 <label for="tLat">Latitude:</label>
-                                <input type="text" class="form-control" id="tLat" placeholder="Masukkan Latitude" name="tLat">
+                                <input type="text" class="form-control" id="tLat" placeholder="Masukkan Latitude" name="tLat" value="{{$destinasi->lat}}">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="tTiket">Tiket:</label>
-                        <input type="text" class="form-control" id="tTiket" placeholder="Masukkan Harga Tiket" name="tTiket">
+                        <input type="text" class="form-control" id="tTiket" placeholder="Masukkan Harga Tiket" name="tTicket" value="{{$destinasi->ticket}}">
                         <!-- <table class="table" id="dynamicAddRemove">
                             <tr>
                                 <td>
@@ -105,13 +105,20 @@
 
                     <div class="form-group">
                         <label for="tOther">Hari Operasional: </label>
-                        <label><input type="checkbox" name="days[]" value="sen"> Senin</label>
-                        <label><input type="checkbox" name="days[]" value="sel"> Selasa</label>
-                        <label><input type="checkbox" name="days[]" value="rab"> Rabu</label>
-                        <label><input type="checkbox" name="days[]" value="kam"> Kamis</label>
-                        <label><input type="checkbox" name="days[]" value="jum"> Jumat</label>
-                        <label><input type="checkbox" name="days[]" value="sab"> Sabtu</label>
-                        <label><input type="checkbox" name="days[]" value="min"> Minggu</label>
+                        <label><input type="checkbox" name="days[]" value="sen"
+                        {{ str_contains($destinasi->days, 'sen') ? "checked" : "" }}> Senin</label>
+                        <label><input type="checkbox" name="days[]" value="sel"
+                        {{ str_contains($destinasi->days, 'sel') ? "checked" : "" }}> Selasa</label>
+                        <label><input type="checkbox" name="days[]" value="rab" 
+                        {{ str_contains($destinasi->days, 'rab') ? "checked" : "" }}> Rabu</label>
+                        <label><input type="checkbox" name="days[]" value="kam"
+                        {{ str_contains($destinasi->days, 'kam') ? "checked" : "" }}> Kamis</label>
+                        <label><input type="checkbox" name="days[]" value="jum"
+                        {{ str_contains($destinasi->days, 'jum') ? "checked" : "" }}> Jumat</label>
+                        <label><input type="checkbox" name="days[]" value="sab"
+                        {{ str_contains($destinasi->days, 'sab') ? "checked" : "" }}> Sabtu</label>
+                        <label><input type="checkbox" name="days[]" value="min"
+                        {{ str_contains($destinasi->days, 'min') ? "checked" : "" }}> Minggu</label>
                     </div>
                 
                     <!-- <div class="form-group">
@@ -194,14 +201,23 @@
                             </div>
                         </div>            
                     </div> -->
+
                     <div class="form-group">
                         <label for="tOther">Lainnya: </label>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1">
+                            @if($destinasi->isHeadline == "1") 
+                                <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1" checked>
+                            @else
+                                <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1">
+                            @endif
                             <label class="form-check-label" for="cHeadline">Tampilkan pada halaman Utama</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
+                            @if($destinasi->isIcon == "1") 
+                                <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1" checked>
+                            @else
                             <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1">
+                            @endif
                             <label class="form-check-label" for="cIcon">Jadikan Icon Kategori</label>
                         </div>
                     </div>

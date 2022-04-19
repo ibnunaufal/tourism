@@ -20,7 +20,8 @@ class AdminController extends Controller
     public function index()
     {
         //
-        $destinasi = Destinasi::all();
+        // $destinasi = Destinasi::all();
+        $destinasi = Destinasi::paginate(5);
         return view('pages.admin.index', compact('destinasi', 'destinasi'));
     }
 
