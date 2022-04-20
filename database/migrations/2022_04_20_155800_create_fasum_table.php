@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('acara', function (Blueprint $table) {
+        Schema::create('fasum', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('desc');
-            $table->string('desa');
-            $table->string('kecamatan');
             $table->string('mapUrl');
             $table->string('image');
-            $table->string('ticket');
-            $table->date('date');
+            $table->string('type');
+            $table->string('openAllDay');
             $table->string('disabilitas');
             $table->string('parkiran');
             $table->string('wifi');
@@ -39,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('acara');
+        Schema::dropIfExists('fasum');
     }
 };

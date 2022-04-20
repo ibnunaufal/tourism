@@ -177,7 +177,7 @@
                         <img src="img/hotel_1.jpg" width="800" height="533" class="img-fluid" alt="image">
                         <!-- <div class="score"><span>7.5</span>Good</div> -->
                         <div class="short_info hotel">
-                            Modern, tengah kota
+                            Modern, tengah 
                         </div>
                     </a>
                 </div>

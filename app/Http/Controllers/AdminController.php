@@ -22,7 +22,9 @@ class AdminController extends Controller
         //
         // $destinasi = Destinasi::all();
         $destinasi = Destinasi::paginate(5);
-        return view('pages.admin.index', compact('destinasi', 'destinasi'));
+        $akomodasi = Akomodasi::paginate(5);
+        return view('pages.admin.index', compact('destinasi', 'destinasi'))
+        ->with('akomodasi', $akomodasi);
     }
 
     /**
