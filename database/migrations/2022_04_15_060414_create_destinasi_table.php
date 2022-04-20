@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('mapUrl');
             $table->string('address');
             $table->string('image');
+            $table->string('imageArray');
             $table->string('type');
             $table->string('ticket');
             $table->string('isOpenAllDay');

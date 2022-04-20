@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('kecamatan');
             $table->string('mapUrl');
             $table->string('image');
+            $table->string('imageArray');
             $table->string('type');
             $table->int('class');
             $table->string('disabilitas');
