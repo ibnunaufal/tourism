@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('idAkomodasi');
             $table->string('idAcara');
             $table->string('idFasum');
+            $table->string('tags');
             $table->timestamps();
         });
     }

@@ -43,7 +43,10 @@ class DestinasiController extends Controller
     public function create()
     {
         //
-        return view('pages.destinasi.create');
+        // $tags = array(array('name' => 'Alam'), array('name' => 'Dayle'));
+
+        $tags = ["Alam","Budaya","Rekreasi"];
+        return view('pages.destinasi.create',compact('tags'));
     }
 
     /**
@@ -70,22 +73,30 @@ class DestinasiController extends Controller
         $request->validate([
             'tName'=>'required',
             'tDesc'=> 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'tVideo' => 'required',
-            'tAddress' => 'required',
-            'tLong' => 'required',
-            'tLat' => 'required',
-            'tAddress' => 'required',
-            'tTiket' => 'required',
-            'addMoreInputFields.*.subject' => 'required'
+            'filename'=> 'required',
+            'filename.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            // 'tVideo' => 'required',
+            // 'tAddress' => 'required',
+            // 'tLong' => 'required',
+            // 'tLat' => 'required',
+            // 'tAddress' => 'required',
+            'tTicket' => 'required',
+            // 'addMoreInputFields.*.subject' => 'required'
         ]);
         // $path = $request->file('image')->store('public/images');
 
-        $image = $request->file('image');
-        $request->image = $image->getClientOriginalName();
-        $image->move(public_path('img/destinasi'), $image->getClientOriginalName());
+        if($request->hasFile('filename')){
+            foreach($request->file('filename') as $images){
+                $nama=$images->getClientOriginalName();
+                $images->move(public_path('img/destinasi'), $nama);
+                $data[] = $nama;
+            }
+        }
+        // $image = $request->file('image');
+        // $request->image = $image->getClientOriginalName();
+        // $image->move(public_path('img/destinasi'), $image->getClientOriginalName());
         // $path = public_path('img/logo').'/'.$image->getClientOriginalName();
-        $path = $image->getClientOriginalName();
+        // $path = $image->getClientOriginalName();
         // time().'.'.$request->file->getClientOriginalExtension();
             
         // $imageName = time().'.'.$request->image->getClientOriginalExtension();
@@ -94,25 +105,52 @@ class DestinasiController extends Controller
         $post = new Destinasi;
         $post->name = $request->get('tName');
         $post->desc = $request->get('tDesc');
-        $post->foto = $path;
-        $post->long = $request->get('tLong');
-        $post->lat = $request->get('tLat');
-        $post->address = $request->get('tAddress');
-        $post->video = $request->get('tVideo');
-        // $post->merge([ 
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('desa') . " " . $request->get('kecamatan');
+        $post->desa = $request->get('desa');
+        $post->mapUrl = $request->get('tMaps');
+        
+        $post->imageArray = json_encode($data);
+        $post->image = json_encode($data);
+        
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        $post->ticket = $request->get('tTiket');
+
+        $post->tags = json_encode($request->get('tags'));
+        $post->type = json_encode($request->get('tags'));
+
         //     'ticket' => implode(',', (array) $request->get('dynamicAddRemove'))
         // ]);
-        $post->price = $request->get('tVideo');
-        $post->ticket = $request->get('tTiket');
-        $post->days = json_encode($request->input('days'));
-        // $post->days = "Setiap Hari";
-        $post->hours = json_encode($request->input('days'));
+        
+        // $post->hours = json_encode($request->input('days'));
+        if($request->get('cIsAllDay') == 1){
+            $post->isOpenAllDay = 1;
+        }else{
+            $post->isOpenAllDay = 0;
+        }
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilitas = 1;
+        }else{
+            $post->disabilitas = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkiran = 1;
+        }else{
+            $post->parkiran = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
         if($request->get('cHeadline') == 1){
-            $post->isHeadline = $request->get('cHeadline');
+            $post->isHeadline = 1;
         }else{
             $post->isHeadline = 0;
         }
-        if($request->get('cIcon') == 2){
+        if($request->get('cIcon') == 1){
             $post->isIcon = 1;
         }else{
             $post->isIcon = 0; 

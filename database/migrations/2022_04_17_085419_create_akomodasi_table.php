@@ -23,10 +23,11 @@ return new class extends Migration
             $table->string('image');
             $table->string('imageArray');
             $table->string('type');
-            $table->int('class');
+            $table->string('class');
             $table->string('disabilitas');
             $table->string('parkiran');
             $table->string('wifi');
+            $table->string('tags');
             $table->boolean('isHeadline');
             $table->boolean('isIcon');
             $table->timestamps();

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('disabilitas');
             $table->string('parkiran');
             $table->string('wifi');
+            $table->string('tags');
             $table->boolean('isHeadline');
             $table->boolean('isIcon');
             $table->timestamps();
