@@ -34,7 +34,7 @@
                                 <a href="#">Forgot Password?</a>
                             </p> -->
                             <div class="text-center"><input type="submit" value="Log In" class="btn_login"></div>
-                            <a href="/register" class="btn_full_outline">Register</a>
+                            <!-- <a href="/register" class="btn_full_outline">Register</a> -->
                         </form>
                     </div>
             </div>
