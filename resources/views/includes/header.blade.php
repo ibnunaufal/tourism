@@ -100,7 +100,7 @@
                         <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-24"></i> Fasilitas Umum <i class="icon-down-open-mini"></i></a>
                         <ul>
                             <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Semua Fasilitas Umum</a></li>
-                            <li><a href="/fasum"><i class="icon_set_1_icon-12"></i> Toilet</a></li>
+                            <!-- <li><a href="/fasum"><i class="icon_set_1_icon-12"></i> Toilet</a></li> -->
                             <li><a href="/fasum"><i class="icon_set_1_icon-7"></i> Wifi</a></li>
                             <li><a href="/fasum"><i class="icon_set_1_icon-26"></i> Halte</a></li>
                             <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> SPBU</a></li>
@@ -114,7 +114,6 @@
                         <a href="javascript:void(0);" class="show-submenu"><i class="icon-login-2"></i> Login <i class="icon-down-open-mini"></i></a>
                         <ul>
                             <li><a href="/login"><i class="icon-login-2"></i> Login</a></li>
-                            <li><a href="/register"><i class="icon-login"></i> Register</a></li>
                         </ul>
                         @endif
                         @if (Auth::check())
@@ -253,9 +252,9 @@
                 </ul>
             </div><!-- End main-menu -->
             <ul id="top_tools">
-                <li>
+                <!-- <li>
                     <a href="javascript:void(0);" class="search-overlay-menu-btn"><i class="icon_search"></i></a>
-                </li>
+                </li> -->
                 <!-- <li>
                     <div class="dropdown dropdown-cart">
                         <a href="#" data-toggle="dropdown" class="cart_bt"><i class="icon_bag_alt"></i><strong>3</strong></a>
