@@ -23,8 +23,12 @@ class AdminController extends Controller
         // $destinasi = Destinasi::all();
         $destinasi = Destinasi::paginate(5);
         $akomodasi = Akomodasi::paginate(5);
+        $kuliner = Kuliner::paginate(5);
+        $acara = Acara::paginate(5);
+        $fasum = Fasum::paginate(5);
         return view('pages.admin.index', compact('destinasi', 'destinasi'))
-        ->with('akomodasi', $akomodasi);
+        ->with('acara', $acara)->with('fasum', $fasum)
+        ->with('akomodasi', $akomodasi)->with('kuliner', $kuliner);
     }
 
     /**

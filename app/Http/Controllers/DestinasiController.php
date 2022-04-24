@@ -110,16 +110,16 @@ class DestinasiController extends Controller
         $post->desa = $request->get('desa');
         $post->mapUrl = $request->get('tMaps');
         
-        $post->imageArray = json_encode($data);
-        $post->image = json_encode($data);
+        $post->imageArray = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($data)))));
+        $post->image = str_replace('"','',json_encode($data[0])) ;
         
         $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
         $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
 
-        $post->ticket = $request->get('tTiket');
+        $post->ticket = $request->get('tTicket');
 
-        $post->tags = json_encode($request->get('tags'));
-        $post->type = json_encode($request->get('tags'));
+        $post->tags = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
+        $post->type = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
 
         //     'ticket' => implode(',', (array) $request->get('dynamicAddRemove'))
         // ]);
@@ -168,7 +168,9 @@ class DestinasiController extends Controller
     public function show(Destinasi $destinasi)
     {
         //
-        return view('pages.destinasi.detail',compact('destinasi'));
+        $temp = "[['long' => 110.5084366, 'lat' => -7.3305234,'description' => 'helloworld']]";
+        return view('pages.destinasi.detail',compact('destinasi'))
+        ->with('temp');
     }
 
     /**
@@ -193,39 +195,89 @@ class DestinasiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $destinasi = Destinasi::find($id);
-        $destinasi->name = $request->get('tName');
-        $destinasi->desc = $request->get('tDesc');
-        $destinasi->video = $request->get('tVideo');
-        $destinasi->long = $request->get('tLong');
-        $destinasi->lat = $request->get('tLat');
-        $destinasi->address = $request->get('tAddress');
-        $destinasi->price = $request->get('tTicket');
-        $destinasi->ticket = $request->get('tTicket');
-        $destinasi->days = json_encode($request->input('days'));
-        $destinasi->hours = json_encode($request->input('days'));
-        if($request->get('cHeadline') == 1){
-            $destinasi->isHeadline = $request->get('cHeadline');
+        // $destinasi = Destinasi::find($id);
+        $post = Destinasi::find($id);
+        $request->validate([
+            'tName'=>'required',
+            'tDesc'=> 'required',
+            'tTicket' => 'required',
+        ]);
+
+        if($request->hasFile('filename')){
+            if(count($request->get('old')) > 0){
+                foreach($request->file('filename') as $images){
+                    $nama=$images->getClientOriginalName();
+                    $images->move(public_path('img/destinasi'), $nama);
+                    $data[] = $nama;
+                }
+                $data[] = array_merge($data, $request->get('old'));
+            }else{
+                foreach($request->file('filename') as $images){
+                    $nama=$images->getClientOriginalName();
+                    $images->move(public_path('img/destinasi'), $nama);
+                    $data[] = $nama;
+                }
+            }
         }else{
-            $destinasi->isHeadline = 0;
+            if(count($request->get('old')) > 0){
+                $data[] = $request->get('old');
+            }
+            else{
+                $data = "";
+            }
+        }
+
+        
+        $post->name = $request->get('tName');
+        $post->desc = $request->get('tDesc');
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('desa') . " " . $request->get('kecamatan');
+        $post->desa = $request->get('desa');
+        $post->mapUrl = $request->get('tMaps');
+        
+        $post->imageArray = json_encode($data);
+        $post->image = json_encode($data);
+        
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        $post->ticket = $request->get('tTicket');
+
+        $post->tags = json_encode($request->get('tags'));
+        $post->type = json_encode($request->get('tags'));
+        
+        if($request->get('cIsAllDay') == 1){
+            $post->isOpenAllDay = 1;
+        }else{
+            $post->isOpenAllDay = 0;
+        }
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilitas = 1;
+        }else{
+            $post->disabilitas = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkiran = 1;
+        }else{
+            $post->parkiran = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
+        if($request->get('cHeadline') == 1){
+            $post->isHeadline = 1;
+        }else{
+            $post->isHeadline = 0;
         }
         if($request->get('cIcon') == 1){
-            $destinasi->isIcon = 1;
+            $post->isIcon = 1;
         }else{
-            $destinasi->isIcon = 0; 
+            $post->isIcon = 0; 
         }
-        // if($request->hasFile('image')){
-        if($request->image != "" && $request->image != null){
-            error_log('has image.');
-            $image = $request->file('image');
-            $request->image = $image->getClientOriginalName();
-            $image->move(public_path('img/destinasi'), $image->getClientOriginalName());
-            // $path = public_path('img/logo').'/'.$image->getClientOriginalName();
-            $path = $image->getClientOriginalName();
-            $destinasi->image = $path;
-        }
-        $destinasi->update();
-        return redirect('/admin')->with('success', 'gallery updated successfully');
+        $post->update();
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**
@@ -234,10 +286,24 @@ class DestinasiController extends Controller
      * @param  \App\Models\Destinasi  $destinasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Destinasi $destinasi)
+    public function destroy( $id)
     {
         //
+        $destinasi = Destinasi::find($id);
+        // error_log($id);
         $destinasi->delete();
+        // $destinasi = Destinasi::where('id', $id)->delete();
+        return redirect('/admin')->with('success', 'destinasi deleted successfully');
+    }
+    public function delete($id)
+    {
+        //
+        $destinasi = Destinasi::findOrFail($id);
+	    $destinasi->delete();
+        // $destinasi = Destinasi::find($id);
+        // error_log($id);
+        // $destinasi->delete();
+        // $destinasi = Destinasi::where('id', $id)->delete();
         return redirect('/destinasi/admin')->with('success', 'destinasi deleted successfully');
     }
 }

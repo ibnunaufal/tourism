@@ -31,9 +31,9 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr class="text-center table-bordered">
-                            <th colspan="8">Daftar Destinasi</th>
+                            <th colspan="8">Daftar Fasilitas Umum</th>
                             <th>
-                            <a class="btn btn-primary" href="{{ url('destinasi/create') }}"> <i class="icon_set_1_icon-11"></i></a>
+                            <a class="btn btn-primary" href="{{ url('fasum/create') }}"> <i class="icon_set_1_icon-11"></i></a>
                             </th>
                         </tr>
                         <tr class="table-bordered">
@@ -42,7 +42,6 @@
                             <th>Deskripsi</th>
                             <th>Foto</th>
                             <th>Alamat</th>
-                            <th>Tiket</th>
                             <th>Operasional</th>
                             <th>Tags/Kategori</th>
                             <th width="280px">Aksi</th>
@@ -50,7 +49,7 @@
                         @php
                             $i = 0;
                         @endphp
-                        @foreach($destinasi as $des)
+                        @foreach($fasum as $des)
                         <tr class="table-bordered">
                             <td class="td-bordered">{{ ++$i }}</td>
                             <td class="td-bordered col-md-1">{{ $des->name }}</td>
@@ -63,19 +62,17 @@
                             $temp = str_replace("]","",$temp);
                             ?>
                             @foreach(explode(',',$temp) as $t)
-                            <img src="{{URL::to('/')}}/img/destinasi/{{$t}}"
+                            <img src="{{URL::to('/')}}/img/fasum/{{$t}}"
                                 style="max-width:70px;max-height:70px;" alt="{{$t}}">
                             @endforeach    
                             </td>
-                            <td class="td-bordered col-md-2">{{ $des->address }}</td>
-                            <td class="td-bordered">{{ $des->ticket }}</td>
+                            <td class="td-bordered col-md-2">{{ $des->desa }} {{ $des->kecamatan }}</td>
                             <td class="td-bordered col-md-3">
-                                <li>Sen-Jum : {{$des->seninJumat}}</li>
+                                <li>Sen-Jum : {{$des->date}}</li>
                                 <li>Sab-Min : {{$des->sabtuMinggu}}</li>
                                 <hr>
                                 <li>Ramah Disabilitas : {{ $des->disabilitas == '1' ? 'Tersedia' : 'Tidak' }}</li>
                                 <li>Parkir Tersedia : {{ $des->parkiran == '1' ? 'Tersedia' : 'Tidak' }}</li>
-                                <li>Wifi Publik : {{ $des->wifi == '1' ? 'Tersedia' : 'Tidak' }}</li>
                             </td>
                             <td class="td-bordered col-md-1">
                             <?php
@@ -88,10 +85,10 @@
                             @endforeach
                             </td>
                             <td class="td-bordered col-md-3" style="text-align: center;">
-                                <form action="{{ route('destinasi.destroy',$des->id) }}" method="POST">
-                                    <a class="btn btn-info" href="{{ route('destinasi.show',$des->id) }}"><i class="icon_set_1_icon-79"></i></a> <br>
-                                    <a class="btn btn-primary" href="{{ route('destinasi.edit',$des->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
-                                    <form action="{{route('destinasi.destroy', $des->id)}}" method="POST">    
+                                <form action="{{ route('fasum.destroy',$des->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{ route('fasum.show',$des->id) }}"><i class="icon_set_1_icon-79"></i></a> <br>
+                                    <a class="btn btn-primary" href="{{ route('fasum.edit',$des->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                    <form action="{{route('fasum.destroy', $des->id)}}" method="POST">    
                                     @method('DELETE')
                                     @csrf
                                         <button type="submit" class="btn btn-danger" onclick="return myFunction();">
@@ -111,8 +108,8 @@
                         @endforeach
                         <tr>
                             <td colspan="10" class="punyaku">
-                                Jumlah Data : {{ $destinasi->total() }} <br>
-                                {{ $destinasi->links("pagination::bootstrap-4") }}
+                                Jumlah Data : {{ $fasum->total() }} <br>
+                                {{ $fasum->links("pagination::bootstrap-4") }}
                             </td>
                         </tr>
                     </table>

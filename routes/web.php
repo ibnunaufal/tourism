@@ -25,6 +25,8 @@ Route::get('login','LoginController@login');
 
 Route::resource('/','HomeController');
 
+Route::get('destinasi/delete','DestinasiController@delete');
+
 Route::get('destinasi/admin','DestinasiController@admin');
 Route::get('akomodasi/admin','AkomodasiController@admin');
 Route::get('kuliner/admin','KulinerController@admin');
@@ -33,6 +35,9 @@ Route::get('fasum/admin','FasumController@admin');
 Route::resource('destinasi','DestinasiController');
 Route::resource('akomodasi','AkomodasiController');
 Route::resource('kuliner','KulinerController');
+
+Route::resource('acara','AcaraController');
+
 Route::resource('admin','AdminController');
 // Route::resource('acara','AcaraController');
 Route::get('fullcalender', 'AcaraController@index');

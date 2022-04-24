@@ -20,10 +20,14 @@ return new class extends Migration
             $table->string('desa');
             $table->string('kecamatan');
             $table->string('mapUrl');
+            $table->string('address');
             $table->string('image');
             $table->string('imageArray');
             $table->string('type');
-            $table->string('class');
+            $table->string('ticket');
+            $table->string('isOpenAllDay');
+            $table->string('seninJumat');
+            $table->string('sabtuMinggu');
             $table->string('disabilitas');
             $table->string('parkiran');
             $table->string('wifi');

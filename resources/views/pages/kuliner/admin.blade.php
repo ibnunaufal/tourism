@@ -31,7 +31,7 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr class="text-center table-bordered">
-                            <th colspan="8">Daftar Kuliner</th>
+                            <th colspan="7">Daftar Kuliner</th>
                             <th>
                             <a class="btn btn-primary" href="{{ url('kuliner/create') }}"> <i class="icon_set_1_icon-11"></i></a>
                             </th>
@@ -41,46 +41,65 @@
                             <th>Nama</th>
                             <th>Deskripsi</th>
                             <th>Foto</th>
-                            <th>Video</th>
                             <th>Alamat</th>
-                            <th>Tiket</th>
                             <th>Operasional</th>
+                            <th>Tags/Kategori</th>
                             <th width="280px">Aksi</th>
                         </tr>
                         @php
                             $i = 0;
                         @endphp
-                        @foreach($kuliner as $ako)
+                        @foreach($kuliner as $des)
                         <tr class="table-bordered">
-                            <td class="td-bordered col-md-1">{{ ++$i }}</td>
-                            <td class="td-bordered col-md-1">{{ $ako->name }}</td>
-                            <td class="td-bordered col-md-3">{{ $ako->desc }}</td>
-                            <td class="td-bordered col-md-3">
+                            <td class="td-bordered">{{ ++$i }}</td>
+                            <td class="td-bordered col-md-1">{{ $des->name }}</td>
+                            <td class="td-bordered col-md-3">{{ $des->desc }}</td>
+                            <td class="td-bordered col-md-1">
                             <!-- <img style="width: 30px;height: 30px;" src="{{ asset('images/icon/logo-whatsapp.svg') }}" alt=""> -->
-                                <img src="{{URL::to('/')}}/img/kuliner/{{$ako->foto}}"
-                                style="max-width:70px;" alt="">
+                            <?php
+                            $temp = str_replace("[","",$des->imageArray);
+                            $temp = str_replace('"','',$temp);
+                            $temp = str_replace("]","",$temp);
+                            ?>
+                            @foreach(explode(',',$temp) as $t)
+                            <img src="{{URL::to('/')}}/img/kuliner/{{$t}}"
+                                style="max-width:70px;max-height:70px;" alt="{{$t}}">
+                            @endforeach    
                             </td>
-                            <td class="td-bordered col-md-1">{{ $ako->video }}</td>
-                            <td class="td-bordered col-md-3">{{ $ako->address }}</td>
-                            <td class="td-bordered col-md-1">{{ $ako->ticket }}</td>
+                            <td class="td-bordered col-md-2">{{ $des->address }}</td>
                             <td class="td-bordered col-md-3">
-                                {{ str_contains($ako->days, 'sen') ? "Senin " : "" }}
-                                {{ str_contains($ako->days, 'sel') ? "Selasa " : "" }}
-                                {{ str_contains($ako->days, 'rab') ? "Rabu " : "" }}
-                                {{ str_contains($ako->days, 'kam') ? "Kamis " : "" }}
-                                {{ str_contains($ako->days, 'jum') ? "Jumat " : "" }}
-                                {{ str_contains($ako->days, 'sab') ? "Sabtu " : "" }}
-                                {{ str_contains($ako->days, 'min') ? "Minggu " : "" }}
-                                
+                                <li>Sen-Jum : {{$des->seninJumat}}</li>
+                                <li>Sab-Min : {{$des->sabtuMinggu}}</li>
+                                <hr>
+                                <li>Ramah Disabilitas : {{ $des->disabilitas == '1' ? 'Tersedia' : 'Tidak' }}</li>
+                                <li>Parkir Tersedia : {{ $des->parkiran == '1' ? 'Tersedia' : 'Tidak' }}</li>
+                                <li>Wifi Publik : {{ $des->wifi == '1' ? 'Tersedia' : 'Tidak' }}</li>
+                            </td>
+                            <td class="td-bordered col-md-1">
+                            <?php
+                            $temp = str_replace("[","",$des->tags);
+                            $temp = str_replace('"','',$temp);
+                            $temp = str_replace("]","",$temp);
+                            ?>
+                            @foreach(explode(',',$temp) as $img)
+                            <li>{{$img}}</li>
+                            @endforeach
                             </td>
                             <td class="td-bordered col-md-3" style="text-align: center;">
-                                <form action="{{ route('kuliner.destroy',$ako->id) }}" method="POST">
-                                    <a class="btn btn-info" href="{{ route('kuliner.show',$ako->id) }}"><i class="icon_set_1_icon-79"></i></a>
-                                    <a class="btn btn-primary" href="{{ route('kuliner.edit',$ako->id) }}"><i class="icon_set_1_icon-17"></i></a>
-                                    <a class="btn btn-danger" onclick="return myFunction();" href="{{route('kuliner.destroy', $ako->id)}}"><i class="icon_set_1_icon-67"></i></a>
+                                <form action="{{ route('kuliner.destroy',$des->id) }}" method="POST">
+                                    <a class="btn btn-info" href="{{ route('kuliner.show',$des->id) }}"><i class="icon_set_1_icon-79"></i></a> <br>
+                                    <a class="btn btn-primary" href="{{ route('kuliner.edit',$des->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                    <form action="{{route('kuliner.destroy', $des->id)}}" method="POST">    
+                                    @method('DELETE')
+                                    @csrf
+                                        <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                            <i class="icon_set_1_icon-67">
+                                        </button>                                        
+                                    </form>
+                                    <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
                                     <script>
                                     function myFunction() {
-                                        if(!confirm("Are You Sure to delete this"))
+                                        if(!confirm("Anda yakin akan menghapus?"))
                                         event.preventDefault();
                                     }
                                     </script>

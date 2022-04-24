@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+<title>Destinasi | Web Salatiga</title>
+@endsection
 @section('content')
 
 
@@ -171,22 +174,28 @@
 					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
 						<div class="row">
 							<div class="col-lg-4 col-md-4">
-								<div class="ribbon_3 popular"><span>Popular</span>
-								</div>
+								<!-- <div class="ribbon_3 popular"><span>Popular</span> 
+								</div>-->
 								<!-- <div class="wishlist">
 									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
 								</div> -->
 								<div class="img_list">
-									<a href="single_tour.html">
-										<img src="{{ URL::to('/') }}/img/destinasi/{{ $destinasi->foto }}" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-4"></i>Museums </div>
+									<a href="{{ route('destinasi.show',$destinasi->id) }}" >
+									<?php
+										$temp = str_replace("[","",$destinasi->imageArray);
+										$temp = str_replace('"','',$temp);
+										$temp = str_replace("]","",$temp);
+										$tempArr = explode(',',$temp)
+										?>
+										<img src="{{ URL::to('/') }}/img/destinasi/{{ $tempArr[0] }}" style="max-width: 353px;max-height: 350px;object-fit: cover;left: 0px;right: 0px;" alt="Image">
+										<div class="short_info"><i class="icon_set_1_icon-24"></i> {{$destinasi->tags}} </div>
 									</a>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<div class="tour_list_desc">
-									<div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
-									</div>
+									<!-- <div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
+									</div> -->
 									<h3><strong> {{ $destinasi->name }} </strong></h3>
 									<p>{{ $destinasi->desc }}</p>
 									<ul class="add_info">
@@ -194,12 +203,11 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
 												<div class="tooltip-content">
-													<h4>Schedule</h4>
-													<strong>Monday to Friday</strong> 09.00 AM - 5.30 PM
+													<h4>Jadwal</h4>
+													<strong>Senin-Jumat</strong> {{$destinasi->seninJumat}}
 													<br>
-													<strong>Saturday</strong> 09.00 AM - 5.30 PM
-													<br>
-													<strong>Sunday</strong> <span class="label label-danger">Closed</span>
+													<strong>Sabtu-Minggu</strong> {{$destinasi->sabtuMinggu}}
+													
 												</div>
 											</div>
 										</li>
@@ -207,7 +215,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Address</h4> {{ $destinasi->address }}
+													<h4>Alamat</h4> {{ $destinasi->address }}
 													<br>
 												</div>
 											</div>
@@ -216,22 +224,17 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
 												<div class="tooltip-content">
-													<h4>Parking</h4> 
-													1-3 Rue Elisée Reclus
-													<br> 76 Rue du Général Leclerc
-													<br> 8 Rue Caillaux 94923
-													<br>
+													<h4>Parkir</h4> 
+													{{ $destinasi->parkiran ? "Tersedia": "Tidak Tersedia" }}
 												</div>
 											</div>
 										</li>
 										<li>
 											<div class="tooltip_styled tooltip-effect-4">
-												<span class="tooltip-item"><i class="icon_set_1_icon-25"></i></span>
+												<span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
 												<div class="tooltip-content">
-													<h4>Transport</h4>
-													<strong>Metro: </strong>Musée du Louvre station (line 1)
-													<br>
-													<strong>Bus:</strong> 21, 24, 27, 39, 48, 68, 69, 72, 81, 95
+													<h4>Akses</h4>
+													{{ $destinasi->disabilitas ? "Ramah Disabilitas": "Tidak Ramah Disabilitas" }}
 													<br>
 												</div>
 											</div>

@@ -79,7 +79,7 @@
                             <li><a href="/akomodasi"><i class="icon_set_1_icon-23"></i> Semua Akomodasi</a></li>
                             <li><a href="/akomodasi"><i class="icon_set_2_icon-104"></i> Hotel</a></li>
                             <li><a href="/akomodasi"><i class="icon_set_2_icon-114"></i> Wisma</a></li>
-                            <li><a href="/akomodasi"><i class="icon_set_1_icon-26"></i> Transportasi</a></li>
+                            <!-- <li><a href="/akomodasi"><i class="icon_set_1_icon-26"></i> Transportasi</a></li> -->
                         </ul>
                     </li>
                     <li class="submenu">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Home;
 use App\Models\Destinasi;
 use App\Models\Akomodasi;
+use App\Models\Kuliner;
+use App\Models\Acara;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,12 +26,20 @@ class HomeController extends Controller
         $data = Destinasi::whereIn('isIcon', [1])->get();
 
         return view('pages.home')
-        ->with('akomodasi', Akomodasi::latest()->take(6)->get())
+        // ->with('akomodasi', Akomodasi::latest()->take(6)->get())
         ->with('akomodasiSize', Akomodasi::count())
         ->with('destinasiSize', Destinasi::count())
+        ->with('kulinerSize', Kuliner::count())
+        ->with('acaraSize', Acara::count())
         // ->with('destinasiIcon', $data)
         ->with('destinasiIcon', Destinasi::where('isIcon', 1)->take(1)->get())
-        ->with('destinasi', Destinasi::whereIn('isHeadline',[1])->take(6)->get());
+        ->with('akomodasiIcon', Akomodasi::where('isIcon', 1)->take(1)->get())
+        ->with('kulinerIcon', Kuliner::where('isIcon', 1)->take(1)->get())
+        ->with('acaraIcon', Acara::where('isIcon', 1)->take(1)->get())
+        ->with('destinasi', Destinasi::whereIn('isHeadline',[1])->take(6)->get())
+        ->with('akomodasi', Akomodasi::whereIn('isHeadline',[1])->take(6)->get())
+        ->with('kuliner', Kuliner::whereIn('isHeadline',[1])->take(6)->get())
+        ->with('acara', Acara::whereIn('isHeadline',[1])->take(6)->get());
     }
 
     /**

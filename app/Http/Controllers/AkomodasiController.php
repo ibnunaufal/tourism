@@ -15,7 +15,8 @@ class AkomodasiController extends Controller
     public function index()
     {
         //
-        return view('pages.akomodasi.index');
+        $akomodasi = Akomodasi::all();
+        return view('pages.akomodasi.index', compact('akomodasi', 'akomodasi'));
     }
     public function admin()
     {
@@ -32,7 +33,8 @@ class AkomodasiController extends Controller
     public function create()
     {
         //
-        return view('pages.akomodasi.create');
+        $tags = ["Alam","Budaya","Rekreasi"];
+        return view('pages.akomodasi.create',compact('tags'));
     }
 
     /**
@@ -44,43 +46,99 @@ class AkomodasiController extends Controller
     public function store(Request $request)
     {
         //
+        // $string = "";
+        // $comma = "=";
+        // $temp = [];
+        // // $string=implode(",",$your_array);
+        // foreach ($request->addMoreInputFields as $key => $value) {
+        //     $temp=implode(",",$value);
+        //     error_log($temp);
+        //     // Student::create($value);
+        // }
+        // Log::info(json_encode($request->get('addMoreInputFields'))); 
+
+        // error_log(implode(",",$request->get('addMoreInputFields')));
         $request->validate([
             'tName'=>'required',
             'tDesc'=> 'required',
-            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-            'tVideo' => 'required',
-            'tAddress' => 'required',
-            'tLong' => 'required',
-            'tLat' => 'required',
-            'tAddress' => 'required',
-            'tTiket' => 'required',
-            'addMoreInputFields.*.subject' => 'required'
+            'filename'=> 'required',
+            'filename.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            // 'tVideo' => 'required',
+            // 'tAddress' => 'required',
+            // 'tLong' => 'required',
+            // 'tLat' => 'required',
+            // 'tAddress' => 'required',
+            // 'tTicket' => 'required',
+            // 'addMoreInputFields.*.subject' => 'required'
         ]);
         // $path = $request->file('image')->store('public/images');
 
-        $image = $request->file('image');
-        $request->image = $image->getClientOriginalName();
-        $image->move(public_path('img/akomodasi'), $image->getClientOriginalName());
-        $path = $image->getClientOriginalName();
+        if($request->hasFile('filename')){
+            foreach($request->file('filename') as $images){
+                $nama=$images->getClientOriginalName();
+                $images->move(public_path('img/akomodasi'), $nama);
+                $data[] = $nama;
+            }
+        }
+        // $image = $request->file('image');
+        // $request->image = $image->getClientOriginalName();
+        // $image->move(public_path('img/akomodasi'), $image->getClientOriginalName());
+        // $path = public_path('img/logo').'/'.$image->getClientOriginalName();
+        // $path = $image->getClientOriginalName();
+        // time().'.'.$request->file->getClientOriginalExtension();
+            
+        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
+        // $request->file->move(public_path('/images/gallert/'), $imageName);
+
         $post = new Akomodasi;
         $post->name = $request->get('tName');
         $post->desc = $request->get('tDesc');
-        $post->foto = $path;
-        $post->long = $request->get('tLong');
-        $post->lat = $request->get('tLat');
-        $post->address = $request->get('tAddress');
-        $post->video = $request->get('tVideo');
-        $post->price = $request->get('tVideo');
-        $post->ticket = $request->get('tTiket');
-        $post->days = json_encode($request->input('days'));
-        // $post->days = "Setiap Hari";
-        $post->hours = json_encode($request->input('days'));
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('desa') . " " . $request->get('kecamatan');
+        $post->desa = $request->get('desa');
+        $post->mapUrl = $request->get('tMaps');
+        
+        $post->imageArray = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($data)))));
+        $post->image = str_replace('"','',json_encode($data[0])) ;
+        
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        $post->ticket = '';
+
+        $post->tags = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
+        $post->type = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
+
+        //     'ticket' => implode(',', (array) $request->get('dynamicAddRemove'))
+        // ]);
+        
+        // $post->hours = json_encode($request->input('days'));
+        if($request->get('cIsAllDay') == 1){
+            $post->isOpenAllDay = 1;
+        }else{
+            $post->isOpenAllDay = 0;
+        }
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilitas = 1;
+        }else{
+            $post->disabilitas = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkiran = 1;
+        }else{
+            $post->parkiran = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
         if($request->get('cHeadline') == 1){
-            $post->isHeadline = $request->get('cHeadline');
+            $post->isHeadline = 1;
         }else{
             $post->isHeadline = 0;
         }
-        if($request->get('cIcon') == 2){
+        if($request->get('cIcon') == 1){
             $post->isIcon = 1;
         }else{
             $post->isIcon = 0; 
@@ -123,40 +181,89 @@ class AkomodasiController extends Controller
     public function update(Request $request, $id)
     {
         //
-        //
-        $akomodasi = Akomodasi::find($id);
-        $akomodasi->name = $request->get('tName');
-        $akomodasi->desc = $request->get('tDesc');
-        $akomodasi->video = $request->get('tVideo');
-        $akomodasi->long = $request->get('tLong');
-        $akomodasi->lat = $request->get('tLat');
-        $akomodasi->address = $request->get('tAddress');
-        $akomodasi->price = $request->get('tTicket');
-        $akomodasi->ticket = $request->get('tTicket');
-        $akomodasi->days = json_encode($request->input('days'));
-        $akomodasi->hours = json_encode($request->input('days'));
-        if($request->get('cHeadline') == 1){
-            $akomodasi->isHeadline = $request->get('cHeadline');
+        // $akomodasi = Akomodasi::find($id);
+        $post = Akomodasi::find($id);
+        $request->validate([
+            'tName'=>'required',
+            'tDesc'=> 'required',
+            // 'tTicket' => 'required',
+        ]);
+
+        if($request->hasFile('filename')){
+            if(count($request->get('old')) > 0){
+                foreach($request->file('filename') as $images){
+                    $nama=$images->getClientOriginalName();
+                    $images->move(public_path('img/akomodasi'), $nama);
+                    $data[] = $nama;
+                }
+                $data[] = array_merge($data, $request->get('old'));
+            }else{
+                foreach($request->file('filename') as $images){
+                    $nama=$images->getClientOriginalName();
+                    $images->move(public_path('img/akomodasi'), $nama);
+                    $data[] = $nama;
+                }
+            }
         }else{
-            $akomodasi->isHeadline = 0;
+            if(count($request->get('old')) > 0){
+                $data[] = $request->get('old');
+            }
+            else{
+                $data = "";
+            }
+        }
+
+        
+        $post->name = $request->get('tName');
+        $post->desc = $request->get('tDesc');
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('desa') . " " . $request->get('kecamatan');
+        $post->desa = $request->get('desa');
+        $post->mapUrl = $request->get('tMaps');
+        
+        $post->imageArray = json_encode($data);
+        $post->image = json_encode($data);
+        
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        $post->ticket = '';
+
+        $post->tags = json_encode($request->get('tags'));
+        $post->type = json_encode($request->get('tags'));
+        
+        if($request->get('cIsAllDay') == 1){
+            $post->isOpenAllDay = 1;
+        }else{
+            $post->isOpenAllDay = 0;
+        }
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilitas = 1;
+        }else{
+            $post->disabilitas = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkiran = 1;
+        }else{
+            $post->parkiran = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
+        if($request->get('cHeadline') == 1){
+            $post->isHeadline = 1;
+        }else{
+            $post->isHeadline = 0;
         }
         if($request->get('cIcon') == 1){
-            $akomodasi->isIcon = 1;
+            $post->isIcon = 1;
         }else{
-            $akomodasi->isIcon = 0; 
+            $post->isIcon = 0; 
         }
-        // if($request->hasFile('image')){
-        if($request->image != "" && $request->image != null){
-            error_log('has image.');
-            $image = $request->file('image');
-            $request->image = $image->getClientOriginalName();
-            $image->move(public_path('img/akomodasi'), $image->getClientOriginalName());
-            // $path = public_path('img/logo').'/'.$image->getClientOriginalName();
-            $path = $image->getClientOriginalName();
-            $akomodasi->image = $path;
-        }
-        $akomodasi->update();
-        return redirect('/admin')->with('success', 'gallery updated successfully');
+        $post->update();
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**
@@ -165,8 +272,13 @@ class AkomodasiController extends Controller
      * @param  \App\Models\Akomodasi  $akomodasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Akomodasi $akomodasi)
+    public function destroy( $id)
     {
         //
+        $akomodasi = Akomodasi::find($id);
+        // error_log($id);
+        $akomodasi->delete();
+        // $akomodasi = Akomodasi::where('id', $id)->delete();
+        return redirect('/admin')->with('success', 'akomodasi deleted successfully');
     }
 }

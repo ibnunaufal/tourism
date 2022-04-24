@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('desc');
             $table->string('desa');
             $table->string('kecamatan');
-            $table->string('mapUrl');
+            $table->text('mapUrl');
             $table->string('image');
             $table->string('imageArray');
             $table->string('ticket');
