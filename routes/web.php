@@ -36,6 +36,11 @@ Route::resource('destinasi','DestinasiController');
 Route::resource('akomodasi','AkomodasiController');
 Route::resource('kuliner','KulinerController');
 
+Route::resource('category','CategoryController');
+Route::resource('subcategory','SubCategoryController');
+Route::resource('item','TempatController');
+Route::resource('review','ReviewController');
+
 Route::resource('acara','AcaraController');
 
 Route::resource('admin','AdminController');

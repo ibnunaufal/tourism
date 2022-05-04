@@ -123,7 +123,153 @@
         </div>
         <!-- End row -->
     </div>
+    
+    
 
+    <div class="container margin_60">
+    <div class="row">
+        <aside class="col-lg-2">
+            <div class="box_style_cat">
+                <ul id="cat_nav">
+                    <li><a href="#" id="active"><i class="icon_set_1_icon-51"></i>Kategori <span>(141)</span></a>
+                    </li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-24"></i> Tempat <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-50"></i> Belanja <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-44"></i> Budaya <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-40"></i> Olahraga <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-3"></i> Rekreasi <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-2"></i> Religi <span>(141)</span></a></li>
+                    <li><a href="all_tours_list.html"><i class="icon_set_1_icon-4"></i> Sejarah <span>(141)</span></a></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="col-lg-10">
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                        <table class="table">
+                                <tr class="text-center table-bordered">
+                                    <th colspan="5">Daftar Kategori dan Sub Kategori</th>
+                                    <th>
+                                    <a class="btn btn-primary" href="{{ url('category/create') }}"> <i class="icon_set_1_icon-11"></i></a>
+                                    </th>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Gambar Utama</th>
+                                    <th>Icon</th>
+                                    <th>SubKategori</th>
+                                    <th width="280px">Aksi</th>
+                                </tr>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach($category as $cat)
+                                <tr class="table-bordered">
+                                    <td class="td-bordered col-sm-1">{{ ++$i }}</td>
+                                    <td class="td-bordered col-md-1">{{ $cat->name }}</td>
+                                    <td class="col-md-1">
+                                        <img src="{{URL::to('/')}}/img/category/{{$cat->image}}"
+                                        style="max-width:70px;max-height:70px;" alt="{{$cat->image}}">
+                                    </td>
+                                    <td class="td-bordered col-md-3">
+                                        <i class="{{$cat->icon}}" style="zoom:2;"></i> {{$cat->icon}}</td>
+                                    <td class="td-bordered col-md-5">
+                                        <div class="row">
+                                        @foreach($subcategory as $subcat)
+                                            @if($cat->id == $subcat->category)
+                                            <div class="col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                    <i class="{{$subcat->icon}}" style="zoom:2;"></i> {{$subcat->name}} 
+                                                    </div>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">
+                                                            
+                                                            <form action="{{route('subcategory.destroy', $subcat->id)}}" method="POST">    
+                                                            @method('DELETE')
+                                                            @csrf
+                                                            <a class="btn btn-primary" href="{{ route('subcategory.edit',$subcat->id) }}">
+                                                                <i class="icon_set_1_icon-17"></i>
+                                                            </a>
+                                                                <button type="submit" class="btn btn-danger" onclick="return myFunction1();">
+                                                                    <i class="icon_set_1_icon-67"></i>
+                                                                    <!-- <i class="icon_set_1_icon-67"></i> -->
+                                                                </button>                                        
+                                                            </form>
+                                                            <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
+                                                            <script>
+                                                            function myFunction1() {
+                                                                if(!confirm("Anda yakin akan menghapus sub kategori ini?"))
+                                                                event.preventDefault();
+                                                            }
+                                                            </script>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        @endforeach
+                                            <div class="col-lg-6">
+                                                <div class="card">
+                                                    <div class="card-header" style="text-align:center;">
+                                                        <a href="subcategory/create">
+                                                            <button class="btn btn-primary">
+                                                                <i class="icon_set_1_icon-11"></i>
+                                                            </button>    
+                                                        </a>
+                                                    </div>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item"  style="text-align:center;">
+                                                            Tambah SubKategori
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </td>
+
+                                    <!-- <img style="width: 30px;height: 30px;" src="{{ asset('images/icon/logo-whatsapp.svg') }}" alt=""> -->
+                                    <td class="td-bordered col-md-1" style="text-align: center;">
+                                        <form action="{{ route('category.destroy',$cat->id) }}" method="POST">
+                                            <a class="btn btn-primary" href="{{ route('akomodasi.edit',$cat->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                            <form action="{{route('category.destroy', $cat->id)}}" method="POST">    
+                                            @method('DELETE')
+                                            @csrf
+                                                <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                                    <i class="icon_set_1_icon-67"></i>
+                                                </button>                                        
+                                            </form>
+                                            <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
+                                            <script>
+                                            function myFunction() {
+                                                if(!confirm("Anda yakin akan menghapus kategori ini?"))
+                                                event.preventDefault();
+                                            }
+                                            </script>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="10" class="punyaku">
+                                        Jumlah Data : {{ $category->total() }} <br>
+                                        {{ $category->links("pagination::bootstrap-4") }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End col lg-9 -->
+                </div>
+                <!-- End row -->
+            </div>
+        </div>
+    </div>
+    </div>
 
     <div class="container margin_60">
         <div class="row">

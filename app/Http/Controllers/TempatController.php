@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
-use App\Models\Destinasi;
-use App\Models\Akomodasi;
-use App\Models\Kuliner;
-use App\Models\Acara;
-use App\Models\Fasum;
-use App\Models\Category;
-use App\Models\SubCategory;
+use App\Models\Tempat;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class TempatController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,20 +15,6 @@ class AdminController extends Controller
     public function index()
     {
         //
-        // $destinasi = Destinasi::all();
-        $destinasi = Destinasi::paginate(5);
-        $akomodasi = Akomodasi::paginate(5);
-        $kuliner = Kuliner::paginate(5);
-        $acara = Acara::paginate(5);
-        $fasum = Fasum::paginate(5);
-        $category = Category::paginate(5);
-        $subcategory = SubCategory::all();
-        return view('pages.admin.index', compact('destinasi', 'destinasi'))
-        ->with('acara', $acara)->with('fasum', $fasum)
-        ->with('akomodasi', $akomodasi)
-        ->with('kuliner', $kuliner)
-        ->with('category', $category)
-        ->with('subcategory', $subcategory);
     }
 
     /**
@@ -62,10 +41,10 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(Tempat $tempat)
     {
         //
     }
@@ -73,10 +52,10 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(Tempat $tempat)
     {
         //
     }
@@ -85,10 +64,10 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, Tempat $tempat)
     {
         //
     }
@@ -96,10 +75,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Admin  $admin
+     * @param  \App\Models\Tempat  $tempat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(Tempat $tempat)
     {
         //
     }
