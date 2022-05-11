@@ -267,6 +267,106 @@
                 </div>
                 <!-- End row -->
             </div>
+            <div class="">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                        <table class="table">
+                                <tr class="text-center table-bordered">
+                                    <th colspan="5">Daftar Tempat</th>
+                                    <th>
+                                    <a class="btn btn-primary" href="{{ url('category/create') }}"> <i class="icon_set_1_icon-11"></i></a>
+                                    </th>
+                                </tr>
+                                <tr class="table-bordered">
+                                    <!-- Name
+                                    Desc
+                                    Alamat(desa kelurahan address)
+                                    mapUrl
+                                    ticket
+                                    rating
+
+                                    seninJumat
+                                    sabtuMinggu
+                                    
+                                    disabilities
+                                    parkir
+                                    wifi
+                                    isHeadline
+                                    isIcon
+
+                                    url
+
+                                    image
+                                    tags -->
+
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Gambar Utama</th>
+                                    <th>Desc</th>
+                                    <th>Alamat MapUrl</th>
+                                    <th>Ticket</th>
+                                    <th>Rating</th>
+                                    <th>Tags</th>
+                                    <th>Lainnya</th>
+
+<!-- 
+                                    <th>Icon</th>
+                                    <th>SubKategori</th> -->
+                                    <th width="280px">Aksi</th>
+                                </tr>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach($category as $cat)
+                                <tr class="table-bordered">
+                                    <td class="td-bordered col-sm-1">{{ ++$i }}</td>
+                                    <td class="td-bordered col-md-1">{{ $cat->name }}</td>
+                                    <td class="col-md-1">
+                                        <img src="{{URL::to('/')}}/img/category/{{$cat->image}}"
+                                        style="max-width:70px;max-height:70px;" alt="{{$cat->image}}">
+                                    </td>
+                                    <td class="td-bordered col-md-3">
+                                        <i class="{{$cat->icon}}" style="zoom:2;"></i> {{$cat->icon}}</td>
+                                    <td class="td-bordered col-md-5">
+                                        
+                                    </td>
+
+                                    <!-- <img style="width: 30px;height: 30px;" src="{{ asset('images/icon/logo-whatsapp.svg') }}" alt=""> -->
+                                    <td class="td-bordered col-md-1" style="text-align: center;">
+                                        <form action="{{ route('category.destroy',$cat->id) }}" method="POST">
+                                            <a class="btn btn-primary" href="{{ route('akomodasi.edit',$cat->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                            <form action="{{route('category.destroy', $cat->id)}}" method="POST">    
+                                            @method('DELETE')
+                                            @csrf
+                                                <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                                    <i class="icon_set_1_icon-67"></i>
+                                                </button>                                        
+                                            </form>
+                                            <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
+                                            <script>
+                                            function myFunction() {
+                                                if(!confirm("Anda yakin akan menghapus kategori ini?"))
+                                                event.preventDefault();
+                                            }
+                                            </script>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="10" class="punyaku">
+                                        Jumlah Data : {{ $category->total() }} <br>
+                                        {{ $category->links("pagination::bootstrap-4") }}
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End col lg-9 -->
+                </div>
+                <!-- End row -->
+            </div>
         </div>
     </div>
     </div>

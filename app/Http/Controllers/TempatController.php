@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tempat;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
 class TempatController extends Controller
@@ -25,6 +26,7 @@ class TempatController extends Controller
     public function create()
     {
         //
+        return view('pages.tempat.create');
     }
 
     /**
@@ -36,6 +38,87 @@ class TempatController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'tName'=>'required',
+            'tDesc'=> 'required',
+            'filename'=> 'required',
+            'filename.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'tTicket' => 'required',
+        ]);
+
+        $post = new Tempat;
+        $post->name = $request->get('tName');
+        $post->desc = $request->get('tDesc');
+        $post->desa = $request->get('desa');
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('tAddress');
+        $post->mapUrl = $request->get('tMapUrl');
+        $post->ticket = $request->get('tTicket');
+        $post->rating = "4.5";
+        $post->url = $request->get('tUrl');
+
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilities = 1;
+        }else{
+            $post->disabilities = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkir = 1;
+        }else{
+            $post->parkir = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
+        if($request->get('cHeadline') == 1){
+            $post->isHeadline = 1;
+        }else{
+            $post->isHeadline = 0;
+        }
+        if($request->get('cIcon') == 1){
+            $post->isIcon = 1;
+        }else{
+            $post->isIcon = 0; 
+        }
+
+        $post->tags = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
+
+
+        if($request->hasFile('filename')){
+            foreach($request->file('filename') as $images){
+                $nama=$images->getClientOriginalName();
+                $data[] = $nama;
+            }
+        }
+        $post->image = str_replace('"','',json_encode($data[0])) ;
+
+        $post->save();
+
+        $id = $post->id;
+
+        if($request->hasFile('filename')){
+            $images = $request->file('filename');
+            $desc = $request->input('imgDesc');
+            for($i=0; $i < count($images); $i++){
+                $nama=$images[$i]->getClientOriginalName();
+                if($i != 0){
+                    $images[$i]->move(public_path('img/tempat'), $nama);
+                }
+                $data[] = $nama;
+
+                $imgUpload = new Image;
+                $imgUpload->idTempat = $id;
+                $imgUpload->image = $nama;
+                $imgUpload->desc = $desc[$i];
+                $imgUpload->tags = $desc[$i];
+                $imgUpload->save();
+            }
+        }
     }
 
     /**
@@ -47,6 +130,8 @@ class TempatController extends Controller
     public function show(Tempat $tempat)
     {
         //
+        return view('pages.tempat.detail', compact('tempat'))
+        ->with('images', Image::where('idTempat', $tempat->id)->get());
     }
 
     /**

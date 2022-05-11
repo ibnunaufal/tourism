@@ -18,20 +18,20 @@ return new class extends Migration
             $table->string('name');
             $table->text('desc');
             $table->string('desa');
-            $table->string('kelurahan');
+            $table->string('kecamatan');
             $table->string('address');
             $table->text('mapUrl');
             $table->integer('ticket');
             $table->string('rating');
             $table->string('seninJumat');
-            $table->string('sabtuMingggu');
+            $table->string('sabtuMinggu');
             $table->boolean('disabilities');
             $table->boolean('parkir');
             $table->boolean('wifi');
             $table->boolean('isHeadline');
             $table->boolean('isIcon');
             $table->string('url');
-            $table->json('image');
+            $table->string('image');
             /* 
             [{
                 image: filename,

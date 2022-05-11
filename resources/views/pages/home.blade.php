@@ -16,7 +16,7 @@
                                     $asd = "Jelajahi berbagai destinasi di kota salatiga.";
                                     @endphp
                                     {{ $asd }}
-                                    <!-- {{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}} -->
+                                    
                                 </p>
                                 <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="all_tours_list.html" role="button">Selengkapnya</a></div>
                             </div>

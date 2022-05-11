@@ -40,6 +40,7 @@ Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
 Route::resource('item','TempatController');
 Route::resource('review','ReviewController');
+Route::resource('tempat','TempatController');
 
 Route::resource('acara','AcaraController');
 
