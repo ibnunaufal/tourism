@@ -17,18 +17,20 @@ class AcaraController extends Controller
     {
         //
         $position = 'Acara';
-    //     if($request->ajax()) {
+        if($request->ajax()) {
        
-    //         $data = Acara::whereDate('start', '>=', $request->start)
-    //                   ->whereDate('end',   '<=', $request->end)
-    //                   ->get(['id', 'name', 'desc', 'desa', 'kecamatan', 'start', 'end']);
+            $data = Acara::whereDate('start', '>=', $request->start)
+                      ->whereDate('end',   '<=', $request->end)
+                      ->get(['id', 'name', 'desc', 'desa', 'kecamatan', 'start', 'end']);
  
-    //         return response()->json($data);
-    //    }
-       $acaraa = Acara::paginate(10);
-       error_log('Some message here.');
-       return view('pages.acara.index')->with('position', $position)
-       ->with('acaraa',$acaraa); ;
+            return response()->json($data);
+       }
+       return view('pages.acara.index')->with('acaras',Acara::get());
+
+    //    $acaraa = Acara::paginate(10);
+    //    error_log('Some message here.');
+    //    return view('pages.acara.index')->with('position', $position)
+    //    ->with('acaraa',$acaraa); ;
     }
 
     public function ajax(Request $request)
@@ -156,20 +158,10 @@ class AcaraController extends Controller
         // $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
 
         $post->ticket = $request->get('tTicket');
-        $post->date = $request->get('tTanggal');
+        $post->start = $request->get('tStart');
+        $post->end = $request->get('tEnd');
 
         $post->tags = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
-        // $post->type = json_encode($request->get('tags'));
-
-        //     'ticket' => implode(',', (array) $request->get('dynamicAddRemove'))
-        // ]);
-        
-        // $post->hours = json_encode($request->input('days'));
-        // if($request->get('cIsAllDay') == 1){
-        //     $post->isOpenAllDay = 1;
-        // }else{
-        //     $post->isOpenAllDay = 0;
-        // }
         if($request->get('cDisabilitas') == 1){
             $post->disabilitas = 1;
         }else{

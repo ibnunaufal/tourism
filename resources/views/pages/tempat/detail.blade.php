@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<section class="parallax-window" data-parallax="scroll" data-image-src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" data-parallax="scroll" data-image-src="{{URL::to('/')}}/img/tempat" data-natural-width="1400" data-natural-height="470">
     <div class="parallax-content-2">
         <div class="container">
             <div class="row">
@@ -46,7 +46,7 @@
             <div class="col-lg-12" id="single_tour_desc">
                 <div id="single_tour_feat">
                     <ul>
-                        <li><i class="icon_set_1_icon-52"></i>Buka 24 Jam</li>
+                        <li><i class="icon_set_1_icon-52"></i>Buka Setiap Hari</li>
                         <li><i class="icon_set_1_icon-86"></i>Free Wifi</li>
                         <li><i class="icon_set_1_icon-13"></i>Ramah Disabilitas</li>
                         <li><i class="icon_set_1_icon-27"></i>Parkir Tersedia</li>
@@ -214,7 +214,19 @@
                         <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">Tambahkan review</a>
                         @endif
                         @if(count($reviews) > 0)
-                            <div id="score_detail"><span>{{ number_format((float)$ratingss, 1, '.', '') }}</span><small>/10</small> Good <small>(Berdasarkan {{ count($reviewer) }} reviews)</small>
+                            <div id="score_detail"><span>{{ number_format((float)$ratingss, 1, '.', '') }}</span><small>/10</small> 
+                            @if($ratingss > 8 && $ratingss <= 10)
+                            Sangat Baik
+                            @endif
+                            @if($ratingss > 6 && $ratingss <= 8)
+                            Cukup
+                            @endif
+                            @if($ratingss > 3 && $ratingss <= 6)
+                            Kurang
+                            @endif
+                            @if($ratingss <= 3)
+                            Buruk
+                            @endif <small>(Berdasarkan {{ count($reviewer) }} reviews)</small>
                             </div>
                             <!-- End general_rating -->
                             <!-- <div class="row" id="rating_summary">
@@ -256,10 +268,10 @@
                                 <small> - {{ $rev->created_at }} -</small>
                                 <h4> {{ $rev->name }} </h4>
                                 <p> {{ $rev->email }} </p>
-                                <div class="rating">
+                                <!-- <div class="rating">
                                     <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
                                 </div>
-                                <br>
+                                <br> -->
                                 <p>
                                     {{ $rev->message }}
                                 </p>

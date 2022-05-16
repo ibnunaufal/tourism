@@ -41,6 +41,12 @@
                     </li>
                     @endforeach
                     <li class="submenu" style="text-align:left;">
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon_set_1_icon-53"></i> Acara <i class="icon-down-open-mini"></i></a>
+                        <ul>
+                            <li><a href="/fullcalender"><i class="icon_set_1_icon-53"></i> Kalender</a></li>
+                        </ul>
+                    </li>
+                    <li class="submenu" style="text-align:left;">
                         @if (Auth::guest())
                         <a href="javascript:void(0);" class="show-submenu"><i class="icon-login-2"></i> Login <i class="icon-down-open-mini"></i></a>
                         <ul>

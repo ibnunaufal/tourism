@@ -182,7 +182,7 @@
 										$temp = str_replace("]","",$temp);
 										$tempArr = explode(',',$temp)
 										?>
-										<img src="{{ URL::to('/') }}/img/tempat/{{ $tempat->image }}" style="max-width: 353px;max-height: 350px;object-fit: contain;left: 0px;right: 0px;" alt="Image">
+										<img src="{{ URL::to('/') }}/img/tempat/{{ $tempat->image }}" style="max-width: 353px;max-height: 350px;object-fit: contain;" alt="Image">
 										<div class="short_info"><i class="icon_set_1_icon-23"></i> {{$tempat->tags}} </div>
 									</a>
 								</div>

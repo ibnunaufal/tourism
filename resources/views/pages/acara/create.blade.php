@@ -109,7 +109,16 @@
                     </div>
                     <div class="form-group">
                         <label for="tVideo">Tanggal Acara:</label>
-                        <input type="date" class="form-control" id="tTanggal" placeholder="Masukkan Tanggal" name="tTanggal">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="tVideo">Tanggal Mulai:</label>
+                                <input type="date" class="form-control" id="tStart" placeholder="Masukkan Tanggal" name="tStart">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="tVideo">Tanggal Selesai:</label>
+                                <input type="date" class="form-control" id="tEnd" placeholder="Masukkan Tanggal" name="tEnd">
+                            </div>
+                        </div>
                     </div>
                     
                     <!-- <div class="form-group">
@@ -125,7 +134,7 @@
                         </div>
                     </div> -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="image">Tags:</label>
                         <select class="form-control js-example-basic-multiple" name="tags[]" multiple="multiple">
                             <option value="BUDAYA">BUDAYA</option>
@@ -134,7 +143,7 @@
                             <option value="RELIGI">RELIGI</option>
                             <option value="SEJARAH">SEJARAH</option>
                         </select>
-                    </div>
+                    </div> -->
                 
                     <!-- <div class="form-group">
                         <label for="tTiket">Jam Operasional:</label>

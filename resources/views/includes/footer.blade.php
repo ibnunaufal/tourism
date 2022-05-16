@@ -6,54 +6,67 @@
             <a href="wa.me/6281225951789" id="phone">+62 895 2462 1666 (WA)</a>
             <a href="mailto:help@dolansalatiga.com" id="email_footer">help@dolansalatiga.com</a>
         </div>
-        <div class="col-md-2">
-            <h3>Destinasi</h3>
+       @if(count($categorynavbar)>0)
+       <div class="col-md-2">
+            <h3>{{$categorynavbar[0]->name}}</h3>
             <ul>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-24"></i> Semua Destinasi</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-24"></i> Alam</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-50"></i> Belanja</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-44"></i> Budaya</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-40"></i> Olahraga</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-3"></i> Rekreasi</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-2"></i> Religi</a></li>
-                <li><a href="/destinasi"><i class="icon_set_1_icon-4"></i> Sejarah</a></li>
+                @foreach($subcategorynavbar as $subcat)
+                    @if($subcat->category == $categorynavbar[0]->id)
+                    <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                    @endif
+                @endforeach
+                
             </ul>
         </div>
+        @if(count($categorynavbar)>1)
         <div class="col-md-2">
-            <h3>Akomodasi</h3>
+            <h3>{{$categorynavbar[1]->name}}</h3>
             <ul>
-                <li><a href="/akomodasi"><i class="icon_set_1_icon-23"></i> Semua Akomodasi</a></li>
-                <li><a href="/akomodasi"><i class="icon_set_2_icon-104"></i> Hotel</a></li>
-                <li><a href="/akomodasi"><i class="icon_set_2_icon-114"></i> Wisma</a></li>
-            </ul>
-            <h3>Kuliner</h3>
-            <ul>
-                <li><a href="/kuliner"><i class="icon_set_1_icon-58"></i> Semua Kuliner</a></li>
-                <li><a href="/kuliner"><i class="icon_set_3_restaurant-5"></i> Tradisional</a></li>
-                <li><a href="/kuliner"><i class="icon_set_3_restaurant-11"></i> Restoran</a></li>
+                @foreach($subcategorynavbar as $subcat)
+                    @if($subcat->category == $categorynavbar[1]->id)
+                    <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                    @endif
+                @endforeach
+                
             </ul>
         </div>
-
+        @endif
+        @if(count($categorynavbar)>2)
         <div class="col-md-2">
-            <h3>Fasilitas Umum</h3>
+            <h3>{{$categorynavbar[2]->name}}</h3>
             <ul>
-                <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Semua Fasilitas Umum</a></li>
-                <!-- <li><a href="/fasum"><i class="icon_set_1_icon-12"></i> Toilet</a></li> -->
-                <li><a href="/fasum"><i class="icon_set_1_icon-7"></i> Wifi</a></li>
-                <li><a href="/fasum"><i class="icon_set_1_icon-26"></i> Halte</a></li>
-                <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> SPBU</a></li>
-                <li><a href="/fasum"><i class="icon_set_1_icon-35"></i> ATM</a></li>
-                <li><a href="/fasum"><i class="icon_set_1_icon-24"></i> Rumah Sakit</a></li>
-                <li><a href="/fasum"><i class="icon_set_2_icon-105"></i> Kantor Polisi</a></li>
+                @foreach($subcategorynavbar as $subcat)
+                    @if($subcat->category == $categorynavbar[2]->id)
+                    <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                    @endif
+                @endforeach
+                
             </ul>
         </div>
-        <div class="col-md-3">
-            <h3>Acara</h3>
+        @endif
+        @if(count($categorynavbar)>3)
+        <div class="col-md-2">
+            <h3>{{$categorynavbar[3]->name}}</h3>
+            <ul>
+                @foreach($subcategorynavbar as $subcat)
+                    @if($subcat->category == $categorynavbar[3]->id)
+                    <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                    @endif
+                @endforeach
+                
+            </ul>
+        </div>
+        @endif
+       @endif
+       <div class="col-md-2">
+           <h3>Acara</h3>
             <ul>
                 <li><a href="/fullcalender"><i class="icon_set_1_icon-53"></i> Kalender</a></li>
             </ul>
+       </div>
+        <div class="col-md-2">
             @if (Auth::guest())
-            <h3>Fasilitas Umum</h3>
+            <h3>Login</h3>
             <ul>
                 <li><a href="/login"><i class="icon-login-2"></i> Login</a></li>
             </ul>

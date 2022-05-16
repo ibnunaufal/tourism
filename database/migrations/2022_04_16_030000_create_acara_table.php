@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('image');
             $table->string('imageArray');
             $table->string('ticket');
-            $table->date('date');
+            $table->date('start');
+            $table->date('end');
             $table->string('disabilitas');
             $table->string('parkiran');
             $table->string('wifi');

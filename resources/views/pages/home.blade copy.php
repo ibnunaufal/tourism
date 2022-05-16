@@ -134,7 +134,7 @@
     <p class="text-center add_bottom_30">
         <a href="tempat" class="btn_1">Lihat Semua Destinasi</a>
     </p>
-    <hr class="mt-5 mb-5">
+
     <div class="main_title">
         <h2>Kunjungi Destinasi <span>{{ $secondList[0]->tags }}</span> Menarik</h2>
         <p>Beragam destinasi untuk dikunjungi</p>
@@ -181,52 +181,148 @@
     </p>
 
     <hr class="mt-5 mb-5">
+
     <div class="main_title">
-        <h2>Ikuti <span>Event</span> Menarik</h2>
-        <p>Beragam acara untuk diikuti</p>
-        <!-- <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p> -->
+        <h2>Akomodasi <span>Terbaik</span> Salatiga</h2>
+        <p>Subtitle</p>
+        <!-- <p>Alam nya yang sejuk, membuat anda nyaman untuk menginap diberbagai sudut kota ini.</p> -->
     </div>
 
     <div class="owl-carousel owl-theme list_carousel add_bottom_30">
-        @foreach ($acaras as $tempat)
+        @foreach ($akomodasi as $akomodasi)
         <div class="item">
-            <div class="tour_container">
-                <!-- <div class="ribbon_3 popular"><span>Terbaik</span></div> -->
+            <div class="hotel_container">
+                <!-- <div class="ribbon_3 popular"><span>Popular</span></div> -->
                 <div class="img_container">
-                    <a href="fullcalender">
-                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
-                        <div class="short_info">
-                            Event
-                            <!-- <span class="price">
-                                <sup>$</sup>39
-                            </span> -->
+                    <a href="{{ route('akomodasi.show',$akomodasi->id) }}">
+                    <img src="{{URL::to('/')}}/img/destinasi/{{$destinasi->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                        <!-- <div class="score"><span>7.5</span>Good</div> -->
+                        <div class="short_info hotel">
+                            <i class="icon_set_1_icon-23"></i>
+                            {{ $akomodasi->tags }}
                         </div>
                     </a>
                 </div>
-                <div class="tour_title">
-                    <h3><strong>{{ $tempat->name }}</strong></h3>
-                    <h6>{{ $tempat->start }} - {{ $tempat->end }}</h6>
-                    <h6>{{ $tempat->desa }} {{ $tempat->kecamatan }}</h6>
+                <div class="hotel_title">
+                    <h3><strong>{{$akomodasi->name}}</strong></h3>
+                    <h3>{{ $akomodasi->desa }} {{$akomodasi->kecamatan}}</h3>
+                    <!-- <div class="rating">
+                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+                        <small>4 Star Hotel</small>
+                    </div> -->
                     <!-- end rating -->
                     <!-- <div class="wishlist">
-                        <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
                     </div> -->
                     <!-- End wish list-->
                 </div>
             </div>
-            <!-- End box tour -->
+            <!-- End box -->
         </div>
         @endforeach
         <!-- /item -->
-        
     </div>
     <!-- /carousel -->
     
-    <p class="text-center add_bottom_30">
-        <a href="fullcalender" class="btn_1">Lihat Semua Acara</a>
+    <p class="text-center nopadding">
+        <a href="akomodasi" class="btn_1">Lihat Semua Akomodasi</a>
     </p>
 
+    <hr class="mt-5 mb-5">
+
+    <div class="main_title">
+        <h2>Beragam <span>Kuliner</span> Ikonik</h2>
+        <p>Subtitle</p>
+        <!-- <p>Alam nya yang sejuk, membuat anda nyaman untuk menginap diberbagai sudut kota ini.</p> -->
+    </div>
+
+    <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+        @foreach ($kuliner as $kuliner)
+        <div class="item">
+            <div class="hotel_container">
+                <!-- <div class="ribbon_3 popular"><span>Popular</span></div> -->
+                <div class="img_container">
+                    <a href="{{ route('kuliner.show',$kuliner->id) }}">
+                    <img src="{{URL::to('/')}}/img/kuliner/{{$kuliner->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                        <!-- <div class="score"><span>7.5</span>Good</div> -->
+                        <div class="short_info hotel">
+                            <i class="icon_set_1_icon-58"></i>
+                            {{ $kuliner->tags }}
+                        </div>
+                    </a>
+                </div>
+                <div class="hotel_title">
+                    <h3><strong>{{$kuliner->name}}</strong></h3>
+                    <h3>{{$kuliner->desa}} {{$kuliner->kecamatan}}</h3>
+                    <!-- <div class="rating">
+                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+                        <small>4 Star Hotel</small>
+                    </div> -->
+                    <!-- end rating -->
+                    <!-- <div class="wishlist">
+                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                    </div> -->
+                    <!-- End wish list-->
+                </div>
+            </div>
+            <!-- End box -->
+        </div>
+        @endforeach
+        <!-- /item -->
+    </div>
+    <!-- /carousel -->
     
+    <p class="text-center nopadding">
+        <a href="kuliner" class="btn_1">Lihat Semua Kuliner</a>
+    </p>
+
+    <hr class="mt-5 mb-5">
+
+    <div class="main_title">
+        <h2>Acara <span>Menarik</span> Salatiga</h2>
+        <p>Subtitle</p>
+        <!-- <p>Alam nya yang sejuk, membuat anda nyaman untuk menginap diberbagai sudut kota ini.</p> -->
+    </div>
+
+    <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+        @foreach ($acara as $acara)
+        <div class="item">
+            <div class="hotel_container">
+                <!-- <div class="ribbon_3 popular"><span>Popular</span></div> -->
+                <div class="img_container">
+                    <a href="{{ route('acara.show',$acara->id) }}">
+                    <img src="{{URL::to('/')}}/img/acara/{{$acara->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                        <!-- <div class="score"><span>7.5</span>Good</div> -->
+                        <div class="short_info hotel">
+                            <i class="icon_set_1_icon-87"></i>
+                            {{ $acara->tags }}
+                        </div>
+                    </a>
+                </div>
+                <div class="hotel_title">
+                    <h3><strong>{{ $acara->name }}</strong></h3>
+                    <h6>{{ $acara->desa }} {{$acara->kecamatan}}</h6>
+                    <!-- <div class="rating">
+                        <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
+                        <small>4 Star Hotel</small>
+                    </div> -->
+                    <!-- end rating -->
+                    <!-- <div class="wishlist">
+                        <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
+                    </div> -->
+                    <!-- End wish list-->
+                </div>
+            </div>
+            <!-- End box -->
+        </div>
+        @endforeach
+        <!-- /item -->
+    </div>
+    <!-- /carousel -->
+    
+    <p class="text-center nopadding">
+        <a href="akomodasi" class="btn_1">Lihat Semua Akomodasi</a>
+    </p>
     
 </div>
 <!-- End container -->

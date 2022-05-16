@@ -3191,8 +3191,8 @@ ul.list_order li span {
 /* Parallax bg */
 .parallax-window {
 	min-height: 470px;
-	background: transparent;
-	/* background: linear-gradient(to bottom,#000,transparent); */
+	/* background: transparent; */
+	background: linear-gradient(to bottom,#000,transparent);
 	position: relative;
 }
 .parallax-mirror {

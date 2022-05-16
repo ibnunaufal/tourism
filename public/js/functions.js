@@ -51,6 +51,12 @@ $(document).ready (function (){
 		console.log(targetOffset);
 		$('html, body').animate({scrollTop:targetOffset-90}, 300);
 	});
+	$('.smooth-goto5').on('click', function() {  
+		var targetOffset = $('#acara').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset-90}, 300);
+	});
 });
 $('#toTop').on('click', function(){
 	$('html, body').animate({scrollTop:0}, 300);
