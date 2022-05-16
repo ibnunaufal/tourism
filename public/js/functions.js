@@ -18,6 +18,45 @@ $(window).scroll(function () {
 	}
 });
 
+$(window).scroll(function(){
+	if($(window).scrollTop() >= 800){
+		$("#toTop").addClass('visible');
+	} else {
+		$("#toTop").removeClass('visible');
+	}
+});
+$(document).ready (function (){
+    // code here
+	$('.smooth-goto1').on('click', function() {  
+		var targetOffset = $('#kategori').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset}, 300);
+	});
+	$('.smooth-goto2').on('click', function() {  
+		var targetOffset = $('#tempat').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset-60}, 300);
+	});
+	$('.smooth-goto3').on('click', function() {  
+		var targetOffset = $('#review').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset-80}, 300);
+	});
+	$('.smooth-goto4').on('click', function() {  
+		var targetOffset = $('#headline').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset-90}, 300);
+	});
+});
+$('#toTop').on('click', function(){
+	$('html, body').animate({scrollTop:0}, 300);
+	return false;
+});
+
 /* Menu */
 $('a.open_close').on("click", function () {
 	$('.main-menu').toggleClass('show');
@@ -157,9 +196,9 @@ $(function () {
 	});
 
 	/* Input incrementer*/
-	$(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
+	// $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>');
 	$(".button_inc").on("click", function () {
-
+		console.log("clicked")
 		var $button = $(this);
 		var oldValue = $button.parent().find("input").val();
 
@@ -286,6 +325,9 @@ const $owlCarousel = $("#carousel-home .owl-carousel").owlCarousel({
     items: 1,
     loop: true,
     nav: false,
+    autoplay:true,
+    autoplayTimeout:5000,
+    autoplayHoverPause:true,
     dots: true,
     responsive: {
         0: {

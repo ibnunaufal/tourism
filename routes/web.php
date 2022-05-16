@@ -40,7 +40,9 @@ Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
 Route::resource('item','TempatController');
 Route::resource('review','ReviewController');
+Route::post('addReply', [App\Http\Controllers\ReviewController::class, 'addReply'])->name('addReply');
 Route::resource('tempat','TempatController');
+Route::resource('headline','HeadlineController');
 
 Route::resource('acara','AcaraController');
 

@@ -16,10 +16,15 @@ return new class extends Migration
         Schema::create('review', function (Blueprint $table) {
             $table->id();
             $table->string('idTempat');
+            $table->string('name');
+            $table->string('email');
             $table->text('message');
             $table->text('image');
             $table->integer('vote');
-            $table->json('reply');
+            $table->text('reply');
+            /*
+            {message:message, date:date}
+            */
             $table->timestamps();
         });
     }

@@ -2181,7 +2181,7 @@ input.qty2 {
 }
 
 .dec {
-	background: #fff url(../img/minus.png) no-repeat center center;
+	/* background: #fff url(../img/minus.png) no-repeat center center; */
 	border: 1px solid #cccccc;
 	left: 0;
 	top: 0;
@@ -2194,7 +2194,7 @@ input.qty2 {
 }
 
 .inc {
-	background: #fff url(../img/plus.png) no-repeat center center;
+	/* background: #fff url(../img/plus.png) no-repeat center center; */
 	right: 0;
 	top: 0;
 	border: 1px solid #cccccc;
@@ -3191,9 +3191,12 @@ ul.list_order li span {
 /* Parallax bg */
 .parallax-window {
 	min-height: 470px;
-	/* background: transparent; */
-	background: linear-gradient(to bottom,#000,transparent);
+	background: transparent;
+	/* background: linear-gradient(to bottom,#000,transparent); */
 	position: relative;
+}
+.parallax-mirror {
+    z-index:1
 }
 
 .parallax-content-1 {

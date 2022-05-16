@@ -7,6 +7,9 @@ use App\Models\Destinasi;
 use App\Models\Akomodasi;
 use App\Models\Kuliner;
 use App\Models\Acara;
+use App\Models\Category;
+use App\Models\Headline;
+use App\Models\Tempat;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,7 +28,16 @@ class HomeController extends Controller
         // }
         $data = Destinasi::whereIn('isIcon', [1])->get();
 
+        if(Category::take(1)->count() == 0){
+            $firstSize = 0;
+        }else{
+            $firstSize = Tempat::where('tags', 'LIKE', '%'.Category::take(1)->get()[0]->name.'%')->count();
+        }
         return view('pages.home')
+        ->with('first', Category::take(1)->get())
+        ->with('firstSize', $firstSize)
+
+        ->with('headline', Headline::take(3)->get())
         // ->with('akomodasi', Akomodasi::latest()->take(6)->get())
         ->with('akomodasiSize', Akomodasi::count())
         ->with('destinasiSize', Destinasi::count())

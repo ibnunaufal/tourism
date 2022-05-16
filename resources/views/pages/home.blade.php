@@ -3,20 +3,16 @@
 
 <div id="carousel-home">
     <div class="owl-carousel owl-theme">
-            <div class="owl-slide cover" style="background-image: url(img/slides/tugu.jpg);">
+        @foreach($headline as $head)
+        <div class="owl-slide cover" style="background-image: url(img/headline/{{$head->image}});">
             <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
                 <div class="container">
                     <div class="row justify-content-center justify-content-md-start">
                         <div class="col-lg-12 static">
-                            <div class="slide-text text-center white">
-                                <h2 class="owl-slide-animated owl-slide-title">Dolan Salatiga</h2>
+                            <div class="slide-text {{$head->alignment}} white">
+                                <h2 class="owl-slide-animated owl-slide-title">{{ $head->title }}</h2>
                                 <p class="owl-slide-animated owl-slide-subtitle">
-                                    @php
-                                    
-                                    $asd = "Jelajahi berbagai destinasi di kota salatiga.";
-                                    @endphp
-                                    {{ $asd }}
-                                    
+                                    {{ $head->subtitle }}
                                 </p>
                                 <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="all_tours_list.html" role="button">Selengkapnya</a></div>
                             </div>
@@ -25,40 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="owl-slide cover" style="background-image: url(img/makana.jpg);">
-            <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-                <div class="container">
-                    <div class="row justify-content-center justify-content-md-start">
-                        <div class="col-lg-12 static">
-                            <div class="slide-text text-right white">
-                                <h2 class="owl-slide-animated owl-slide-title">Kuliner Salatiga</h2>
-                                <p class="owl-slide-animated owl-slide-subtitle">
-                                    Sebagai kota gastronomi, Salatiga memiliki banyak destinasi kuliner.
-                                </p>
-                                <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="all_tours_list.html" role="button">Selengkapnya</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="owl-slide cover" style="background-image: url(img/tari9.jpg);">
-            <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
-                <div class="container">
-                    <div class="row justify-content-center justify-content-md-start">
-                        <div class="col-lg-12 static">
-                            <div class="slide-text text-left white">
-                                <h2 class="owl-slide-animated owl-slide-title">Keberagaman Budaya</h2>
-                                <p class="owl-slide-animated owl-slide-subtitle">
-                                    Kota kecil ini memiliki kebudayaan yang cukup beragam.
-                                </p>
-                                <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="all_tours_list.html" role="button">Selengkapnya</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
         <!--/owl-slide-->
     </div>
     <div id="icon_drag_mobile"></div>
@@ -70,13 +33,13 @@
     <div class="row small-gutters categories_grid">
         <div class="col-sm-12 col-md-6">
             <a href="/destinasi">
-                @foreach ($destinasiIcon as $destinasiIcon)
-                <img src="{{URL::to('/')}}/img/destinasi/{{$destinasiIcon->image}}" style="width: 550px;max-height: 500px;object-fit: cover;" alt="Icon" class="img-fluid">
-                @endforeach
+                @foreach ($first as $first)
+                <img src="{{URL::to('/')}}/img/category/{{$first->image}}" style="width: 550px;max-height: 500px;object-fit: cover;" alt="Icon" class="img-fluid">
                 <div class="wrapper">
-                    <h2>Destinasi</h2>
+                    <h2>{{ $first->name }}</h2>
                     <p>{{ $destinasiSize }} Destinasi</p>
                 </div>
+                @endforeach
             </a>
         </div>
         <div class="col-sm-12 col-md-6">
@@ -88,7 +51,7 @@
                     @endforeach
                         <div class="wrapper">
                             <h2>Akomodasi</h2>
-                            <p>{{ $akomodasiSize }} Tempat</p>
+                            <p>{{ $firstSize }} Tempat</p>
                         </div>
                     </a>
                 </div>

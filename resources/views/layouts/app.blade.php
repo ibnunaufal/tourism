@@ -81,6 +81,10 @@
     <script src="{{URL::to('/')}}/js/jquery-2.2.4.min.js"></script>
     <script src="{{URL::to('/')}}/js/common_scripts_min.js"></script>
     <script src="{{URL::to('/')}}/js/functions.js"></script>
+	<!-- <script src="{{URL::to('/')}}/js/parallax.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/2.1.3/parallax.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 	@if(Request::is('fullcalender/'))
 		// code
 		

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tempat;
 use App\Models\Image;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class TempatController extends Controller
@@ -106,9 +107,7 @@ class TempatController extends Controller
             $desc = $request->input('imgDesc');
             for($i=0; $i < count($images); $i++){
                 $nama=$images[$i]->getClientOriginalName();
-                if($i != 0){
-                    $images[$i]->move(public_path('img/tempat'), $nama);
-                }
+                $images[$i]->move(public_path('img/tempat'), $nama);
                 $data[] = $nama;
 
                 $imgUpload = new Image;
@@ -130,8 +129,12 @@ class TempatController extends Controller
     public function show(Tempat $tempat)
     {
         //
-        return view('pages.tempat.detail', compact('tempat'))
-        ->with('images', Image::where('idTempat', $tempat->id)->get());
+        return view('pages.tempat.detail')
+        ->with('tempat', $tempat)
+        ->with('ratingss', Review::where('idTempat', (int)$tempat->id)->avg('vote'))
+        ->with('reviewer', Review::where('idTempat', (int)$tempat->id)->get())
+        ->with('reviews', Review::where('idTempat', (int)$tempat->id)->get())
+        ->with('imageArray', Image::where('idTempat', (int)$tempat->id)->get());
     }
 
     /**

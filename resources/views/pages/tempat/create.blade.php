@@ -180,7 +180,7 @@
                         <label for="image">Tags:</label>
                         <select class="form-control js-example-basic-multiple" name="tags[]" multiple="multiple">
                             @foreach($subcategorynavbar as $subcat)
-                            <option value="{{$subcat->id}}">{{$subcat->name}}</option>
+                            <option value="{{$subcat->name}}">{{$subcat->name}}</option>
                             @endforeach
                         </select>
                     </div>

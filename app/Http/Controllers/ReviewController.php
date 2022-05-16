@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use Log;
 
 class ReviewController extends Controller
 {
@@ -36,6 +38,41 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name_review'=>'required',
+            'email_review'=> 'required',
+            'review_text' => 'required',
+            'vote' => 'required',
+            'id_tempat' => 'required',
+        ]);
+        $post = new Review;
+        $post->idTempat = $request->get('id_tempat');
+        $post->name = $request->get('name_review');
+        $post->vote = $request->get('vote');
+        $post->image = "";
+        $post->reply = "";
+        $post->email = $request->get('email_review');
+        $post->message = $request->get('review_text');
+        $post->save();
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addReply(Request $request){
+        Log::info('message');
+        
+        $post = Review::find(1);
+        Log::info($request->input('reviewer_id'));
+        $request->validate([
+            'review_text' => 'required',
+        ]);
+        $post->reply = $request->get('reviewer_id');
+
+        $post->update();
     }
 
     /**
@@ -67,7 +104,7 @@ class ReviewController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
         //
     }
