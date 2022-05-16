@@ -121,7 +121,6 @@
                         <div class="row">
                             <div class="col-md-6">    
                             <h4>Operasional</h4>
-                            {{ $tempat }}
                                 <ul>
                                     <li>Senin-Jumat : {{$tempat->seninJumat}}</li>
                                     <li>Sabtu-Minggu : {{$tempat->sabtuMinggu}}</li>
@@ -130,7 +129,7 @@
                             <div class="col-md-6">
                                 <h4>Harga Tiket</h4>
                                 <ul>
-                                    <li>Tiket : {{$tempat->ticket}}</li>
+                                    <li>Tiket : Rp {{strrev(chunk_split(strrev($tempat->ticket), 3, '.'))}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -150,7 +149,8 @@
                                 </ul>
                             </div>
                             <div class="col-md-6">
-                                
+                            <h4>Website</h4>
+                            <a href="http://{{ $tempat->url }}" target="_blank" rel="noopener noreferrer">{{ $tempat->url }}</a>
                             </div>
                         </div>
                         <!-- End row  -->
@@ -252,9 +252,10 @@
                         @foreach($reviews as $rev)
                             <hr>
                             <div class="review_strip_single">
-                                <img src="img/avatar1.jpg" alt="Image" class="rounded-circle">
+                                <!-- <img src="img/avatar1.jpg" alt="Image" class="rounded-circle"> -->
                                 <small> - {{ $rev->created_at }} -</small>
-                                <h4>Jhon Doe</h4>
+                                <h4> {{ $rev->name }} </h4>
+                                <p> {{ $rev->email }} </p>
                                 <div class="rating">
                                     <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i><i class="icon-smile"></i>
                                 </div>

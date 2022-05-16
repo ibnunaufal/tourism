@@ -29,18 +29,20 @@
 <!--/carousel-->
 
 <div class="white_bg">
-<div class="container margin_60">
-    <div class="row small-gutters categories_grid">
+<!-- <div class="container margin_60"> -->
+    <!-- <div class="row small-gutters categories_grid">
         <div class="col-sm-12 col-md-6">
-            <a href="/destinasi">
-                @foreach ($first as $first)
+            {{ $first }}
+            @foreach ($first as $first)
+            <a href="/cari?cari={{$first->name}}">
+                
                 <img src="{{URL::to('/')}}/img/category/{{$first->image}}" style="width: 550px;max-height: 500px;object-fit: cover;" alt="Icon" class="img-fluid">
                 <div class="wrapper">
                     <h2>{{ $first->name }}</h2>
-                    <p>{{ $destinasiSize }} Destinasi</p>
+                    <p>{{ $firstSize }} Destinasi</p>
                 </div>
-                @endforeach
             </a>
+            @endforeach
         </div>
         <div class="col-sm-12 col-md-6">
             <div class="row small-gutters mt-md-0 mt-sm-2">
@@ -79,9 +81,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--/categories_grid-->
-</div>
+<!-- </div> -->
 <!-- /container -->
 </div>
 <!-- /white_bg -->
@@ -95,16 +97,15 @@
     </div>
 
     <div class="owl-carousel owl-theme list_carousel add_bottom_30">
-        @foreach ($destinasi as $destinasi)
+        @foreach ($firstList as $tempat)
         <div class="item">
             <div class="tour_container">
                 <!-- <div class="ribbon_3 popular"><span>Terbaik</span></div> -->
                 <div class="img_container">
-                    <a href="{{ route('destinasi.show',$destinasi->id) }}">
-                        <img src="{{URL::to('/')}}/img/destinasi/{{$destinasi->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                    <a href="{{ route('tempat.show',$tempat->id) }}">
+                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
                         <div class="short_info">
-                            <i class="icon_set_1_icon-24"></i>
-                            {{ $destinasi->tags }}
+                            {{ $tempat->tags }}
                             <!-- <span class="price">
                                 <sup>$</sup>39
                             </span> -->
@@ -112,9 +113,9 @@
                     </a>
                 </div>
                 <div class="tour_title">
-                    <h3><strong>{{ $destinasi->name }}</strong></h3>
+                    <h3><strong>{{ $tempat->name }}</strong></h3>
                     
-                    <h6>{{ $destinasi->address }}</h6>
+                    <h6>{{ $tempat->address }}</h6>
                     <!-- end rating -->
                     <!-- <div class="wishlist">
                         <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>

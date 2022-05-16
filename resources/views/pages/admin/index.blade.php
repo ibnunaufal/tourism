@@ -49,25 +49,25 @@
         <div class="row add_bottom_45">
             <div class="col-lg-3 other_tours">
                 <ul>
-                    <li><a href="javascript:void(0)" class="smooth-goto1"><i class="icon_set_1_icon-3"></i>Kategori<span class="other_tours_price">$42</span></a>
+                    <li><a href="javascript:void(0)" class="smooth-goto1"><i class="icon_set_1_icon-65"></i>Kategori<span class="other_tours_price">{{ $category->total() }}</span></a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-3 other_tours">
                 <ul>
-                    <li><a href="javascript:void(0)" class="smooth-goto2"><i class="icon_set_1_icon-3"></i>Tempat<span class="other_tours_price">$42</span></a>
+                    <li><a href="javascript:void(0)" class="smooth-goto2"><i class="icon_set_1_icon-41"></i>Tempat<span class="other_tours_price">{{ $tempat->total() }}</span></a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-3 other_tours">
                 <ul>
-                    <li><a href="javascript:void(0)" class="smooth-goto3"><i class="icon_set_1_icon-3"></i>Review<span class="other_tours_price">$42</span></a>
+                    <li><a href="javascript:void(0)" class="smooth-goto3"><i class="icon_set_1_icon-85"></i>Review<span class="other_tours_price">{{ $review->total() }}</span></a>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-3 other_tours">
                 <ul>
-                    <li><a href="javascript:void(0)" class="smooth-goto4"><i class="icon_set_1_icon-3"></i>Headline<span class="other_tours_price">$42</span></a>
+                    <li><a href="javascript:void(0)" class="smooth-goto4"><i class="icon_set_1_icon-38"></i>Headline<span class="other_tours_price">{{ $headline->total() }}</span></a>
                     </li>
                 </ul>
             </div>
@@ -115,6 +115,8 @@
                                         @foreach($subcategory as $subcat)
                                                 @if($cat->id == $subcat->category)
                                                 <form action="{{route('subcategory.destroy', $subcat->id)}}" method="POST">    
+                                                @method('DELETE')
+                                                @csrf
                                                 <li>
                                                     <i class="{{$subcat->icon}}" style="zoom:1.5;"></i> {{$subcat->name}}  |  
                                                     <a class="btn btn-primary" href="{{ route('subcategory.edit',$subcat->id) }}">
@@ -124,7 +126,13 @@
                                                     <button type="submit" class="btn btn-danger" onclick="return myFunction1();">
                                                         <i class="icon_set_1_icon-67"></i>
                                                         <!-- <i class="icon_set_1_icon-67"></i> -->
-                                                    </button>                                        
+                                                    </button>                             
+                                                    <script>
+                                                        function myFunction1() {
+                                                    if(!confirm("Anda yakin akan menghapus sub kategori ini?"))
+                                                    event.preventDefault();
+                                                }
+                                                    </script>           
                                                 
                                                 </li>
                                                 </form>
@@ -293,22 +301,22 @@
                                         <!-- <td class="td-bordered col-sm-1">{{ ++$i }}</td> -->
                                         <td class="td-bordered col-md-2">{{ $temp->name }}</td>
                                         <td class="col-md-1">
-                                            <img src="{{URL::to('/')}}/img/category/{{$temp->image}}"
+                                            <img src="{{URL::to('/')}}/img/tempat/{{$temp->image}}"
                                             style="max-width:70px;max-height:70px;" alt="{{$temp->image}}">
                                         </td>
                                         <td class="td-bordered col-md-3">
-                                            <p class="collapse" id="collapseExample" aria-expanded="false">
+                                            <p class="collapse" id="collapseExample{{$i}}" aria-expanded="false">
                                                 {{ $temp->desc }}
                                             </p>
-                                            <a role="button" class="collapsed btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></a>
+                                            <a role="button" class="collapsed btn btn-primary" data-toggle="collapse" href="#collapseExample{{$i}}" aria-expanded="false" aria-controls="collapseExample"></a>
                                         </td>
                                         <style>
-                                        #collapseExample.collapse:not(.show) {
+                                        #collapseExample{{{$i}}}.collapse:not(.show) {
                                             display: block;
                                             height: 2.5rem;
                                             overflow: hidden;
                                         }
-                                        #collapseExample.collapsing {
+                                        #collapseExample{{{$i}}}.collapsing {
                                             height: 3rem;
                                         }
                                         #module a.collapsed::after {
@@ -341,9 +349,9 @@
                                         </td>
                                         <!-- <img style="width: 30px;height: 30px;" src="{{ asset('images/icon/logo-whatsapp.svg') }}" alt=""> -->
                                         <td class="td-bordered col-md-1" style="text-align: center;">
-                                            <form action="{{ route('category.destroy',$temp->id) }}" method="POST">
-                                                <a class="btn btn-primary" href="{{ route('akomodasi.edit',$temp->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
-                                                <form action="{{route('category.destroy', $temp->id)}}" method="POST">    
+                                            <form action="{{ route('tempat.destroy',$temp->id) }}" method="POST">
+                                                <a class="btn btn-primary" href="{{ route('tempat.edit',$temp->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                                <form action="{{route('tempat.destroy', $temp->id)}}" method="POST">    
                                                 @method('DELETE')
                                                 @csrf
                                                     <button type="submit" class="btn btn-danger" onclick="return myFunction();">
@@ -383,7 +391,7 @@
                             <div class="table-responsive">
                             <table class="table">
                                     <tr class="text-center table-bordered">
-                                        <th colspan="6">Daftar Review</th>
+                                        <th colspan="7">Daftar Review</th>
                                         <th>
                                         <a class="btn btn-primary" href="{{ url('tempat/create') }}"> <i class="icon_set_1_icon-11"></i></a>
                                         </th>
@@ -397,7 +405,7 @@
                                         <th>Rating</th>
                                         <th>Balasan</th>
                                         <th>Tanggal</th>
-                                        <!-- <th width="280px">Aksi</th> -->
+                                        <th>Aksi</th>
                                     </tr>
                                     @php
                                         $i = 0;
@@ -413,10 +421,28 @@
                                             {{ $rev->idTempat }}
                                         </td>
                                         <td class="td-bordered col-md-3">
-                                            <p class="collapse" id="collapseExample" aria-expanded="false">
+                                            <p class="collapse" id="collapseExampleTempat{{$i}}" aria-expanded="false">
                                                 {{ $rev->message }}
-                                            </p>                                            
+                                            </p>                                       
+                                            <a role="button" class="collapsed btn btn-primary" data-toggle="collapse" href="#collapseExampleTempat{{$i}}" aria-expanded="false" aria-controls="collapseExampleTempat"></a>     
                                         </td>
+
+                                        <style>
+                                        #collapseExampleTempat{{{$i}}}.collapse:not(.show) {
+                                            display: block;
+                                            height: 2.5rem;
+                                            overflow: hidden;
+                                        }
+                                        #collapseExampleTempat{{{$i}}}.collapsing {
+                                            height: 3rem;
+                                        }
+                                        #module a.collapsed::after {
+                                            content: '+ Show More';
+                                        }
+                                        #module a:not(.collapsed)::after {
+                                            content: '- Show Less';
+                                        }
+                                        </style>
                                         <td class="td-bordered col-md-1">
                                             {{ $rev->vote }}/10
                                         </td>
@@ -440,6 +466,26 @@
                                         <td class="td-bordered col-md-2">
                                             <h6>
                                             {{ $rev->created_at }}
+                                            </h6>
+                                        </td>
+                                        <td class="td-bordered col-md-2">
+                                            <h6>
+                                            <form action="{{route('review.destroy', $rev->id)}}" method="POST">    
+                                                @method('DELETE')
+                                                @csrf
+                                                    <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                                        <i class="icon_set_1_icon-67"></i>
+                                                    </button>                                        
+                                                </button>                                        
+                                                    </button>                                        
+                                                </form>
+                                                <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
+                                                <script>
+                                                function myFunction() {
+                                                    if(!confirm("Anda yakin akan menghapus kategori ini?"))
+                                                    event.preventDefault();
+                                                }
+                                                </script>
                                             </h6>
                                         </td>
                                         

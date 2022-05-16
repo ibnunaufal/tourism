@@ -54,6 +54,7 @@ class ReviewController extends Controller
         $post->email = $request->get('email_review');
         $post->message = $request->get('review_text');
         $post->save();
+        return redirect('/tempat/'.$post->idTempat)->with('success', 'gallery has been added');
     }
 
     /**
@@ -115,8 +116,13 @@ class ReviewController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         //
+        $review = Review::find($id);
+        // error_log($id);
+        $review->delete();
+        // $destinasi = Destinasi::where('id', $id)->delete();
+        return redirect('/admin')->with('success', 'destinasi deleted successfully');
     }
 }

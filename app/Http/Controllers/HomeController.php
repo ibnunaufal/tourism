@@ -8,6 +8,7 @@ use App\Models\Akomodasi;
 use App\Models\Kuliner;
 use App\Models\Acara;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Headline;
 use App\Models\Tempat;
 use Illuminate\Http\Request;
@@ -33,9 +34,14 @@ class HomeController extends Controller
         }else{
             $firstSize = Tempat::where('tags', 'LIKE', '%'.Category::take(1)->get()[0]->name.'%')->count();
         }
+
         return view('pages.home')
         ->with('first', Category::take(1)->get())
         ->with('firstSize', $firstSize)
+        ->with('firstList', Tempat::where('tags', 'LIKE', '%'.SubCategory::take(1)->get()[0]->name.'%')->take(5)->get())
+        // ->with('firstList', Tempat::where('tags', 'LIKE', '%'.SubCategory::take(4)->get()[1]->name.'%')->take(5)->get())
+        // ->with('firstList', Tempat::where('tags', 'LIKE', '%'.SubCategory::take(4)->get()[2]->name.'%')->take(5)->get())
+        // ->with('firstList', Tempat::where('tags', 'LIKE', '%'.SubCategory::take(4)->get()[3]->name.'%')->take(5)->get())
 
         ->with('headline', Headline::take(3)->get())
         // ->with('akomodasi', Akomodasi::latest()->take(6)->get())

@@ -34,7 +34,7 @@
                         <ul>
                             @foreach($subcategorynavbar as $subcat)
                                 @if($subcat->category == $cat->id)
-                                <li><a href="/destinasi"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                                <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
                                 @endif
                             @endforeach
                         </ul>

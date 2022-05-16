@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tempat;
 use App\Models\Image;
 use App\Models\Review;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class TempatController extends Controller
@@ -17,6 +18,28 @@ class TempatController extends Controller
     public function index()
     {
         //
+        $tempat = Tempat::paginate(5);
+        $subcat = SubCategory::all();
+        $selected = "all";
+        return view('pages.tempat.index')
+        ->with('tempat', $tempat)
+        ->with('selected', $selected)
+        ->with('subcat', $subcat);
+    }
+
+    public function cari(Request $request){
+        $cari = $request->cari;
+        $tempat = Tempat::where('tags','like',"%".$cari."%")->paginate(5);
+        $subcat = SubCategory::all();
+        if($cari==""){
+            $selected = "all";
+        }else{
+            $selected = "$cari";
+        }
+        return view('pages.tempat.index')
+        ->with('tempat', $tempat)
+        ->with('selected', $selected)
+        ->with('subcat', $subcat);
     }
 
     /**
@@ -118,6 +141,7 @@ class TempatController extends Controller
                 $imgUpload->save();
             }
         }
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**
@@ -146,6 +170,12 @@ class TempatController extends Controller
     public function edit(Tempat $tempat)
     {
         //
+        $image = Image::where('idTempat', $tempat->id)->get();
+        $subcategory = SubCategory::all();
+        return view('pages.tempat.edit')
+        ->with('tempat', $tempat)
+        ->with('image',$image)
+        ->with('subcategory', $subcategory);
     }
 
     /**
@@ -158,6 +188,58 @@ class TempatController extends Controller
     public function update(Request $request, Tempat $tempat)
     {
         //
+        $post = Tempat::find($tempat->id);
+        $request->validate([
+            'tName'=>'required',
+            'tDesc'=> 'required',
+            // 'tTicket' => 'required',
+        ]);
+        $post->name = $request->get('tName');
+        $post->desc = $request->get('tDesc');
+        $post->desa = $request->get('desa');
+        $post->kecamatan = $request->get('kecamatan');
+        $post->address = $request->get('tAddress');
+        $post->mapUrl = $request->get('tMapUrl');
+        $post->ticket = $request->get('tTicket');
+        $post->rating = "4.5";
+        $post->url = $request->get('tUrl');
+
+        $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
+        $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');
+
+        if($request->get('cDisabilitas') == 1){
+            $post->disabilities = 1;
+        }else{
+            $post->disabilities = 0; 
+        }
+        if($request->get('cParkir') == 1){
+            $post->parkir = 1;
+        }else{
+            $post->parkir = 0; 
+        }
+        if($request->get('cWifi') == 1){
+            $post->wifi = 1;
+        }else{
+            $post->wifi = 0; 
+        }
+        // if($request->get('cHeadline') == 1){
+        //     $post->isHeadline = 1;
+        // }else{
+        //     $post->isHeadline = 0;
+        // }
+        // if($request->get('cIcon') == 1){
+        //     $post->isIcon = 1;
+        // }else{
+        //     $post->isIcon = 0; 
+        // }
+
+        $post->tags = str_replace(']','',str_replace(']','',str_replace('[','',str_replace('"','',json_encode($request->get('tags'))))));
+
+        $post->update();
+
+        return redirect('/admin')->with('success', 'gallery has been added');
+
+
     }
 
     /**

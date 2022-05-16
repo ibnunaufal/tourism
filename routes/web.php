@@ -46,6 +46,8 @@ Route::resource('headline','HeadlineController');
 
 Route::resource('acara','AcaraController');
 
+Route::get('/cari', [App\Http\Controllers\TempatController::class, 'cari'])->name('cari');
+
 Route::resource('admin','AdminController');
 // Route::resource('acara','AcaraController');
 Route::get('fullcalender', 'AcaraController@index');
