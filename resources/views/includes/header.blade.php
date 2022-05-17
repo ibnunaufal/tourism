@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-3">
             <div id="logo_home">
-                <h1><a href="/" title="City tours travel template">City Tours travel template</a></h1>
+                <h1><a href="/" title="Dolan Salatiga">Dolan Salatiga</a></h1>
             </div>
         </div>
         <nav class="col-9" style="text-align:right;">

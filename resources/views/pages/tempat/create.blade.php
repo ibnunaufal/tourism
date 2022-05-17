@@ -169,11 +169,7 @@
                         </div>
                         <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1">
-                            <label class="form-check-label" for="cHeadline">Tampilkan pada halaman Utama</label>
-                        </div>
-                        <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1">
-                            <label class="form-check-label" for="cIcon">Jadikan Icon Kategori</label>
+                            <label class="form-check-label" for="cHeadline">Tampilkan</label>
                         </div>
                     </div>
                     <div class="form-group">

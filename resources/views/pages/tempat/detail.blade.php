@@ -28,7 +28,15 @@
 </section>
 
 <!-- End section -->
-
+<div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
 <main>
     <div id="position">
         <div class="container">
@@ -55,8 +63,8 @@
                         <li><i class="icon_set_1_icon-27"></i>Parkir Tersedia</li>
                     </ul>
                 </div>
-                <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
-                </p>
+                <!-- <p class="d-none d-md-block d-block d-lg-none"><a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
+                </p> -->
                 <!-- Map button for tablets/mobiles -->
 
                 <div id="Img_carousel" class="slider-pro">
