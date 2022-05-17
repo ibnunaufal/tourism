@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+<title>Acara</title>
+@endsection
 @section('content')
 
 
@@ -34,12 +37,12 @@
 		<div class="container margin_60">
 
 			<div class="row">
-				<aside class="col-lg-4">
+				<!-- <aside class="col-lg-4"> -->
 					<!-- <p>
 						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">View on map</a>
 					</p> -->
 
-					<div class="box_style_cat">
+					<!-- <div class="box_style_cat">
 						<ul id="cat_nav">
 							@foreach($acaras as $a)
                             <li>
@@ -59,7 +62,7 @@
 							Belum ada acara pada bulan ini
 							@endif
 						</ul>
-					</div>
+					</div> -->
 
 					<!-- <div id="filters_col">
 						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>Filters</a>
@@ -142,9 +145,9 @@
 						<a href="tel://004542344599" class="phone">+45 423 445 99</a>
 						<small>Monday to Friday 9.00am - 7.30pm</small>
 					</div> -->
-				</aside>
+				<!-- </aside> -->
 				<!--End aside -->
-				<div class="col-lg-8">
+				<div class="col-lg-12">
 
 					<!-- <div id="tools">
 						<div class="row">
@@ -209,13 +212,11 @@
 		<!-- End container -->
 	</main>
 	<!-- End main -->
-
-
 @stop
 @section('footer-scripts')
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
@@ -223,6 +224,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 <script src='https://unpkg.com/tooltip.js/dist/umd/tooltip.min.js'></script>
+<script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
 
 
 <script>
@@ -241,11 +243,12 @@ var calendar = $('#calendar').fullCalendar({
                     events: SITEURL + "/fullcalender",
                     displayEventTime: false,
                     editable: true,
+					plugins: [ 'dayGrid' ],
 					eventDidMount: function(info) {
 						var tooltip = new Tooltip(info.el, {
 							title: info.event.extendedProps.description,
 							placement: 'top',
-							trigger: 'click',
+							trigger: 'hover',
 							container: 'body'
 						});
 					},
@@ -257,7 +260,7 @@ var calendar = $('#calendar').fullCalendar({
                         }
                     },
                     selectable: true,
-                    // selectHelper: true,
+                    selectHelper: true,
                     // select: function (start, end, allDay) {
                     //     var title = prompt('Event Title:');
                     //     if (title) {
@@ -308,23 +311,34 @@ var calendar = $('#calendar').fullCalendar({
                     //         }
                     //     });
                     // },
-                    // eventClick: function (event) {
-                    //     var deleteMsg = confirm("Do you really want to delete?");
-                    //     if (deleteMsg) {
-                    //         $.ajax({
-                    //             type: "POST",
-                    //             url: SITEURL + '/fullcalenderAjax',
-                    //             data: {
-                    //                     id: event.id,
-                    //                     type: 'delete'
-                    //             },
-                    //             success: function (response) {
-                    //                 calendar.fullCalendar('removeEvents', event.id);
-                    //                 displayMessage("Event Deleted Successfully");
-                    //             }
-                    //         });
-                    //     }
-                    // }
+                    eventClick: function (event) {
+                        // var deleteMsg = confirm("Do you really want to delete?");
+						jQuery.noConflict();
+
+						$('#myReview').modal({ show: true });
+						$("h4.modal-title").text(event.name);
+						$("#desc").text(event.desc);
+						$("#address").text("Alamat: " + event.desa + " " + event.kecamatan);
+						$("#tanggal").text("Tanggal Mulai: " + event.start._i);
+						$("#tanggal2").text("Tanggal Selesai: " + event.end._i);
+						$("#link").attr("href", event.mapurl)
+						console.log(event);
+						
+                        // if (deleteMsg) {
+                        //     $.ajax({
+                        //         type: "POST",
+                        //         url: SITEURL + '/fullcalenderAjax',
+                        //         data: {
+                        //                 id: event.id,
+                        //                 type: 'delete'
+                        //         },
+                        //         success: function (response) {
+                        //             calendar.fullCalendar('removeEvents', event.id);
+                        //             displayMessage("Event Deleted Successfully");
+                        //         }
+                        //     });
+                        // }
+                    }
  
                 });
  
@@ -336,3 +350,43 @@ function displayMessage(message) {
   
 </script>
 @endsection
+<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">Tulis Review Anda</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+                    <form action="{{ route('review.store') }}" method="POST">
+                    @csrf
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+								<ul>
+									<li id="address"></li>
+									<li id="desc"></li>
+									<li id="tanggal"></li>
+									<li id="tanggal2"></li>
+								</ul>
+									<!-- <a href="" id="link" target="_blank">Buka lokasi di maps</a> -->
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+									
+								</div>
+                            </div>
+                            
+                        </div>
+						<!-- End row -->
+                        <hr>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

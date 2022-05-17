@@ -3192,7 +3192,7 @@ ul.list_order li span {
 .parallax-window {
 	min-height: 470px;
 	/* background: transparent; */
-	background: linear-gradient(to bottom,#000,transparent);
+	background: linear-gradient(to bottom,#000000db,transparent);
 	position: relative;
 }
 .parallax-mirror {

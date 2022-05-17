@@ -6,6 +6,7 @@ use App\Models\Tempat;
 use App\Models\Image;
 use App\Models\Review;
 use App\Models\SubCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class TempatController extends Controller
@@ -31,6 +32,8 @@ class TempatController extends Controller
         $cari = $request->cari;
         $tempat = Tempat::where('tags','like',"%".$cari."%")->paginate(5);
         $subcat = SubCategory::all();
+        $cat = $request->cat;
+        $img = Category::where('id',$cat)->take(1)->get();
         if($cari==""){
             $selected = "all";
         }else{
@@ -38,6 +41,8 @@ class TempatController extends Controller
         }
         return view('pages.tempat.index')
         ->with('tempat', $tempat)
+        ->with('cat', $cat)
+        ->with('img', $img)
         ->with('selected', $selected)
         ->with('subcat', $subcat);
     }

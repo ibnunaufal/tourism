@@ -21,7 +21,7 @@ class AcaraController extends Controller
        
             $data = Acara::whereDate('start', '>=', $request->start)
                       ->whereDate('end',   '<=', $request->end)
-                      ->get(['id', 'name', 'desc', 'desa', 'kecamatan', 'start', 'end']);
+                      ->get();
  
             return response()->json($data);
        }

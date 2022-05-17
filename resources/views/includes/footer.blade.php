@@ -74,12 +74,14 @@
             @if (Auth::check())
             <h3>Admin Page</h3>
             <ul>
+                @if(auth()->user()->isAdmin == 1)
                 <li><a href="/admin"><i class="icon-user-2"></i> Admin Page</a></li>
-                <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
+                @endif
+                <!-- <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
                 <li><a href="/akomodasi/admin"><i class="icon_set_1_icon-23"></i> Detail Akomodasi</a></li>
                 <li><a href="/kuliner/admin"><i class="icon_set_1_icon-58"></i> Detail Kuliner</a></li>
                 <li><a href="/acara/admin"><i class="icon_set_1_icon-87"></i> Detail Acara</a></li>
-                <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li>
+                <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li> -->
                 <li><a href="/actionlogout"><i class="icon-logout"></i> Logout</a></li>
             </ul>
             @endif

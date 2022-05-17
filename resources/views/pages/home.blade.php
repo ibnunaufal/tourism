@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('title')
+<title>Dolan Salatiga | Disbudpar Salatiga</title>
+@endsection
 @section('content')
 
 <div id="carousel-home">

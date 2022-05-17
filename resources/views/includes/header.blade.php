@@ -34,7 +34,7 @@
                         <ul>
                             @foreach($subcategorynavbar as $subcat)
                                 @if($subcat->category == $cat->id)
-                                <li><a href="/cari?cari={{$subcat->name}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
+                                <li><a href="/cari?cari={{$subcat->name}}&cat={{$cat->id}}"><i class="{{$subcat->icon}}"></i> {{$subcat->name}}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -54,14 +54,12 @@
                         </ul>
                         @endif
                         @if (Auth::check())
-                        <a href="javascript:void(0);" class="show-submenu"><i class="icon-user-2"></i> Admin Page <i class="icon-down-open-mini"></i></a>
+                        <a href="javascript:void(0);" class="show-submenu"><i class="icon-user-2"></i> Auth <i class="icon-down-open-mini"></i></a>
                         <ul>
+                        {{ auth()->user()->some_column }}
+                            @if(auth()->user()->isAdmin == 1)
                             <li><a href="/admin"><i class="icon-user-2"></i> Admin Page</a></li>
-                            <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
-                            <li><a href="/akomodasi/admin"><i class="icon_set_1_icon-23"></i> Detail Akomodasi</a></li>
-                            <li><a href="/kuliner/admin"><i class="icon_set_1_icon-58"></i> Detail Kuliner</a></li>
-                            <li><a href="/acara/admin"><i class="icon_set_1_icon-87"></i> Detail Acara</a></li>
-                            <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li>
+                            @endif
                             <li><a href="/actionlogout"><i class="icon-logout"></i> Logout</a></li>
                         </ul>
                         @endif

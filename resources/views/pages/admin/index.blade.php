@@ -112,8 +112,10 @@
                                         <td class="td-bordered col-sm-1">{{ ++$i }}</td>
                                         <td class="td-bordered col-md-1">{{ $cat->name }}</td>
                                         <td class="col-md-1">
+                                            <a href="{{URL::to('/')}}/img/category/{{$cat->image}}" target="_blank" rel="noopener noreferrer">
                                             <img src="{{URL::to('/')}}/img/category/{{$cat->image}}"
                                             style="max-width:70px;max-height:70px;" alt="{{$cat->image}}">
+                                            </a>
                                         </td>
                                         <td class="td-bordered col-md-3">
                                             <i class="{{$cat->icon}}" style="zoom:2;"></i> {{$cat->icon}}</td>
@@ -309,8 +311,10 @@
                                         <!-- <td class="td-bordered col-sm-1">{{ ++$i }}</td> -->
                                         <td class="td-bordered col-md-2">{{ $temp->name }}</td>
                                         <td class="col-md-1">
+                                            <a href="{{URL::to('/')}}/img/tempat/{{$temp->image}}" target="_blank" rel="noopener noreferrer">
                                             <img src="{{URL::to('/')}}/img/tempat/{{$temp->image}}"
                                             style="max-width:70px;max-height:70px;" alt="{{$temp->image}}">
+                                            </a>
                                         </td>
                                         <td class="td-bordered col-md-3">
                                             <p class="collapse" id="collapseExample{{$i}}" aria-expanded="false">
@@ -543,8 +547,10 @@
                                         <!-- <td class="td-bordered col-sm-1">{{ ++$i }}</td> -->
                                         <td class="td-bordered col-md-2">{{ $head->title }}</td>
                                         <td class="td-bordered col-md-2">
+                                            <a href="{{URL::to('/')}}/img/headline/{{$head->image}}" target="_blank" rel="noopener noreferrer">
                                             <img src="{{URL::to('/')}}/img/headline/{{$head->image}}"
                                             style="max-width:70px;max-height:70px;" alt="{{$head->image}}">
+                                            </a>
                                         </td>
                                         
                                         <td class="td-bordered col-md-2">{{ $head->subtitle }}</td>
@@ -599,7 +605,7 @@
                     <!-- End row -->
                 </div>
                 <hr>
-                <div class="">
+                <div class="" id="acara" #acara>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
@@ -636,8 +642,10 @@
                                         $temp = str_replace("]","",$temp);
                                         ?>
                                         @foreach(explode(',',$temp) as $t)
+                                        <a href="{{URL::to('/')}}/img/acara/{{$t}}" target="_blank" rel="noopener noreferrer">
                                         <img src="{{URL::to('/')}}/img/acara/{{$t}}"
                                             style="max-width:70px;max-height:70px;" alt="{{$t}}">
+                                        </a>
                                         @endforeach    
                                         </td>
                                         <td class="td-bordered col-md-2">{{ $des->desa }}, {{$des->kecamatan}} </td>

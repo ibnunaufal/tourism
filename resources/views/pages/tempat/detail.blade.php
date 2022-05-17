@@ -5,7 +5,10 @@
 @endsection
 @section('content')
 
-<section class="parallax-window" data-parallax="scroll" data-image-src="{{URL::to('/')}}/img/tempat" data-natural-width="1400" data-natural-height="470">
+<section class="parallax-window" data-parallax="scroll" data-image-src="" data-natural-width="1400" data-natural-height="470">
+    <div style="display: flex;justify-content: center;">
+    <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" alt="img" style="object-fit: cover;z-index: -1;min-height: 450px;max-height: 455px;">
+    </div>    
     <div class="parallax-content-2">
         <div class="container">
             <div class="row">
@@ -67,15 +70,14 @@
                         @foreach($imageArray as $img)
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }} justify-content-center">
                                 <div class="justify-content-center">
-                                    <img class="d-block w-100" style="height: 350px;object-fit:scale-down;" src="{{URL::to('/')}}/img/tempat/{{ $img->image }}" alt="{{ $img }}">
+                                    <img class="d-block w-100" style="height: 350px;object-fit:contain;" src="{{URL::to('/')}}/img/tempat/{{ $img->image }}" alt="{{ $img }}">
                                 </div>
                                 <!-- <div class="carousel-caption d-none d-md-block">
                                     <h5>Anastasios G. Leventis</h5>
                                     <p>University House</p>
                                 </div> -->
-                                <div class="carousel-caption d-none d-md-block" style="background: #ffffff59;">
+                                <div class="carousel-caption d-none d-md-block" style="background: #ffffffc4;">
                                     <h5>{{ $img->desc }}</h5>
-                                    <p>...</p>
                                 </div>
                             </div>
                         @endforeach
@@ -162,11 +164,15 @@
                 <hr>
 
                 <div class="row">
+                    
+                </div>
+                <div class="row">
                     <div class="col-lg-2">
                         <h3>Alamat</h3>
                     </div>
                     <div class="col-lg-10">
                         <h5>Kelurahan {{ $tempat->desa }}, Kecamatan {{ $tempat->kecamatan }}</h5>
+                        
                         
                         <div id="map-container" style="position:relative;">
                             <div id="peta" style="width: 100%;height: 40vh;position:relative;"></div>

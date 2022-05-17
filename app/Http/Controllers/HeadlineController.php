@@ -55,6 +55,7 @@ class HeadlineController extends Controller
         $post->alignment = $request->get('alignment');
         $post->image = $nama;
         $post->save();
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**

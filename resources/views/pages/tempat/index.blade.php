@@ -47,7 +47,9 @@
 							<li><a href="/tempat" id="{{ $selected == 'all' ? 'active' :'' }}"><i class="icon_set_1_icon-51"></i>Semua Tempat <span>(141)</span></a>
 							</li>
 							@foreach($subcat as $subcat)
-                            <li><a href="/cari?cari={{$subcat->name}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+							@if($subcat->category == $cat)
+                            <li><a href="/cari?cari={{$subcat->name}}&cat={{$cat}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+							@endif
                             @endforeach
 						</ul>
 					</div>
