@@ -73,6 +73,13 @@ class TempatController extends Controller
             'filename'=> 'required',
             'filename.*' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'tTicket' => 'required',
+            'tMapUrl' => 'required',
+            'tAddress' => 'required',
+            'desa' => 'required',
+            'kecamatan' => 'required',
+            'seninJumat1' => 'required',
+            'sabtuMinggu1' => 'required',
+            'imgDesc' => 'required'
         ]);
 
         $post = new Tempat;
@@ -84,7 +91,11 @@ class TempatController extends Controller
         $post->mapUrl = $request->get('tMapUrl');
         $post->ticket = $request->get('tTicket');
         $post->rating = "4.5";
-        $post->url = $request->get('tUrl');
+        if($request->get('tUrl') != ""){
+            $post->url = $request->get('tUrl');
+        }else{
+            $post->url = "";
+        }
 
         $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
         $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');

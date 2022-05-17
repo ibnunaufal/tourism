@@ -32,6 +32,15 @@
 <!--/carousel-->
 
 <div class="white_bg">
+<div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
 <!-- <div class="container margin_60"> -->
     <!-- <div class="row small-gutters categories_grid">
         <div class="col-sm-12 col-md-6">

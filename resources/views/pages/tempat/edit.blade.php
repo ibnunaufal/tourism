@@ -232,14 +232,14 @@
                             <input class="form-check-input" type="checkbox" id="cWifi" name="cWifi" value="1" {{ $tempat->wifi == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cWifi">Tersedia Wifi</label>
                         </div>
-                        <!-- <div class="form-group form-check form-check-inline">
+                        <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1" {{ $tempat->isHeadline == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cHeadline">Tampilkan pada halaman Utama</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1" {{ $tempat->isIcon == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cIcon">Jadikan Icon Kategori</label>
-                        </div> -->
+                        </div>
                     </div>
 
                     <div class="form-group">
