@@ -405,9 +405,9 @@
                             <table class="table">
                                     <tr class="text-center table-bordered">
                                         <th colspan="7">Daftar Review</th>
-                                        <th>
+                                        <!-- <th>
                                         <a class="btn btn-primary" href="{{ url('tempat/create') }}"> <i class="icon_set_1_icon-11"></i></a>
-                                        </th>
+                                        </th> -->
                                     </tr>
                                     <tr class="table-bordered">
                                         <!-- <th>No</th> -->
@@ -660,7 +660,9 @@
                                         
                                         <td class="td-bordered col-md-1" style="text-align: center;">
                                             <form action="{{ route('acara.destroy',$des->id) }}" method="POST">
-                                                <a class="btn btn-primary" href="{{ route('acara.edit',$des->id) }}"><i class="icon_set_1_icon-17"></i></a> <br>
+                                                    <a class="btn btn-primary" href="{{ route('acara.edit',$des->id) }}">
+                                                        <i class="icon_set_1_icon-17"></i>
+                                                    </a> <br>
                                                 <form action="{{route('acara.destroy', $des->id)}}" method="POST">    
                                                 @method('DELETE')
                                                 @csrf

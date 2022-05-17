@@ -78,6 +78,7 @@ class HeadlineController extends Controller
     public function edit(Headline $headline)
     {
         //
+        return view('pages.headline.edit',compact('headline'));
     }
 
     /**

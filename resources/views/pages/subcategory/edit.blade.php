@@ -36,7 +36,7 @@
                         <h2>Edit Sub Kategori</h2>
                     </div>
                     <div class="col-lg-1">
-                        <a class="btn btn-primary" href="{{ url('/subCategory/admin') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ url('/admin') }}"> Back</a>
                     </div>
                 </div>
             

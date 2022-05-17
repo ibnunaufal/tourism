@@ -211,6 +211,7 @@ class AcaraController extends Controller
     public function edit(Acara $acara)
     {
         //
+        return view('pages.acara.edit')->with('acara', $acara);
     }
 
     /**

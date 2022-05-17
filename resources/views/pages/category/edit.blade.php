@@ -36,7 +36,7 @@
                         <h2>Ubah Kategori</h2>
                     </div>
                     <div class="col-lg-1">
-                        <a class="btn btn-primary" href="{{ url('/category/admin') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ url('/admin') }}"> Back</a>
                     </div>
                 </div>
             

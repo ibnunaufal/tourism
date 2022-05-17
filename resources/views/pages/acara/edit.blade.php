@@ -36,7 +36,7 @@
                         <h2>Edit Destinasi</h2>
                     </div>
                     <div class="col-lg-1">
-                        <a class="btn btn-primary" href="{{ url('/destinasi/admin') }}"> Back</a>
+                        <a class="btn btn-primary" href="{{ url('/admin') }}"> Back</a>
                     </div>
                 </div>
             
@@ -50,45 +50,45 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('destinasi.update', $destinasi->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('acara.update', $acara->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')    
                 @csrf
                     <div class="form-group">
                         <label for="tName">Nama:</label>
-                        <input type="text" class="form-control" id="tName" placeholder="Masukkan Nama" name="tName" value="{{$destinasi->name}}">
+                        <input type="text" class="form-control" id="tName" placeholder="Masukkan Nama" name="tName" value="{{$acara->name}}">
                     </div>
                     <div class="form-group">
                         <label for="tDesc">Deskripsi:</label>
-                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi" value="{{$destinasi->desc}}">{{$destinasi->desc}}</textarea>
+                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi" value="{{$acara->desc}}">{{$acara->desc}}</textarea>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="tLong">Kecamatan:</label>
-                                <select name="kecamatan" id="kecamatan" value="{{$destinasi->kecamatan}}" class="form-control select2">
+                                <select name="kecamatan" id="kecamatan" value="{{$acara->kecamatan}}" class="form-control select2">
                                     <option value =""> PILIH KECAMATAN</option>
-                                    <option value ="ARGOMULYO" {{ $destinasi->kecamatan == 'ARGOMULYO' ? 'selected' : '' }}> ARGOMULYO</option>
-                                    <option value ="TINGKIR" {{ $destinasi->kecamatan == 'TINGKIR' ? 'selected' : '' }}> TINGKIR</option>
-                                    <option value ="SIDOMUKTI" {{ $destinasi->kecamatan == 'SIDOMUKTI' ? 'selected' : '' }}> SIDOMUKTI</option>
-                                    <option value ="SIDOREJO" {{ $destinasi->kecamatan == 'SIDOREJO' ? 'selected' : '' }}> SIDOREJO</option>
+                                    <option value ="ARGOMULYO" {{ $acara->kecamatan == 'ARGOMULYO' ? 'selected' : '' }}> ARGOMULYO</option>
+                                    <option value ="TINGKIR" {{ $acara->kecamatan == 'TINGKIR' ? 'selected' : '' }}> TINGKIR</option>
+                                    <option value ="SIDOMUKTI" {{ $acara->kecamatan == 'SIDOMUKTI' ? 'selected' : '' }}> SIDOMUKTI</option>
+                                    <option value ="SIDOREJO" {{ $acara->kecamatan == 'SIDOREJO' ? 'selected' : '' }}> SIDOREJO</option>
                                 </select>
                             </div>
                             <div class="col-lg-6">
                                 <label for="tLat">Desa:</label>
                                 <select name="desa" id="desa" class="form-control select2">
-                                    <option value="{{$destinasi->desa}}">{{$destinasi->desa}}</option>
+                                    <option value="{{$acara->desa}}">{{$acara->desa}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="tDesc">Map Url (Google Maps):</label>
-                        <input type="text" class="form-control" id="tMaps" placeholder="Masukkan Url" name="tMaps" value="{{$destinasi->mapUrl}}">
+                        <input type="text" class="form-control" id="tMaps" placeholder="Masukkan Url" name="tMaps" value="{{$acara->mapUrl}}">
                     </div>
                     <div class="form-group">
                         <label for="image">Foto: </label> <br>
                         <?php
-                        $temp = str_replace("[","",$destinasi->imageArray);
+                        $temp = str_replace("[","",$acara->imageArray);
                         $temp = str_replace('"','',$temp);
                         $temp = str_replace("]","",$temp);
                         $tempArr = explode(',',$temp)
@@ -102,7 +102,7 @@
                                 @foreach($tempArr as $t)
                                 <td id="t{{$i}}">
                                     <input type="text" name="old[]" value="{{$tempArr[$i]}}" style="visibility: hidden;width: 5px;height: 1px;" class="form-control">
-                                    <img src="{{URL::to('/')}}/img/destinasi/{{$t}}" style="max-width:100px; max-height:100px" alt="">
+                                    <img src="{{URL::to('/')}}/img/acara/{{$t}}" style="max-width:100px; max-height:100px" alt="">
                                 </td> 
                                 @php
                                 ++$i;
@@ -166,7 +166,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tVideo">Harga Ticket:</label>
-                        <input type="number" class="form-control" id="tTicket" placeholder="Masukkan Harga Ticket" name="tTicket" value="{{$destinasi->ticket}}">
+                        <input type="number" class="form-control" id="tTicket" placeholder="Masukkan Harga Ticket" name="tTicket" value="{{$acara->ticket}}">
                     </div>
                     <div class="form-group">
                         <label for="tAddress">Jam Operasional:</label>
@@ -175,13 +175,13 @@
                             <label for="tLat">Senin-Jumat:</label>
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <input type="time" id="seninJumat1" name="seninJumat1" placeholder="Buka" class="form-control" value="{{substr($destinasi->seninJumat, 0, 5)}}">
+                                        <input type="time" id="seninJumat1" name="seninJumat1" placeholder="Buka" class="form-control" value="{{substr($acara->seninJumat, 0, 5)}}">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="">Sampai</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input type="time" id="seninJumat2" name="seninJumat2" placeholder="Buka" class="form-control" value="{{substr($destinasi->seninJumat, 6,10)}}">
+                                        <input type="time" id="seninJumat2" name="seninJumat2" placeholder="Buka" class="form-control" value="{{substr($acara->seninJumat, 6,10)}}">
                                     </div>
                                 </div>
                             </div>
@@ -189,13 +189,13 @@
                                 <label for="tLat">Sabtu-Minggu:</label>
                                 <div class="row">
                                     <div class="col-lg-5">
-                                        <input type="time" id="sabtuMinggu1" name="sabtuMinggu1" placeholder="Buka" class="form-control" value="{{substr($destinasi->sabtuMinggu, 0,5)}}">
+                                        <input type="time" id="sabtuMinggu1" name="sabtuMinggu1" placeholder="Buka" class="form-control" value="{{substr($acara->sabtuMinggu, 0,5)}}">
                                     </div>
                                     <div class="col-lg-2">
                                         <label for="">Sampai</label>
                                     </div>
                                     <div class="col-lg-5">
-                                        <input type="time" id="sabtuMinggu2" name="sabtuMinggu2" placeholder="Buka" class="form-control" value="{{substr($destinasi->sabtuMinggu, 6,10)}}">
+                                        <input type="time" id="sabtuMinggu2" name="sabtuMinggu2" placeholder="Buka" class="form-control" value="{{substr($acara->sabtuMinggu, 6,10)}}">
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +217,7 @@
                     </div> -->
                     <div class="form-group">
                         <label for="tTiket">Tiket:</label>
-                        <input type="number" class="form-control" id="tTiket" placeholder="Masukkan Harga Tiket" name="tTiket" value="{{$destinasi->ticket}}">
+                        <input type="number" class="form-control" id="tTiket" placeholder="Masukkan Harga Tiket" name="tTiket" value="{{$acara->ticket}}">
                         <!-- <table class="table" id="dynamicAddRemove">
                             <tr>
                                 <td>
@@ -238,13 +238,13 @@
                         <select class="form-control js-example-basic-multiple" name="tags[]" multiple="multiple">
 
 
-                            <option value="ALAM" {{ Str::contains($destinasi->tags, 'ALAM') ? 'selected':'' }}>ALAM</option>
-                            <option value="BELANJA" {{ Str::contains($destinasi->tags, 'BELANJA') ? 'selected':'' }}>BELANJA</option>
-                            <option value="BUDAYA" {{ Str::contains($destinasi->tags, 'BUDAYA') ? 'selected':'' }}>BUDAYA</option>
-                            <option value="OLAHRAGA" {{ Str::contains($destinasi->OLAHRAGA, 'ALAM') ? 'selected':'' }}>OLAHRAGA</option>
-                            <option value="REKREASI" {{ Str::contains($destinasi->tags, 'REKREASI') ? 'selected':'' }}>REKREASI</option>
-                            <option value="RELIGI" {{ Str::contains($destinasi->tags, 'RELIGI') ? 'selected':'' }}>RELIGI</option>
-                            <option value="SEJARAH" {{ Str::contains($destinasi->tags, 'SEJARAH') ? 'selected':'' }}>SEJARAH</option>
+                            <option value="ALAM" {{ Str::contains($acara->tags, 'ALAM') ? 'selected':'' }}>ALAM</option>
+                            <option value="BELANJA" {{ Str::contains($acara->tags, 'BELANJA') ? 'selected':'' }}>BELANJA</option>
+                            <option value="BUDAYA" {{ Str::contains($acara->tags, 'BUDAYA') ? 'selected':'' }}>BUDAYA</option>
+                            <option value="OLAHRAGA" {{ Str::contains($acara->OLAHRAGA, 'ALAM') ? 'selected':'' }}>OLAHRAGA</option>
+                            <option value="REKREASI" {{ Str::contains($acara->tags, 'REKREASI') ? 'selected':'' }}>REKREASI</option>
+                            <option value="RELIGI" {{ Str::contains($acara->tags, 'RELIGI') ? 'selected':'' }}>RELIGI</option>
+                            <option value="SEJARAH" {{ Str::contains($acara->tags, 'SEJARAH') ? 'selected':'' }}>SEJARAH</option>
                         </select>
                     </div>
                 
@@ -331,27 +331,27 @@
                     <div class="form-group">
                         <label for="tOther">Lainnya: </label>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cIsAllDay" name="cIsAllDay" value="1" {{ $destinasi->isOpenAllDay == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cIsAllDay" name="cIsAllDay" value="1" {{ $acara->isOpenAllDay == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cIsAllDay">Buka 24 Jam</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cDisabilitas" name="cDisabilitas" value="1" {{ $destinasi->disabilitas == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cDisabilitas" name="cDisabilitas" value="1" {{ $acara->disabilitas == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cDisabilitas">Ramah Bagi disabilitas</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cParkir" name="cParkir" value="1" {{ $destinasi->parkiran == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cParkir" name="cParkir" value="1" {{ $acara->parkiran == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cParkir">Tersedia Parkir</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cWifi" name="cWifi" value="1" {{ $destinasi->wifi == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cWifi" name="cWifi" value="1" {{ $acara->wifi == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cWifi">Tersedia Wifi</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1" {{ $destinasi->isHeadline == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cHeadline" name="cHeadline" value="1" {{ $acara->isHeadline == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cHeadline">Tampilkan pada halaman Utama</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1" {{ $destinasi->isIcon == '1' ? 'checked' :'' }} >
+                            <input class="form-check-input" type="checkbox" id="cIcon" name="cIcon" value="1" {{ $acara->isIcon == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cIcon">Jadikan Icon Kategori</label>
                         </div>
                     </div>
