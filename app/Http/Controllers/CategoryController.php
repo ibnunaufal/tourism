@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -127,9 +128,13 @@ class CategoryController extends Controller
     {
         //
 
-        $subcat = Category::find($category->id);
+        $cat = Category::find($category->id);
         // error_log($id);
-        $subcat->delete();
+        $cat->delete();
+        $subcat = SubCategory::where('idTempat',$category->id);
+        foreach($subcat as $sub){
+            $subcat->delete();
+        }
         // $destinasi = Destinasi::where('id', $id)->delete();
         return redirect('/admin')->with('success', 'destinasi deleted successfully');
     }
