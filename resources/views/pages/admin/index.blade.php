@@ -366,7 +366,7 @@
                                                 <form action="{{route('tempat.destroy', $temp->id)}}" method="POST">    
                                                 @method('DELETE')
                                                 @csrf
-                                                    <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                                    <button type="submit" class="btn btn-danger" onclick="return myFunctionr();">
                                                         <i class="icon_set_1_icon-67"></i>
                                                     </button>                                        
                                                 </button>                                        
@@ -374,8 +374,8 @@
                                                 </form>
                                                 <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
                                                 <script>
-                                                function myFunction() {
-                                                    if(!confirm("Anda yakin akan menghapus kategori ini?"))
+                                                function myFunctionr() {
+                                                    if(!confirm("Anda yakin akan menghapus tempat ini?"))
                                                     event.preventDefault();
                                                 }
                                                 </script>

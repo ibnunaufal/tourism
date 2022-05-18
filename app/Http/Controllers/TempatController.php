@@ -294,5 +294,9 @@ class TempatController extends Controller
     public function destroy(Tempat $tempat)
     {
         //
+        $cat = Category::find($category->id);
+        // error_log($id);
+        $cat->delete();
+        return redirect('/admin')->with('success', 'destinasi deleted successfully');
     }
 }
