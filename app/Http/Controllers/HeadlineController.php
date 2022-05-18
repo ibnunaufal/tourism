@@ -96,6 +96,23 @@ class HeadlineController extends Controller
     public function update(Request $request, Headline $headline)
     {
         //
+        $post = Headline::find($headline->id);
+        $request->validate([
+            'tTitle'=>'required',
+            'tSubTitle'=> 'required',
+            'alignment'=> 'required',
+        ]);
+
+        if($request->hasFile('filename')){
+            $nama=$request->filename->getClientOriginalName();
+            $request->filename->move(public_path('img/headline'), $nama);
+            $post->image = $nama;
+        }
+        $post->title = $request->get('tTitle');
+        $post->subtitle = $request->get('tSubTitle');
+        $post->alignment = $request->get('alignment');
+        $post->save();
+        return redirect('/admin')->with('success', 'gallery has been added');
     }
 
     /**

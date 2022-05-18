@@ -224,7 +224,7 @@
                                                 <form action="{{route('category.destroy', $cat->id)}}" method="POST">    
                                                 @method('DELETE')
                                                 @csrf
-                                                    <button type="submit" class="btn btn-danger" onclick="return myFunction();">
+                                                    <button type="submit" class="btn btn-danger" onclick="return myFunctionq();">
                                                         <i class="icon_set_1_icon-67"></i>
                                                     </button>                                        
                                                 </button>                                        
@@ -232,7 +232,7 @@
                                                 </form>
                                                 <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
                                                 <script>
-                                                function myFunction() {
+                                                function myFunctionq() {
                                                     if(!confirm("Anda yakin akan menghapus kategori ini?"))
                                                     event.preventDefault();
                                                 }

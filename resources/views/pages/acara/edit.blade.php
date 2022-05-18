@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 @section('title')
-<title>Admin Page | Edit Destinasi</title>
+<title>Admin Page | Edit Acara</title>
 @endsection
 @section('content')
 
@@ -10,7 +10,7 @@
 	<div class="parallax-content-1">
 		<div class="animated fadeInDown">
 			<h1>Admin Page</h1>
-            <p>Edit Destinasi</p>
+            <p>Edit Acara</p>
 		</div>
 	</div>
 </section>
@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-11">
-                        <h2>Edit Destinasi</h2>
+                        <h2>Edit Acara</h2>
                     </div>
                     <div class="col-lg-1">
                         <a class="btn btn-primary" href="{{ url('/admin') }}"> Back</a>
@@ -50,33 +50,33 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('acara.update', $acara->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('acara.update',$acara->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')    
-                @csrf
+                    @csrf
                     <div class="form-group">
                         <label for="tName">Nama:</label>
                         <input type="text" class="form-control" id="tName" placeholder="Masukkan Nama" name="tName" value="{{$acara->name}}">
                     </div>
                     <div class="form-group">
                         <label for="tDesc">Deskripsi:</label>
-                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi" value="{{$acara->desc}}">{{$acara->desc}}</textarea>
+                        <textarea class="form-control" id="tDesc" name="tDesc" rows="3" placeholder="Masukkan Deskripsi">{{$acara->desc}}</textarea>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
                                 <label for="tLong">Kecamatan:</label>
-                                <select name="kecamatan" id="kecamatan" value="{{$acara->kecamatan}}" class="form-control select2">
+                                <select name="kecamatan" id="kecamatan" class="form-control select2">
                                     <option value =""> PILIH KECAMATAN</option>
-                                    <option value ="ARGOMULYO" {{ $acara->kecamatan == 'ARGOMULYO' ? 'selected' : '' }}> ARGOMULYO</option>
-                                    <option value ="TINGKIR" {{ $acara->kecamatan == 'TINGKIR' ? 'selected' : '' }}> TINGKIR</option>
-                                    <option value ="SIDOMUKTI" {{ $acara->kecamatan == 'SIDOMUKTI' ? 'selected' : '' }}> SIDOMUKTI</option>
-                                    <option value ="SIDOREJO" {{ $acara->kecamatan == 'SIDOREJO' ? 'selected' : '' }}> SIDOREJO</option>
+                                    <option value ="ARGOMULYO" {{ $acara->kecamatan == 'ARGOMULYO' ? 'selected' :'' }}> ARGOMULYO</option>
+                                    <option value ="TINGKIR" {{ $acara->kecamatan == 'TINGKIR' ? 'selected' :'' }}> TINGKIR</option>
+                                    <option value ="SIDOMUKTI" {{ $acara->kecamatan == 'SIDOMUKTI' ? 'selected' :'' }}> SIDOMUKTI</option>
+                                    <option value ="SIDOREJO" {{ $acara->kecamatan == 'SIDOREJO' ? 'selected' :'' }}> SIDOREJO</option>
                                 </select>
                             </div>
                             <div class="col-lg-6">
                                 <label for="tLat">Desa:</label>
                                 <select name="desa" id="desa" class="form-control select2">
-                                    <option value="{{$acara->desa}}">{{$acara->desa}}</option>
+                                    <option value ="{{$acara->desa}}" selected> {{$acara->desa}}</option>
                                 </select>
                             </div>
                         </div>
@@ -86,69 +86,11 @@
                         <input type="text" class="form-control" id="tMaps" placeholder="Masukkan Url" name="tMaps" value="{{$acara->mapUrl}}">
                     </div>
                     <div class="form-group">
-                        <label for="image">Foto: </label> <br>
-                        <?php
-                        $temp = str_replace("[","",$acara->imageArray);
-                        $temp = str_replace('"','',$temp);
-                        $temp = str_replace("]","",$temp);
-                        $tempArr = explode(',',$temp)
-                        ?>
-                        @if(count($tempArr) > 0)
-                        <table>
-                            <tr>
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($tempArr as $t)
-                                <td id="t{{$i}}">
-                                    <input type="text" name="old[]" value="{{$tempArr[$i]}}" style="visibility: hidden;width: 5px;height: 1px;" class="form-control">
-                                    <img src="{{URL::to('/')}}/img/acara/{{$t}}" style="max-width:100px; max-height:100px" alt="">
-                                </td> 
-                                @php
-                                ++$i;
-                                @endphp
-                                @endforeach
-                            </tr>
-                            <tr>
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($tempArr as $t)
-                                <td onclick="remove(this,t{{$i}})"> Hapus</td>
-                                @php
-                                ++$i;
-                                @endphp
-                                @endforeach
-                                <script>
-                                    function remove(el, el2){
-                                        var element = el;
-                                        var element2 = el2;
-                                        element.remove();
-                                        element2.remove();
-                                    }
-                                </script>
-                            </tr>
-                        </table>
-                        <br>
+                        <label for="image">Foto: </label>
                         <div class="input-group control-group increment" >
                             <input type="file" name="filename[]" class="form-control">
                             <div class="input-group-btn"> 
-                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah </button>
-                            </div>
-                        </div>
-                        <div class="clone hide">
-                            <div class="control-group input-group" style="margin-top:10px">
-                                <input type="file" name="filename[]" class="form-control">
-                                <div class="input-group-btn"> 
-                                <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Hapus</button>
-                                </div>
-                            </div>
-                        </div>
-                        @else
-                        <div class="input-group control-group increment" >
-                            <input type="file" name="filename[]" class="form-control">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
+                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Edit</button>
                             </div>
                             </div>
                             <div class="clone hide">
@@ -159,7 +101,6 @@
                                 </div>
                             </div>
                         </div>
-                        @endif
                         <label for="" style="color:red;font-style:italic;">*Foto urutan pertama akan menjadi foto utama</label>
                         <!-- <input class="form-control" type="file" id="image" name="image" /> -->
                         <!-- <input type="file" class="form-control" id="image" placeholder="Masukkan Foto" name="tFoto"> -->
@@ -169,40 +110,19 @@
                         <input type="number" class="form-control" id="tTicket" placeholder="Masukkan Harga Ticket" name="tTicket" value="{{$acara->ticket}}">
                     </div>
                     <div class="form-group">
-                        <label for="tAddress">Jam Operasional:</label>
+                        <label for="tVideo">Tanggal Acara:</label>
                         <div class="row">
                             <div class="col-lg-6">
-                            <label for="tLat">Senin-Jumat:</label>
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <input type="time" id="seninJumat1" name="seninJumat1" placeholder="Buka" class="form-control" value="{{substr($acara->seninJumat, 0, 5)}}">
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label for="">Sampai</label>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <input type="time" id="seninJumat2" name="seninJumat2" placeholder="Buka" class="form-control" value="{{substr($acara->seninJumat, 6,10)}}">
-                                    </div>
-                                </div>
+                                <label for="tVideo">Tanggal Mulai:</label>
+                                <input type="date" class="form-control" id="tStart" placeholder="Masukkan Tanggal" name="tStart" value="{{$acara->start}}">
                             </div>
                             <div class="col-lg-6">
-                                <label for="tLat">Sabtu-Minggu:</label>
-                                <div class="row">
-                                    <div class="col-lg-5">
-                                        <input type="time" id="sabtuMinggu1" name="sabtuMinggu1" placeholder="Buka" class="form-control" value="{{substr($acara->sabtuMinggu, 0,5)}}">
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <label for="">Sampai</label>
-                                    </div>
-                                    <div class="col-lg-5">
-                                        <input type="time" id="sabtuMinggu2" name="sabtuMinggu2" placeholder="Buka" class="form-control" value="{{substr($acara->sabtuMinggu, 6,10)}}">
-                                    </div>
-                                </div>
+                                <label for="tVideo">Tanggal Selesai:</label>
+                                <input type="date" class="form-control" id="tEnd" placeholder="Masukkan Tanggal" name="tEnd" value="{{$acara->end}}">
                             </div>
                         </div>
-                        <!-- <textarea class="form-control" id="tAddress" name="tAddress" rows="3" placeholder="Masukkan Deskripsi"></textarea> -->
-                        <!-- <input type="time" class="form-control datetimepicker" id="datetimepicker" name="Appointment_time">  -->
                     </div>
+                    
                     <!-- <div class="form-group">
                         <div class="row">
                             <div class="col-lg-6">
@@ -215,38 +135,17 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="form-group">
-                        <label for="tTiket">Tiket:</label>
-                        <input type="number" class="form-control" id="tTiket" placeholder="Masukkan Harga Tiket" name="tTiket" value="{{$acara->ticket}}">
-                        <!-- <table class="table" id="dynamicAddRemove">
-                            <tr>
-                                <td>
-                                    <input type="text" name="addMoreInputFields[0][subject]" placeholder="Masukkan Kategori" class="form-control" />
-                                </td>
-                                <td>
-                                    <input type="number" name="addMoreInputFields1[0][subject]" placeholder="Masukkan Harga tanpa titik" class="form-control" />
-                                </td>
-                                <td>
-                                    <button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Tambah Kategori</button>
-                                </td>
-                            </tr>
-                        </table> -->
-                    </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="image">Tags:</label>
                         <select class="form-control js-example-basic-multiple" name="tags[]" multiple="multiple">
-
-
-                            <option value="ALAM" {{ Str::contains($acara->tags, 'ALAM') ? 'selected':'' }}>ALAM</option>
-                            <option value="BELANJA" {{ Str::contains($acara->tags, 'BELANJA') ? 'selected':'' }}>BELANJA</option>
-                            <option value="BUDAYA" {{ Str::contains($acara->tags, 'BUDAYA') ? 'selected':'' }}>BUDAYA</option>
-                            <option value="OLAHRAGA" {{ Str::contains($acara->OLAHRAGA, 'ALAM') ? 'selected':'' }}>OLAHRAGA</option>
-                            <option value="REKREASI" {{ Str::contains($acara->tags, 'REKREASI') ? 'selected':'' }}>REKREASI</option>
-                            <option value="RELIGI" {{ Str::contains($acara->tags, 'RELIGI') ? 'selected':'' }}>RELIGI</option>
-                            <option value="SEJARAH" {{ Str::contains($acara->tags, 'SEJARAH') ? 'selected':'' }}>SEJARAH</option>
+                            <option value="BUDAYA">BUDAYA</option>
+                            <option value="OLAHRAGA">OLAHRAGA</option>
+                            <option value="REKREASI">REKREASI</option>
+                            <option value="RELIGI">RELIGI</option>
+                            <option value="SEJARAH">SEJARAH</option>
                         </select>
-                    </div>
+                    </div> -->
                 
                     <!-- <div class="form-group">
                         <label for="tTiket">Jam Operasional:</label>
@@ -330,10 +229,6 @@
                     </div> -->
                     <div class="form-group">
                         <label for="tOther">Lainnya: </label>
-                        <div class="form-group form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="cIsAllDay" name="cIsAllDay" value="1" {{ $acara->isOpenAllDay == '1' ? 'checked' :'' }} >
-                            <label class="form-check-label" for="cIsAllDay">Buka 24 Jam</label>
-                        </div>
                         <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="cDisabilitas" name="cDisabilitas" value="1" {{ $acara->disabilitas == '1' ? 'checked' :'' }} >
                             <label class="form-check-label" for="cDisabilitas">Ramah Bagi disabilitas</label>

@@ -126,5 +126,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+
+        $subcat = Category::find($category->id);
+        // error_log($id);
+        $subcat->delete();
+        // $destinasi = Destinasi::where('id', $id)->delete();
+        return redirect('/admin')->with('success', 'destinasi deleted successfully');
     }
 }

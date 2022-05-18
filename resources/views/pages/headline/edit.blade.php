@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 @section('title')
-<title>Admin Page | Tambah Headline</title>
+<title>Admin Page | Edit Headline</title>
 @endsection
 @section('content')
 
@@ -10,7 +10,7 @@
 	<div class="parallax-content-1">
 		<div class="animated fadeInDown">
 			<h1>Admin Page</h1>
-            <p>Tambahkan Headline</p>
+            <p>Edit Headline</p>
 		</div>
 	</div>
 </section>
@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-11">
-                        <h2>Tambahkan Headline</h2>
+                        <h2>Edit Headline</h2>
                     </div>
                     <div class="col-lg-1">
                         <a class="btn btn-primary" href="{{ url('/admin') }}"> Back</a>
@@ -50,29 +50,33 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ route('headline.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('headline.update', $headline->id) }}" method="POST" enctype="multipart/form-data">
+                    @method('PATCH')    
                     @csrf
                     <div class="form-group">
                         <label for="tName">Title:</label>
-                        <input type="text" class="form-control" id="tTitle" placeholder="Masukkan Judul" name="tTitle">
+                        <input type="text" class="form-control" id="tTitle" placeholder="Masukkan Judul" name="tTitle" value="{{$headline->title}}">
                     </div>
                     <div class="form-group">
                         <label for="tName">SubTitle:</label>
-                        <input type="text" class="form-control" id="tSubTitle" placeholder="Masukkan SubJudul" name="tSubTitle">
+                        <input type="text" class="form-control" id="tSubTitle" placeholder="Masukkan SubJudul" name="tSubTitle" value="{{$headline->subtitle}}">
                     </div>
                     <div class="form-group">
                         <label for="tName">Alignment:</label>
                         <select name="alignment" id="alignment" class="form-control select2">
-                            <option value ="text-right"> Rata Kanan</option>
-                            <option value ="text-center"> Rata Tengah</option>
-                            <option value ="text-left"> Rata Kiri</option>
+                            <option value ="text-right" {{ $headline->alignment == 'text-right' ? 'selected' :'' }}> Rata Kanan</option>
+                            <option value ="text-center" {{ $headline->alignment == 'text-center' ? 'selected' :'' }}> Rata Tengah</option>
+                            <option value ="text-left" {{ $headline->alignment == 'text-left' ? 'selected' :'' }}> Rata Kiri</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="image">Foto: </label>
+                        <br>
+                        <img src="{{URL::to('/')}}/img/headline/{{$headline->image}}" alt="" style="max-height:300px;min-height:300px;">
                         <div class="input-group control-group increment" >
-                            <input type="file" name="filename" class="form-control">
+                            <input type="file" name="filename" class="form-control" value="{{$headline->image}}">
                         </div>
+                        <br>
                         <label for="" style="color:red;font-style:italic;">*Disarankan menggunakan foto landscape dengan resolusi cukup baik</label>
                     </div>
                     <div class="form-group">
