@@ -149,7 +149,7 @@
                                             @endforeach
                                             <br>
                                             <li>
-                                                <a href="subcategory/create">
+                                                <a href="subcategory/create?cat={{$cat->id}}">
                                                     Tambah SubKategori
                                                 </a>
                                                 

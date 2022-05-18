@@ -7,7 +7,7 @@
 
 <section class="parallax-window" data-parallax="scroll" data-image-src="" data-natural-width="1400" data-natural-height="470">
     <div style="display: flex;justify-content: center;">
-    <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" alt="img" style="object-fit: cover;z-index: -1;min-height: 450px;max-height: 455px;">
+    <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" alt="img" style="object-fit: cover;z-index: -1;min-height: 450px;max-height: 455px;width:100%">
     </div>    
     <div class="parallax-content-2">
         <div class="container">
@@ -163,6 +163,38 @@
                             <a href="http://{{ $tempat->url }}" target="_blank" rel="noopener noreferrer">{{ $tempat->url }}</a>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12" style="{{ $tempat->video != ''?'height: 300px;' : '' }}">
+                            <div id="newe"></div>
+                                <script>
+                                    
+                                    function getId(url) {
+                                        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+                                        const match = url.match(regExp);
+
+                                        return (match && match[2].length === 11)
+                                        ? match[2]
+                                        : null;
+                                    }
+                                    
+                                    var url = {!! json_encode($tempat->video) !!};
+
+                                    const videoId = getId(url);
+                                    const iframeMarkup = '<iframe width="560" height="315" src="//www.youtube.com/embed/' 
+                                        + videoId + '" frameborder="0" allowfullscreen></iframe>';
+
+                                    console.log('Video ID:', videoId)
+
+                                    var div = document.getElementById('newe');
+
+                                    if(url != ""){
+                                        div.innerHTML += iframeMarkup;
+                                    }
+                                
+                                </script>
+                            
+                            </div>
+                        </div>
                         <!-- End row  -->
                     </div>
                     <!-- End col-md-9  -->
@@ -172,17 +204,34 @@
                 <hr>
 
                 <div class="row">
-                    
+                    <div class="col-lg-12">
+                        
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-2">
                         <h3>Alamat</h3>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-10" style="height: 300px;">
                         <h5>Kelurahan {{ $tempat->desa }}, Kecamatan {{ $tempat->kecamatan }}</h5>
                         
-                        
-                        <div id="map-container" style="position:relative;">
+
+                        <div id="new">
+
+                        </div>
+                        <script>
+                            var url = {!! json_encode($tempat->mapUrl) !!};
+                            var regex = new RegExp('@(.*),(.*),');
+                            var lat_long_match = url.match(regex);
+                            var lat = parseFloat(lat_long_match[1]);
+                            var long = parseFloat(lat_long_match[2]);
+
+                            var div = document.getElementById('new');
+
+                            div.innerHTML += '<iframe src = "https://maps.google.com/maps?q='+lat+','+long+'&hl=id;z=14&amp;output=embed" style="height:272px;position:inherit;"></iframe>';
+
+                        </script>
+                        <!-- <div id="map-container" style="position:relative;">
                             <div id="peta" style="width: 100%;height: 40vh;position:relative;"></div>
                             
                             <script>
@@ -206,7 +255,7 @@
                                     "<h4>{{$tempat->name}}<br>{{$tempat->address}} <br></h4> <h5><a href="+url+" target='_blank'>Buka di maps</a></h5>")) // add popup
                                 .addTo(map)
                             </script>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- End col-md-9  -->
                 </div>

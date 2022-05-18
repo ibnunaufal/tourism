@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SubCategoryController extends Controller
 {
@@ -23,11 +24,23 @@ class SubCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+
         $category = Category::all();
-        return view("pages.subcategory.create", compact('category','category'));
+        if($request->get('cat') != ""){
+            $selected = $request->get('cat');
+        }else{
+            $selected = 1;
+        }
+        if(Auth::check()){
+            return view("pages.subcategory.create", compact('category','category'))
+            ->with('category', $category)
+            ->with('selected',$selected);
+        }else{
+            return redirect('/');
+        }
     }
 
     /**

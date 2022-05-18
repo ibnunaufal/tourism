@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -26,7 +27,11 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view("pages.category.create");
+        if(Auth::check()){
+            return view("pages.category.create");
+        }else{
+            return redirect('/');
+        }
     }
 
     /**

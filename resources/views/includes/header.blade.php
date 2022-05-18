@@ -47,12 +47,12 @@
                         </ul>
                     </li>
                     <li class="submenu" style="text-align:left;">
-                        @if (Auth::guest())
+                        <!-- @if (Auth::guest())
                         <a href="javascript:void(0);" class="show-submenu"><i class="icon-login-2"></i> Login <i class="icon-down-open-mini"></i></a>
                         <ul>
                             <li><a href="/login"><i class="icon-login-2"></i> Login</a></li>
                         </ul>
-                        @endif
+                        @endif -->
                         @if (Auth::check())
                         <a href="javascript:void(0);" class="show-submenu"><i class="icon-user-2"></i> Auth <i class="icon-down-open-mini"></i></a>
                         <ul>

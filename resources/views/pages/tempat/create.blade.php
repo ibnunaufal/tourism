@@ -97,6 +97,10 @@
                         <input type="text" class="form-control" id="tUrl" placeholder="Masukkan Url Website (Jika Ada)" name="tUrl">
                     </div>
                     <div class="form-group">
+                        <label for="tName">Youtube Video:</label>
+                        <input type="text" class="form-control" id="tVideo" placeholder="Masukkan Video Youtube (Jika Ada)" name="tVideo">
+                    </div>
+                    <div class="form-group">
                         <label for="image">Foto: </label>
                         <div class="input-group control-group increment" >
                             <input type="file" name="filename[]" class="form-control">

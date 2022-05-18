@@ -1,12 +1,17 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
+            <div style="display: flex;align-content: center;align-items: center;justify-content: center;height:100%;">
+                <img src="{{URL::to('/')}}/img/logo_sticky.png" alt="">
+            </div>
+        </div>
+        <div class="col-md-6">
             <h3>Butuh bantuan?</h3>
             <a href="tel://089524621666" id="phone">+62 895 2462 1666</a>
             <a href="wa.me/6281225951789" id="phone">+62 895 2462 1666 (WA)</a>
             <a href="mailto:help@dolansalatiga.com" id="email_footer">help@dolansalatiga.com</a>
         </div>
-       @if(count($categorynavbar)>0)
+       <!-- @if(count($categorynavbar)>0)
        <div class="col-md-2">
             <h3>{{$categorynavbar[0]->name}}</h3>
             <ul>
@@ -77,15 +82,15 @@
                 @if(auth()->user()->isAdmin == 1)
                 <li><a href="/admin"><i class="icon-user-2"></i> Admin Page</a></li>
                 @endif
-                <!-- <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
+                <li><a href="/destinasi/admin"><i class="icon_set_1_icon-24"></i> Detail Destinasi</a></li>
                 <li><a href="/akomodasi/admin"><i class="icon_set_1_icon-23"></i> Detail Akomodasi</a></li>
                 <li><a href="/kuliner/admin"><i class="icon_set_1_icon-58"></i> Detail Kuliner</a></li>
                 <li><a href="/acara/admin"><i class="icon_set_1_icon-87"></i> Detail Acara</a></li>
-                <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li> -->
+                <li><a href="/fasum/admin"><i class="icon_set_1_icon-24"></i> Detail Fasilitas Umum</a></li>
                 <li><a href="/actionlogout"><i class="icon-logout"></i> Logout</a></li>
             </ul>
             @endif
-        </div>
+        </div> -->
         <!-- <div class="col-md-2">
             <h3>Settings</h3>
             <div class="styled-select">

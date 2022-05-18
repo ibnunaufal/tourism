@@ -60,7 +60,7 @@
                         <label for="image">Kategori:</label>
                         <select class="form-control" name="category">
                             @foreach($category as $cat)
-                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            <option value="{{$cat->id}}" {{ $cat->id == $selected ? 'selected' : '' }}>{{$cat->name}}</option>
                             @endforeach
                         </select>
                     </div>

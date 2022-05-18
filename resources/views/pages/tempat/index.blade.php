@@ -44,13 +44,23 @@
 
 					<div class="box_style_cat">
 						<ul id="cat_nav">
-							<li><a href="/tempat" id="{{ $selected == 'all' ? 'active' :'' }}"><i class="icon_set_1_icon-51"></i>Semua Tempat <span>(141)</span></a>
+							<li><a href="/tempat" id="{{ $selected == 'all' ? 'active' :'' }}"><i class="icon_set_1_icon-51"></i>Semua Tempat <span>({{$tempatSize}})</span></a>
 							</li>
-							@foreach($subcat as $subcat)
-							@if($subcat->category == $cat)
-                            <li><a href="/cari?cari={{$subcat->name}}&cat={{$cat}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+							@if($cat == "all")
+								@foreach($subcat as $subcat)
+									@foreach($allcat as $all)
+										@if($subcat->category == $all->id)
+										<li><a href="/cari?cari={{$subcat->name}}&cat={{$subcat->category}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+										@endif
+									@endforeach
+								@endforeach
+							@else
+								@foreach($subcat as $subcat)
+									@if($subcat->category == $cat)
+									<li><a href="/cari?cari={{$subcat->name}}&cat={{$subcat->id}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+									@endif
+								@endforeach
 							@endif
-                            @endforeach
 						</ul>
 					</div>
 
@@ -167,7 +177,7 @@
 					</div> -->
 					<!--/tools -->
 
-					@foreach ($tempat as $tempat)
+					@foreach ($tempat as $tem)
 					<div class="strip_all_tour_list wow fadeIn" data-wow-delay="0.1s">
 						<div class="row">
 							<div class="col-lg-4 col-md-4">
@@ -177,15 +187,16 @@
 									<a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">Add to wishlist</span></span></a>
 								</div> -->
 								<div class="img_list">
-									<a href="{{ route('tempat.show',$tempat->id) }}" >
+									<a href="{{ route('tempat.show',$tem->id) }}" >
 									<?php
-										$temp = str_replace("[","",$tempat->imageArray);
+										$temp = str_replace("[","",$tem->imageArray);
 										$temp = str_replace('"','',$temp);
 										$temp = str_replace("]","",$temp);
 										$tempArr = explode(',',$temp)
 										?>
-										<img src="{{ URL::to('/') }}/img/tempat/{{ $tempat->image }}" style="max-width: 353px;max-height: 350px;object-fit: contain;" alt="Image">
-										<div class="short_info"><i class="icon_set_1_icon-23"></i> {{$tempat->tags}} </div>
+										<img src="{{ URL::to('/') }}/img/tempat/{{ $tem->image }}" style="max-width: 353px;max-height: 350px;object-fit: contain;" alt="Image">
+										
+										<div class="short_info">{{$tem->tags}} </div>
 									</a>
 								</div>
 							</div>
@@ -193,8 +204,8 @@
 								<div class="tour_list_desc">
 									<!-- <div class="rating"><i class="icon-smile voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile  voted"></i><i class="icon-smile"></i><small>(75)</small>
 									</div> -->
-									<h3><strong> {{ $tempat->name }} </strong></h3>
-									<p class="collapse" id="collapseExample" aria-expanded="false" style="overflow-y: auto;height: 100px;">{{ $tempat->desc }}</p>
+									<h3><strong> {{ $tem->name }} </strong></h3>
+									<p class="collapse" id="collapseExample" aria-expanded="false" style="overflow-y: auto;height: 100px;">{{ $tem->desc }}</p>
                                     <!-- <a role="button" class="collapsed btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Show/hide</a> -->
                                     <style>
                                     #collapseExample.collapse:not(.show) {
@@ -218,9 +229,9 @@
 												<span class="tooltip-item"><i class="icon_set_1_icon-83"></i></span>
 												<div class="tooltip-content">
 													<h4>Jadwal</h4>
-													<strong>Senin-Jumat</strong> {{$tempat->seninJumat}}
+													<strong>Senin-Jumat</strong> {{$tem->seninJumat}}
 													<br>
-													<strong>Sabtu-Minggu</strong> {{$tempat->sabtuMinggu}}
+													<strong>Sabtu-Minggu</strong> {{$tem->sabtuMinggu}}
 													
 												</div>
 											</div>
@@ -229,7 +240,7 @@
 											<div class="tooltip_styled tooltip-effect-4">
 												<span class="tooltip-item"><i class="icon_set_1_icon-41"></i></span>
 												<div class="tooltip-content">
-													<h4>Alamat</h4> {{ $tempat->address }}
+													<h4>Alamat</h4> {{ $tem->address }}
 													<br>
 												</div>
 											</div>
@@ -239,7 +250,7 @@
 												<span class="tooltip-item"><i class="icon_set_1_icon-27"></i></span>
 												<div class="tooltip-content">
 													<h4>Parkir</h4> 
-													{{ $tempat->parkiran ? "Tersedia": "Tidak Tersedia" }}
+													{{ $tem->parkiran ? "Tersedia": "Tidak Tersedia" }}
 												</div>
 											</div>
 										</li>
@@ -248,7 +259,7 @@
 												<span class="tooltip-item"><i class="icon_set_1_icon-13"></i></span>
 												<div class="tooltip-content">
 													<h4>Akses</h4>
-													{{ $tempat->disabilitas ? "Ramah Disabilitas": "Tidak Ramah Disabilitas" }}
+													{{ $tem->disabilitas ? "Ramah Disabilitas": "Tidak Ramah Disabilitas" }}
 													<br>
 												</div>
 											</div>
@@ -259,7 +270,7 @@
 							<div class="col-lg-2 col-md-2">
 								<div class="price_list">
 									<div>
-										<p><a href="{{ route('tempat.show',$tempat->id) }}" class="btn_1">Details</a>
+										<p><a href="{{ route('tempat.show',$tem->id) }}" class="btn_1">Details</a>
 										</p>
 									</div>
 
@@ -268,6 +279,7 @@
 						</div>
 					</div>
 					@endforeach
+					{{ $tempat->links("pagination::bootstrap-4") }}
 					<!--End strip -->
 
 

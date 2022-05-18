@@ -14,6 +14,8 @@ use App\Models\Headline;
 use App\Models\Review;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
@@ -26,27 +28,32 @@ class AdminController extends Controller
     {
         //
         // $destinasi = Destinasi::all();
-        $destinasi = Destinasi::paginate(5);
-        $akomodasi = Akomodasi::paginate(5);
-        $kuliner = Kuliner::paginate(5);
-        $acara = Acara::paginate(5);
-        $fasum = Fasum::paginate(5);
-        $headline = Headline::paginate(5);
-        // $category = Category::paginate(5);
-        // $tempat = Tempat::paginate(5);
-        $category = Category::paginate(5, ['*'], 'category');
-        $tempat = Tempat::paginate(5, ['*'], 'tempat');
-        $review = Review::paginate(5, ['*'], 'review');
-        $subcategory = SubCategory::all();
-        return view('pages.admin.index', compact('destinasi', 'destinasi'))
-        ->with('acara', $acara)->with('fasum', $fasum)
-        ->with('akomodasi', $akomodasi)
-        ->with('kuliner', $kuliner)
-        ->with('tempat', $tempat)
-        ->with('review', $review)
-        ->with('category', $category)
-        ->with('headline', $headline)
-        ->with('subcategory', $subcategory);
+        if(Auth::check()){
+            $destinasi = Destinasi::paginate(5);
+            $akomodasi = Akomodasi::paginate(5);
+            $kuliner = Kuliner::paginate(5);
+            $acara = Acara::paginate(5);
+            $fasum = Fasum::paginate(5);
+            $headline = Headline::paginate(5);
+            // $category = Category::paginate(5);
+            // $tempat = Tempat::paginate(5);
+            $category = Category::paginate(5, ['*'], 'category');
+            $tempat = Tempat::paginate(5, ['*'], 'tempat');
+            $review = Review::paginate(5, ['*'], 'review');
+            $subcategory = SubCategory::all();
+            return view('pages.admin.index', compact('destinasi', 'destinasi'))
+            ->with('acara', $acara)->with('fasum', $fasum)
+            ->with('akomodasi', $akomodasi)
+            ->with('kuliner', $kuliner)
+            ->with('tempat', $tempat)
+            ->with('review', $review)
+            ->with('category', $category)
+            ->with('headline', $headline)
+            ->with('subcategory', $subcategory);
+        }else{
+            return redirect('/');
+        }
+        
     }
 
     /**

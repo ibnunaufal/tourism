@@ -98,6 +98,10 @@
                         <input type="text" class="form-control" id="tUrl" placeholder="Masukkan Url Website (Jika Ada)" name="tUrl" value="{{$tempat->url}}">
                     </div>
                     <div class="form-group">
+                        <label for="tName">Website:</label>
+                        <input type="text" class="form-control" id="tVideo" placeholder="Masukkan Url Website (Jika Ada)" name="tVideo" value="{{$tempat->video}}">
+                    </div>
+                    <div class="form-group">
                         <label for="image">Foto: </label> <br>
                         <?php
                         $temp = str_replace("[","",$tempat->imageArray);

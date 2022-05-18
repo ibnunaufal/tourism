@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Headline;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HeadlineController extends Controller
 {
@@ -25,7 +26,11 @@ class HeadlineController extends Controller
     public function create()
     {
         //
-        return view('pages.headline.create');
+        if(Auth::check()){
+            return view('pages.headline.create');
+        }else{
+            return redirect('/');
+        }
     }
 
     /**

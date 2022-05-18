@@ -8,6 +8,7 @@ use App\Models\Review;
 use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TempatController extends Controller
 {
@@ -20,17 +21,24 @@ class TempatController extends Controller
     {
         //
         $tempat = Tempat::paginate(5);
+        $tempatSize = Tempat::count();
         $subcat = SubCategory::all();
+        $allcat = Category::all();
         $selected = "all";
+        $cat = "all";
         return view('pages.tempat.index')
         ->with('tempat', $tempat)
+        ->with('tempatSize', $tempatSize)
         ->with('selected', $selected)
+        ->with('cat', $cat)
+        ->with('allcat', $allcat)
         ->with('subcat', $subcat);
     }
 
     public function cari(Request $request){
         $cari = $request->cari;
         $tempat = Tempat::where('tags','like',"%".$cari."%")->paginate(5);
+        $tempatSize = Tempat::count();
         $subcat = SubCategory::all();
         $cat = $request->cat;
         $img = Category::where('id',$cat)->take(1)->get();
@@ -41,6 +49,7 @@ class TempatController extends Controller
         }
         return view('pages.tempat.index')
         ->with('tempat', $tempat)
+        ->with('tempatSize', $tempatSize)
         ->with('cat', $cat)
         ->with('img', $img)
         ->with('selected', $selected)
@@ -55,7 +64,11 @@ class TempatController extends Controller
     public function create()
     {
         //
-        return view('pages.tempat.create');
+        if(Auth::check()){
+            return view('pages.tempat.create');
+        }else{
+            return redirect('/');
+        }
     }
 
     /**
@@ -95,6 +108,11 @@ class TempatController extends Controller
             $post->url = $request->get('tUrl');
         }else{
             $post->url = "";
+        }
+        if($request->get('tVideo') != ""){
+            $post->video = $request->get('tVideo');
+        }else{
+            $post->video = "";
         }
 
         $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
@@ -218,7 +236,16 @@ class TempatController extends Controller
         $post->mapUrl = $request->get('tMapUrl');
         $post->ticket = $request->get('tTicket');
         $post->rating = "4.5";
-        $post->url = $request->get('tUrl');
+        if($request->get('tUrl') != ""){
+            $post->url = $request->get('tUrl');
+        }else{
+            $post->url = "";
+        }
+        if($request->get('tVideo') != ""){
+            $post->video = $request->get('tVideo');
+        }else{
+            $post->video = "";
+        }
 
         $post->seninJumat = $request->get('seninJumat1') . '-' . $request->get('seninJumat2');
         $post->sabtuMinggu = $request->get('sabtuMinggu1') . '-' . $request->get('sabtuMinggu2');

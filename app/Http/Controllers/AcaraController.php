@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Acara;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class AcaraController extends Controller
 {
@@ -78,7 +78,12 @@ class AcaraController extends Controller
     {
         //
         $tags = ["Alam","Budaya","Rekreasi"];
-        return view('pages.acara.create',compact('tags'));
+        if(Auth::check()){
+            return view('pages.acara.create',compact('tags'));
+        }else{
+            return redirect('/');
+        }
+        
     }
     public function admin()
     {

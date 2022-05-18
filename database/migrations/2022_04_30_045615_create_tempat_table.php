@@ -32,6 +32,7 @@ return new class extends Migration
             $table->boolean('isIcon');
             $table->string('url');
             $table->string('image');
+            $table->text('video');
             /* 
             [{
                 image: filename,
