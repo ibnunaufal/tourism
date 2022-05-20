@@ -103,6 +103,7 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Foto: </label> <br>
+                        <label for="" style="color:red;font-style:italic;">*Foto urutan pertama akan menjadi foto utama</label>
                         <?php
                         $temp = str_replace("[","",$tempat->imageArray);
                         $temp = str_replace('"','',$temp);
@@ -110,76 +111,63 @@
                         $tempArr = explode(',',$temp)
                         ?>
                         <br>
-                        @if(count($image) > 0)
-                        <table>
-                            <tr>
-                                @php
-                                    $i = 0;
-                                @endphp
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tr class="text-center table-bordered">
+                                    <td>Foto</td>
+                                    <td>Deskripsi Foto</td>
+                                    <td>Aksi</td>
+                                </tr>
                                 @foreach($image as $t)
-                                <td id="t{{$i}}">
-                                    <input type="text" name="old[]" value="{{$t->image}}" style="visibility: hidden;width: 5px;height: 1px;" class="form-control">
-                                    <img src="{{URL::to('/')}}/img/tempat/{{$t->image}}" style="max-width:100px; max-height:100px" alt="">
-                                </td> 
-                                @php
-                                ++$i;
-                                @endphp
+                                <tr class="text-center table-bordered">
+                                    <td>
+                                        <input type="text" name="old[]" value="{{$t->image}}" style="visibility: hidden;width: 5px;height: 1px;" class="form-control">
+                                        <img src="{{URL::to('/')}}/img/tempat/{{$t->image}}" style="max-width:100px; max-height:100px" alt=""></td>
+                                    <td>{{ $t->desc }}</td>
+                                    <td>
+                                    <form action="{{route('images.destroy',$t->id)}}" method="POST">
+                                        @method('DELETE')
+                                                @csrf
+                                                <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview" onclick="return setValue({{$t}});">
+                                                    <i class="icon_set_1_icon-17"></i>
+                                                </a>
+                                                <script>
+                                                    function setValue(id){
+
+                                                        console.log(id)
+                                                        $('#desc_img').attr('value', id.desc);
+                                                        $('#id_image').attr('value', id.id);
+                                                        $('#img').attr('src', 'https://salatigatourism.com/img/tempat/'+id.image);
+                                                    }
+                                                </script>
+
+                                                <input type="text" id="idDelete" name="idDelete" value="{{$t->id}}" style="visibility:hidden;width:0px;height:0px">
+                                                    <!-- <button type="submit" class="btn btn-danger" onclick="return myFunctiona();"> -->
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="icon_set_1_icon-67"></i>
+                                                    </button>                                        
+                                                </button>                                        
+                                                    </button>                                        
+                                                <!-- <a class="btn btn-danger" onclick="return myFunction();" href=""><i class="icon_set_1_icon-67"></i></a> -->
+                                                <script>
+                                                function myFunctiona() {
+                                                    if(!confirm("Anda yakin akan menghapus gambar ini?"))
+                                                    event.preventDefault();
+                                                }
+                                                </script>
+                                        </form>
+                                    </td>
+                                </tr>
                                 @endforeach
-                            </tr>
-                            <tr>
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach($image as $t)
-                                <td onclick="remove(this,t{{$i}})"> Hapus</td>
-                                @php
-                                ++$i;
-                                @endphp
-                                @endforeach
-                                <script>
-                                    function remove(el, el2){
-                                        var element = el;
-                                        var element2 = el2;
-                                        element.remove();
-                                        element2.remove();
-                                    }
-                                </script>
-                            </tr>
-                        </table>
-                        <br>
-                        <div class="input-group control-group increment" >
-                            <input type="file" name="filename[]" class="form-control">
-                            <input type="text" name="imgDesc[]" id="" class="form-control" placeholder="Tambahkan deskripsi gambar">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah </button>
-                            </div>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;">
+                                        <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#newImage">
+                                            Tambah Gambar <i class="icon_set_1_icon-17"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="clone hide">
-                            <div class="control-group input-group" style="margin-top:10px">
-                                <input type="file" name="filename[]" class="form-control">
-                                <input type="text" name="imgDesc[]" id="" class="form-control" placeholder="Tambahkan deskripsi gambar">
-                                <div class="input-group-btn"> 
-                                <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Hapus</button>
-                                </div>
-                            </div>
-                        </div>
-                        @else
-                        <div class="input-group control-group increment" >
-                            <input type="file" name="filename[]" class="form-control">
-                            <div class="input-group-btn"> 
-                                <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
-                            </div>
-                            </div>
-                            <div class="clone hide">
-                            <div class="control-group input-group" style="margin-top:10px">
-                                <input type="file" name="filename[]" class="form-control">
-                                <div class="input-group-btn"> 
-                                <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Hapus</button>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        <label for="" style="color:red;font-style:italic;">*Foto urutan pertama akan menjadi foto utama</label>
                         <!-- <input class="form-control" type="file" id="image" name="image" /> -->
                         <!-- <input type="file" class="form-control" id="image" placeholder="Masukkan Foto" name="tFoto"> -->
                     </div>
@@ -333,3 +321,102 @@
     });
 </script>
 @endsection
+<div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
+<div class="modal fade" id="myReview" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">Edit Gambar</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+                    <form action="{{ route('imageUpdate') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+						<input name="hotel_name" id="hotel_name" type="hidden" value="Mariott Hotel Paris">
+						<div class="row">
+                            <div class="col-md-2">
+								<div class="form-group">
+									Deskripsi Gambar:
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<input name="desc_img" id="desc_img" type="text" placeholder="Deskripsi Gambar" class="form-control">
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <img src="" id="img" alt="" style="max-width: 450px;height: auto;">
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                            <input name="new_image" id="new_image" type="file" placeholder="id" class="form-control">
+                            <input name="id_image" id="id_image" type="text" placeholder="id" class="form-control" >
+                            </div>
+                        </div>
+						<!-- End row -->
+                        <hr>
+						<!-- <div class="form-group">
+							<input type="text" id="verify_review" class=" form-control" placeholder="Verifikasi diri anda. 3 + 1 =">
+						</div> -->
+						<input type="submit" value="Simpan" class="btn_1" id="submit-review">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="modal fade" id="newImage" tabindex="-1" role="dialog" aria-labelledby="myReviewLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myReviewLabel">Tambah Gambar</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<div id="message-review">
+					</div>
+                    <form action="{{ route('imageAdd') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+						<div class="row">
+                            <div class="col-md-2">
+								<div class="form-group">
+									Deskripsi Gambar:
+								</div>
+							</div>
+							<div class="col-md-10">
+								<div class="form-group">
+									<input name="new_desc_img" id="new_desc_img" type="text" placeholder="Deskripsi Gambar" class="form-control">
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <input name="add_new_image" id="add_new_image" type="file" placeholder="id" class="form-control">
+                                <input name="id_new_image" id="id_new_image" type="text" placeholder="id" class="form-control" value="{{$tempat->id}}" style="visibility:hidden;">
+                            </div>
+                        </div>
+						<!-- End row -->
+                        <hr>
+						<!-- <div class="form-group">
+							<input type="text" id="verify_review" class=" form-control" placeholder="Verifikasi diri anda. 3 + 1 =">
+						</div> -->
+						<input type="submit" value="Simpan" class="btn_1" id="submit-review">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>

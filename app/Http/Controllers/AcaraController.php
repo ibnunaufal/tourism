@@ -205,6 +205,7 @@ class AcaraController extends Controller
     public function show(Acara $acara)
     {
         //
+        return view('pages.acara.detail')->with('acara', $acara);    
     }
 
     /**

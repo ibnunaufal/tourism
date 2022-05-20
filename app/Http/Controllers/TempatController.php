@@ -265,6 +265,7 @@ class TempatController extends Controller
         }else{
             $post->wifi = 0; 
         }
+        $post->image = $request->get('old')[0];
         // if($request->get('cHeadline') == 1){
         //     $post->isHeadline = 1;
         // }else{
@@ -294,7 +295,7 @@ class TempatController extends Controller
     public function destroy(Tempat $tempat)
     {
         //
-        $cat = Category::find($category->id);
+        $cat = Tempat::find($tempat->id);
         // error_log($id);
         $cat->delete();
         return redirect('/admin')->with('success', 'destinasi deleted successfully');

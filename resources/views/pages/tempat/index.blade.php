@@ -57,7 +57,7 @@
 							@else
 								@foreach($subcat as $subcat)
 									@if($subcat->category == $cat)
-									<li><a href="/cari?cari={{$subcat->name}}&cat={{$subcat->id}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
+									<li><a href="/cari?cari={{$subcat->name}}&cat={{$subcat->category}}" id="{{ $selected == $subcat->name ? 'active' :'' }}"><i class="{{$subcat->icon}}"></i> {{ $subcat->name }} <span></span></a></li>
 									@endif
 								@endforeach
 							@endif

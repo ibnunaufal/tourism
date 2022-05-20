@@ -57,6 +57,12 @@ $(document).ready (function (){
 		console.log(targetOffset);
 		$('html, body').animate({scrollTop:targetOffset-90}, 300);
 	});
+	$('.smooth-goto6').on('click', function() {  
+		var targetOffset = $('#scrolling').offset().top;
+		console.log("targetOffset");
+		console.log(targetOffset);
+		$('html, body').animate({scrollTop:targetOffset-90}, 300);
+	});
 });
 $('#toTop').on('click', function(){
 	$('html, body').animate({scrollTop:0}, 300);

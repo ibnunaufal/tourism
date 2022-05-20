@@ -17,7 +17,19 @@
                                 <p class="owl-slide-animated owl-slide-subtitle">
                                     {{ $head->subtitle }}
                                 </p>
-                                <div class="owl-slide-animated owl-slide-cta"><a class="btn_1" href="all_tours_list.html" role="button">Selengkapnya</a></div>
+                                <div class="owl-slide-animated owl-slide-cta">
+                                    <a class="btn_1 smooth-goto6" href="javascript:void(0)" class="" role="button">Selengkapnya</a>
+                                    <a href="javascript:void(0)" class="smooth-goto2"><i class="icon_set_1_icon-41"></i>Tempat<span class="other_tours_price"></span></a>
+                                    <script>
+                                        $('.smooth-goto6').on('click', function() {  
+                                            console.log()
+                                            var targetOffset = $('#scrolling').offset().top;
+                                            console.log("targetOffset");
+                                            console.log(targetOffset);
+                                            $('html, body').animate({scrollTop:targetOffset-90}, 300);
+                                        });
+                                    </script>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -100,7 +112,7 @@
 </div>
 <!-- /white_bg -->
 
-<div class="container margin_60">
+<div class="container margin_60" id="scrolling" #scrolling>
 
     <div class="main_title">
         <h2>Jelajahi destinasi <span>{{ $firstList[0]->tags }}</span> Menarik</h2>
@@ -115,7 +127,7 @@
                 <!-- <div class="ribbon_3 popular"><span>Terbaik</span></div> -->
                 <div class="img_container">
                     <a href="{{ route('tempat.show',$tempat->id) }}">
-                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;min-height:270px;max-height: 370px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
                         <div class="short_info">
                             {{ $tempat->tags }}
                             <!-- <span class="price">
@@ -160,7 +172,7 @@
                 <!-- <div class="ribbon_3 popular"><span>Terbaik</span></div> -->
                 <div class="img_container">
                     <a href="{{ route('tempat.show',$tempat->id) }}">
-                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;min-height:270px;max-height: 370px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
                         <div class="short_info">
                             {{ $tempat->tags }}
                             <!-- <span class="price">
@@ -205,8 +217,8 @@
             <div class="tour_container">
                 <!-- <div class="ribbon_3 popular"><span>Terbaik</span></div> -->
                 <div class="img_container">
-                    <a href="fullcalender">
-                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;max-height: 475px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
+                    <a href="acara/{{$tempat->id}}">
+                        <img src="{{URL::to('/')}}/img/tempat/{{$tempat->image}}" style="width: 560px;min-height:270px;max-height: 370px;object-fit: cover;" width="800" height="533" class="img-fluid" alt="image">
                         <div class="short_info">
                             Event
                             <!-- <span class="price">

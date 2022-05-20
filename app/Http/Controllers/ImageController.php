@@ -67,9 +67,57 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, $a)
     {
         //
+        $post = Image::find($request->id_image);
+        $post->desc = $request->get('desc_img');
+        if($request->hasFile('new_image')){
+            $nama = $request->$request->file('new_image')->getClientOriginalName();
+            $images->move(public_path('img/tempat'), $nama);
+            
+            $post->image = $nama;
+        }
+
+        $post->update();
+
+        return redirect()->back();
+    }
+    public function imageUpdate(Request $request)
+    {
+        //
+        $post = Image::find($request->id_image);
+        $post->desc = $request->get('desc_img');
+        if($request->hasFile('new_image')){
+            $nama = $request->file('new_image')->getClientOriginalName();
+            $request->file('new_image')->move(public_path('img/tempat'), $nama);
+            
+            $post->image = $nama;
+        }
+
+        $post->update();
+
+        return redirect()->back();
+    }
+    public function imageAdd(Request $request)
+    {
+        //
+        $post = new Image;
+        $post->idTempat = $request->get('id_new_image');
+        $post->desc = $request->get('new_desc_img');
+        $post->tags = $request->get('new_desc_img');
+        if($request->hasFile('add_new_image')){
+            $nama = $request->file('add_new_image')->getClientOriginalName();
+            $request->file('add_new_image')->move(public_path('img/tempat'), $nama);
+            
+            $post->image = $nama;
+        }else{
+            $post->image = "";
+        }
+
+        $post->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +126,19 @@ class ImageController extends Controller
      * @param  \App\Models\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function hapus(Request $request)
     {
         //
+        $post = Image::find($request->get('idDelete'));
+        $post->delete();
+        // return redirect()->back();
+    }
+    public function destroy($id)
+    {
+        //
+        $post = Image::find($id);
+        $post->delete();
+        return redirect()->back();
+        // return redirect('/');
     }
 }

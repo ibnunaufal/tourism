@@ -36,6 +36,12 @@ Route::resource('destinasi','DestinasiController');
 Route::resource('akomodasi','AkomodasiController');
 Route::resource('kuliner','KulinerController');
 
+// Route::post('imageUpdate','ImageController');
+Route::post('imageUpdate', [App\Http\Controllers\ImageController::class, 'imageUpdate'])->name('imageUpdate');
+Route::post('imageAdd', [App\Http\Controllers\ImageController::class, 'imageAdd'])->name('imageAdd');
+Route::post('imageDelete', [App\Http\Controllers\ImageController::class, 'hapus'])->name('hapus');
+Route::resource('images','ImageController');
+
 Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
 Route::resource('item','TempatController');

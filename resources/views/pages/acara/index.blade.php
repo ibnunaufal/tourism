@@ -237,13 +237,18 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
-  
+var items = Array('purple', 'red', 'blue', 'green');
+
+var item = items[Math.floor(Math.random()*items.length)];
+
 var calendar = $('#calendar').fullCalendar({
                     editable: false,
                     events: SITEURL + "/fullcalender",
                     displayEventTime: false,
                     editable: true,
 					plugins: [ 'dayGrid' ],
+					eventColor: items[Math.floor(Math.random()*items.length)],
+					eventTextColor: 'white',
 					eventDidMount: function(info) {
 						var tooltip = new Tooltip(info.el, {
 							title: info.event.extendedProps.description,
@@ -253,12 +258,29 @@ var calendar = $('#calendar').fullCalendar({
 						});
 					},
                     eventRender: function (event, element, view) {
+						console.log(event);
+						console.log(element);
+						console.log(view);
                         if (event.allDay === 'true') {
                                 event.allDay = true;
                         } else {
                                 event.allDay = false;
                         }
+						element.text(event.name)
                     },
+					eventAfterRender: function (event, element, view) {
+						var dataHoje = new Date();
+						if (event.start < dataHoje && event.end > dataHoje) {
+							//event.color = "#FFB347"; //Em andamento
+							element.css('background-color', '#FFB347');
+						} else if (event.start < dataHoje && event.end < dataHoje) {
+							//event.color = "#77DD77"; //Concluído OK
+							element.css('background-color', '#77DD77');
+						} else if (event.start > dataHoje && event.end > dataHoje) {
+							//event.color = "#AEC6CF"; //Não iniciado
+							element.css('background-color', '#AEC6CF');
+						}
+					},
                     selectable: true,
                     selectHelper: true,
                     // select: function (start, end, allDay) {
@@ -321,7 +343,9 @@ var calendar = $('#calendar').fullCalendar({
 						$("#address").text("Alamat: " + event.desa + " " + event.kecamatan);
 						$("#tanggal").text("Tanggal Mulai: " + event.start._i);
 						$("#tanggal2").text("Tanggal Selesai: " + event.end._i);
-						$("#link").attr("href", event.mapurl)
+						$("#link").attr("href", event.mapurl);
+						$("#url").attr("href", "{{URL::to('/')}}/acara/"+event.id);
+						$("#image").attr("src", "{{URL::to('/')}}/img/acara/"+event.image);
 						console.log(event);
 						
                         // if (deleteMsg) {
@@ -359,6 +383,8 @@ function displayMessage(message) {
 				</div>
 				<div class="modal-body">
 					<div id="message-review">
+					<img src="" id="image" alt="" style="width: 450px;max-height: 450px;object-fit: cover;">
+					<br>
 					</div>
                     <form action="{{ route('review.store') }}" method="POST">
                     @csrf
@@ -378,7 +404,7 @@ function displayMessage(message) {
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-									
+									<a href="" id="url">Buka Lebih Detail</a>
 								</div>
                             </div>
                             
