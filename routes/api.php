@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('mobileheadline', [App\Http\Controllers\MobileController::class, 'mobileheadline'])->name('mobileheadline');
+Route::get('getpage', [App\Http\Controllers\MobileController::class, 'getpage'])->name('getpage');
+Route::get('imagebyid', [App\Http\Controllers\MobileController::class, 'imagebyid'])->name('imagebyid');
+Route::get('reviewbyid', [App\Http\Controllers\MobileController::class, 'reviewbyid'])->name('reviewbyid');
+Route::post('reviewstore', [App\Http\Controllers\MobileController::class, 'reviewstore'])->name('reviewstore');
+
+Route::post('mobileactionlogin', [App\Http\Controllers\LoginController::class, 'mobileactionlogin'])->name('mobileactionlogin');
+Route::get('mobileactionlogout', [App\Http\Controllers\LoginController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+Route::post('mobilepostRegistration', [App\Http\Controllers\LoginController::class, 'postRegistration'])->name('postRegistration');
