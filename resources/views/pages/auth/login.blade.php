@@ -19,9 +19,9 @@
                         <hr>
                         <form action="{{ route('actionlogin') }}" method="post">
                             @csrf
-                        <!-- <a href="#0" class="social_bt facebook">Login with Facebook</a>
-                        <a href="#0" class="social_bt google">Login with Google</a>
-                        <div class="divider"><span>Or</span></div> -->
+                        <!-- <a href="#0" class="social_bt facebook">Login with Facebook</a> -->
+                        <a href="{{ '/auth/redirect'}}" class="social_bt google">Login with Google</a>
+                        <div class="divider"><span>Or</span></div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email" class="form-control" placeholder="Email" required="">

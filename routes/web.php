@@ -63,3 +63,8 @@ Route::resource('fasum','FasumController');
 Route::get('/category', function () {
     return view('pages.category');
 });
+
+Route::get('/auth/redirect', [App\Http\Controllers\LoginController::class, 'redirectToProvider'])->name('redirectToProvider');
+Route::get('/auth/callback', [App\Http\Controllers\LoginController::class, 'handleProviderCallback'])->name('handleProviderCallback');
+// Route::get('/auth/redirect', 'Auth\LoginController@redirectToProvider');
+// Route::get('/auth/callback', 'Auth\LoginController@handleProviderCallback');
