@@ -703,7 +703,7 @@ sidebarBtn.onclick = function() {
   position: fixed;
   height: 100%;
   width: 240px;
-  background: #e04f67;
+  background: linear-gradient(45deg, black, #e04f67);
   transition: all 0.5s ease;
 }
 .sidebar.active{
