@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // 'api' => [
+        //     'driver' => 'passport',//previously "token"
+        //     'provider' => 'users',//This will be switched regularly from the middleware between drivers and users
+        // ],
     ],
 
     /*

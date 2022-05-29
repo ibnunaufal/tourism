@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Tempat;
 use App\Models\Image;
 use App\Models\Review;
+use App\Models\Headline;
+use App\Models\Acara;
+use App\Models\Category;
 
 class MobileController extends Controller
 {
@@ -28,9 +31,19 @@ class MobileController extends Controller
     {
         //
     }
-    public function mobileheadline(Request $request){
-        $tempat = Tempat::take(3)->get();
-        return $tempat;
+    public function mobilehome(Request $request){
+        $tempat = Tempat::take(5)->get();
+        $event = Acara::take(5)->get();
+        $headline = Headline::take(3)->get();
+        $category = Category::get();
+        $response = [
+            'tempat'=> $tempat,
+            'event'=> $event,
+            'headline'=> $headline,
+            'category'=> $category
+        ];
+        // $response = json(['tempat'=>$tempat,'event'=>$event,'headline'=>$headline])
+        return $response;
     }
     public function imagebyid(Request $request){
         $cari = $request->cari;

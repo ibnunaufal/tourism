@@ -59,8 +59,40 @@ class LoginController extends Controller
   
         return redirect("login")->withSuccess('Login details are not valid');
     }
+    public function mobileactionlogin(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            $user = Auth::guard()->user();
+            $user->generateToken();
+
+            return response()->json([
+                'data' => $user->toArray(),
+            ]);
+        }
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request,[]);
+    }
+    protected function attemptLogin(Request $request)
+    {
+        return $this->guard()->attempt(
+            $this->credentials($request), $request->filled('remember_token')
+        );
+    } 
+
 
     public function actionlogout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+    public function mobileactionlogout()
     {
         Auth::logout();
         return redirect('/');

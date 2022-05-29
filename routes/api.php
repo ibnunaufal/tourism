@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('mobileheadline', [App\Http\Controllers\MobileController::class, 'mobileheadline'])->name('mobileheadline');
+Route::get('mobilehome', [App\Http\Controllers\MobileController::class, 'mobilehome'])->name('mobilehome');
 Route::get('getpage', [App\Http\Controllers\MobileController::class, 'getpage'])->name('getpage');
 Route::get('imagebyid', [App\Http\Controllers\MobileController::class, 'imagebyid'])->name('imagebyid');
 Route::get('reviewbyid', [App\Http\Controllers\MobileController::class, 'reviewbyid'])->name('reviewbyid');
